@@ -252,8 +252,8 @@ namespace microX {
     export function setOrangeGreenGeekservoSpeed(servoNum: Servo, speed: number): void {
         // reverse: 500uS-1500uS, 0: 1500uS, forward: 1500uS-2500uS
         let pulseWidth = 1500 + speed
-        if (pulseWidth > 1500)
-            pulseWidth = 1500
+        if (pulseWidth > 2500)
+            pulseWidth = 2500
         else if (pulseWidth < 500)
             pulseWidth = 500
         setServoPulseWidth(servoNum, pulseWidth)
