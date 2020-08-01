@@ -138,16 +138,28 @@ namespace microX {
         pins.i2cWriteBuffer(address, buffer)
     }
 
-    function i2ccmd(address: number, value: number) {
-        let buffer = pins.createBuffer(1)
-        buffer[0] = value
-        pins.i2cWriteBuffer(address, buffer)
-    }
+    // function i2ccmd(address: number, value: number) {
+    //     let buffer = pins.createBuffer(1)
+    //     buffer[0] = value
+    //     pins.i2cWriteBuffer(address, buffer)
+    // }
 
     function i2cread(address: number, reg: number) {
         pins.i2cWriteNumber(address, reg, NumberFormat.UInt8BE)
         let val = pins.i2cReadNumber(address, NumberFormat.UInt8BE)
         return val
+    }
+
+    function setFreq(freq: number): void {
+        // Constrain the frequency
+        let prescale = 25000000 / 4096 / freq - 1
+        let oldmode = i2cread(PWM_PCA9685_ADDRESS, 0x00)
+        let newmode = (oldmode & 0x7f) | 0x10 // sleep
+        i2cwrite(PWM_PCA9685_ADDRESS, 0x00, newmode) // go to sleep
+        i2cwrite(PWM_PCA9685_ADDRESS, 0xfe, prescale) // set the prescaler
+        i2cwrite(PWM_PCA9685_ADDRESS, 0x00, oldmode)
+        control.waitMicros(5000)
+        i2cwrite(PWM_PCA9685_ADDRESS, 0x00, oldmode | 0xa1)
     }
 
     //% block="initialize PWM driver (for servos and motors)"
@@ -157,33 +169,19 @@ namespace microX {
         i2cwrite(PWM_PCA9685_ADDRESS, 0x00, 0x00)
         // Operate at 50Hz
         setFreq(50)
-        for (let channel = 0; channel < 16; channel++) {
-            setPwm(channel, 0, 0)
-        }
         wasInitializedPhaseWidthModulationDriver = true
-    }
-
-    function setFreq(freq: number): void {
-        // Constrain the frequency
-        let prescale = 25000000 / 4096 / freq - 1
-        let oldmode = i2cread(PWM_PCA9685_ADDRESS, 0x00)
-        let newmode = (oldmode & 0x7F) | 0x10 // sleep
-        i2cwrite(PWM_PCA9685_ADDRESS, 0x00, newmode) // go to sleep
-        i2cwrite(PWM_PCA9685_ADDRESS, 0xFE, prescale) // set the prescaler
-        i2cwrite(PWM_PCA9685_ADDRESS, 0x00, oldmode)
-        control.waitMicros(5000)
-        i2cwrite(PWM_PCA9685_ADDRESS, 0x00, oldmode | 0xa1)
     }
 
     function setPwm(channel: number, low2Bytes: number, high2Bytes: number): void {
         if (channel < 0 || channel > 15)
             return
-        let buffer = pins.createbuffer(5)
+        initPhaseWidthModulationDriver()
+        let buffer = pins.createBuffer(5)
         buffer[0] = (channel << 2) + 6
         buffer[1] = low2Bytes & 0xff
-        buffer[2] = (low2Bytes >> 8) & 0xff
+        buffer[2] = (low2Bytes >>> 8) & 0xff
         buffer[3] = high2Bytes & 0xff
-        buffer[4] = (high2Bytes >> 8) & 0xff
+        buffer[4] = (high2Bytes >>> 8) & 0xff
         pins.i2cWriteBuffer(PWM_PCA9685_ADDRESS, buffer)
     }
 
@@ -210,23 +208,6 @@ namespace microX {
         let channel = motorNum << 1
         setPwm(channel, 0, speed1)
         setPwm(channel + 1, 0, speed2)
-    }
-
-    /**
-     * Rotate Servo
-     * @param servoNum Servo Channel; e.g.: S1
-     * @param degree [0-180] degree of servo; e.g.: 0, 90, 180
-    */
-    //% blockId=rotateServo block="Rotate Servo|%servoNum|degree %degree"
-    //% weight=100
-    //% degree.min=0 degree.max=180
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function rotateServo(servoNum: Servo, degree: number): void {
-        initPhaseWidthModulationDriver()
-        // 50hz: 20,000 us
-        let v_us = (degree * 1800 / 180 + 600) // 0.6 ~ 2.4
-        let value = v_us * 4096 / 20000
-        setPwm(servoNum + 7, 0, value)
     }
 
     /**
