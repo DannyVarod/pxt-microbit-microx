@@ -185,15 +185,20 @@ namespace microX {
         pins.i2cWriteBuffer(PWM_PCA9685_ADDRESS, buffer)
     }
 
+    /**
+     * Set servo pulse width
+     * @param motorNum Motor; e.g.: M1A
+     * @param speed [-4095...4095] speed
+    */
     //% blockId=robotbit_motor_run block="Motor|%motorNum|speed %speed"
     //% weight=85
-    //% speed.min=-255 speed.max=255
+    //% speed.min=-4095 speed.max=4095
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function MotorRun(motorNum: Motor, speed: number): void {
         if (motorNum < 0 || 3 < motorNum)
             return
         initPhaseWidthModulationDriver()
-        let speed1 = Math.round(speed * 16) // map 256 to 4096
+        let speed1 = speed
         if (speed1 > 4095) {
             speed1 = 4095
         }
@@ -213,11 +218,11 @@ namespace microX {
     /**
      * Set servo pulse width
      * @param servoNum Servo Channel; e.g.: S1
-     * @param pulseWidth [1...19999] pulse width in uSec
+     * @param pulseWidth [5...19990] pulse width in uSec
     */
     //% blockId=setServoPulseWidth block="set servo pulse width (uSec)|%servoNum|pulseWidth %pulseWidth"
     //% weight=99
-    //% pulseWidth.min=1uS pulseWidth.max=19999uS
+    //% pulseWidth.min=1 pulseWidth.max=19999
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function setServoPulseWidth(servoNum: Servo, pulseWidth: number): void {
         initPhaseWidthModulationDriver()
@@ -233,15 +238,15 @@ namespace microX {
     /**
      * Set Geekservo speed
      * @param servoNum Servo Channel; e.g.: S1
-     * @param speed [-1...1] degree of servo; e.g.: -45, 90, 225
+     * @param speed [-1000...1000] speed
     */
     //% blockId=setOrangeGreenGeekservoSpeed block="set Geekservo speed (orange/green)|%servoNum|speed %speed"
     //% weight=99
-    //% speed.min=-1 speed.max=1
+    //% speed.min=-1000 speed.max=1000
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function setOrangeGreenGeekservoSpeed(servoNum: Servo, speed: number): void {
-        // reverse: 500uS-1500uS, 0: 1500uS, forward: 1500uS-2000uS
-        let pulseWidth = (speed * 500) + 1500
+        // reverse: 500uS-1500uS, 0: 1500uS, forward: 1500uS-2500uS
+        let pulseWidth = 1500 + speed
         if (pulseWidth > 1500)
             pulseWidth = 1500
         else if (pulseWidth < 500)
