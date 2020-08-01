@@ -215,7 +215,7 @@ namespace microX {
      * @param servoNum Servo Channel; e.g.: S1
      * @param pulseWidth [1...19999] pulse width in uSec
     */
-    //% blockId=setGreyGeekservoAngle block="set servo pulse width (uSec)|%servoNum|pulseWidth %pulseWidth"
+    //% blockId=setServoPulseWidth block="set servo pulse width (uSec)|%servoNum|pulseWidth %pulseWidth"
     //% weight=99
     //% pulseWidth.min=1uS pulseWidth.max=19999uS
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
@@ -282,7 +282,7 @@ namespace microX {
      * @param servoNum Servo Channel; e.g.: S1
      * @param degree [0...360) degree of servo; e.g.: -45, 90, 225
     */
-    //% blockId=setGreyGeekservoAngle block="set large Geekservo angle (grey 2Kg)|%servoNum|degree %degree"
+    //% blockId=setLargeGreygGeekservoAngle block="set large Geekservo angle (grey 2Kg)|%servoNum|degree %degree"
     //% weight=99
     //% degree.min=0 degree.max=360
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
