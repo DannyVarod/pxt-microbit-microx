@@ -1,0 +1,20 @@
+{
+    "name": "micro-x",
+    "version": "0.0.1",
+    "description": "extension for Microsoft MakeCode micro:bit",
+    "keywords": [
+        "JavaScript",
+        "education",
+        "microbit",
+        "typescript",
+        "robot",
+        "remote",
+        "sensor",
+        "motor",
+        "servo"
+    ],
+    "dependencies": {
+        "pxt-common-packages": "7.1.1",
+        "pxt-core": "6.1.6"
+    }
+}
