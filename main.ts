@@ -113,7 +113,7 @@ namespace microX {
             pulseValue = PulseValue.High
         
         let pin: DigitalPin = DigitalPin.P8
-        switch button {
+        switch (button) {
             case YBRemoteButton.B1Red:
                 pin = DigitalPin.P13
                 break
