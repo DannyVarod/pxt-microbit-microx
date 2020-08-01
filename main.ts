@@ -173,7 +173,7 @@ namespace microX {
     }
 
     function setPwm(channel: number, low2Bytes: number, high2Bytes: number): void {
-        if (channel < 0 || channel > 15)
+        if (channel < 0 || 15 < channel)
             return
         initPhaseWidthModulationDriver()
         let buffer = pins.createBuffer(5)
@@ -188,28 +188,32 @@ namespace microX {
     /**
      * Set servo pulse width
      * @param motorNum Motor; e.g.: M1A
-     * @param speed [-4095...4095] speed
+     * @param speed [-4096...4096] speed
     */
     //% blockId=robotbit_motor_run block="Motor|%motorNum|speed %speed"
     //% weight=85
-    //% speed.min=-4095 speed.max=4095
+    //% speed.min=-4096 speed.max=4096
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function MotorRun(motorNum: Motor, speed: number): void {
         if (motorNum < 0 || 3 < motorNum)
             return
         initPhaseWidthModulationDriver()
+        
         let speed1 = speed
-        if (speed1 > 4095) {
-            speed1 = 4095
+        if (speed1 > 4096) {
+            speed1 = 4096
         }
-        if (speed1 < -4095) {
-            speed1 = -4095
+        else if (speed1 < -4096) {
+            speed1 = -4096
         }
+
         let speed2 = 0
         if (speed1 < 0) {
             speed2 = -speed1
             speed1 = 0
         }
+
+        // Motors are mapped to channels [[0, 1], [2, 3], [4, 5], [6, 7]]
         let channel = motorNum << 1
         setPwm(channel, 0, speed1)
         setPwm(channel + 1, 0, speed2)
@@ -226,12 +230,13 @@ namespace microX {
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function setServoPulseWidth(servoNum: Servo, pulseWidth: number): void {
         initPhaseWidthModulationDriver()
-        // 50Hz --> Full cycle is 20mS (20000uS), normalize this from range 0...20000uS to 0...4096 (12bits)
-        let value = Math.round(pulseWidth * 4096 / 20000)
+        // 50Hz --> Full cycle is 20mS (20000uS), normalize this from range 0...20000uS to 0...4096
+        let value = Math.round(pulseWidth * 4096.0 / 20000.0)
         if (value < 0)
             value = 0
-        else if (value > 4095)
-            value = 4095
+        else if (value > 4096)
+            value = 4096
+        // Servos are mapped to channels [8, 9, 10, 11, 12, 13, 14, 15]
         setPwm(servoNum + 7, 0, value)
     }
 
