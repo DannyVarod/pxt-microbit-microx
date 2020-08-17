@@ -145,12 +145,11 @@ namespace microX {
             return
 
         if (port < 1 || port > 7)
-            throw new RangeError("Port is out of range")
+            throw new Error("Port is out of range")
         
         powerblockPixels = new RgbMatrix(8, 8, PowerbrickDigitalPorts[port - 1][0])
         
         initializedPowerbrickRgb = true
-        return
     }
 
     //% block="initialize for Kittenbot Robotbit"
