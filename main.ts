@@ -493,7 +493,7 @@ namespace microX {
      * @param g pixel green intensity [0,255]
      * @param b pixel blue intensity [0,255]
     */
-    //% blockId=setPowerbrickAllPixels block="set robotbit all pixels|%r|%g|%b"
+    //% blockId=setRobotBitAllPixels block="set robotbit all pixels|%r|%g|%b"
     //% weight=99
     //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=5
@@ -511,7 +511,7 @@ namespace microX {
      * @param g pixel green intensity [0,255]
      * @param b pixel blue intensity [0,255]
     */
-    //% blockId=setPowerbrickPixel block="set robotbit pixel|%x|%r|%g|%b"
+    //% blockId=setRobotBitPixel block="set robotbit pixel|%x|%r|%g|%b"
     //% weight=99
     //% x.min=0 x.max=7 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=6
@@ -525,7 +525,7 @@ namespace microX {
     /**
      * Refresh robotbit pixels
     */
-    //% blockId=refreshPowerbrickPixels block="refresh robotbit pixels|%port"
+    //% blockId=refreshRobotBitPixels block="refresh robotbit pixels|%port"
     //% weight=99
     //% port.min=0 port.max=6
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
