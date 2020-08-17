@@ -2,7 +2,7 @@
     "name": "MicroX",
     "dependencies": {
         "core": "*",
-        "servo": "*"
+        "ws2812b": "github:Microsoft/pxt-ws2812b#v0.1.1"
     },
     "description": "",
     "files": [
