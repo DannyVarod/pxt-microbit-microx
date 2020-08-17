@@ -150,7 +150,6 @@ namespace microX {
         powerblockPixels = new RgbMatrix(8, 8, PowerbrickDigitalPorts[port - 1][0])
         
         initializedPowerbrickRgb = true
-        return
     }
 
     //% block="initialize for Kittenbot Robotbit"
