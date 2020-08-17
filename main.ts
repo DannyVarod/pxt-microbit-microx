@@ -9,7 +9,7 @@ namespace microX {
     const PWM_PCA9685_ADDRESS = 0x40
 
     let initializedPhaseWidthModulationDriver = false
-    let initializedPowerbrickRgb = false
+    let initializedPowerbrickPixels = false
     let initializedRobotbit = false
     let initializedYBRemote = false
 
@@ -138,10 +138,9 @@ namespace microX {
     //% weight=99
     //% port.min=1 port.max=7
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    //% blockId=intializePowerbrickRgb block="Initialize powerbrick pixels"
     //% group="Powerbrick pixels"
-    export function intializePowerbrickRgb(port: number): void {
-        if (initializedPowerbrickRgb)
+    export function intializePowerbrickPixels(port: number): void {
+        if (initializedPowerbrickPixels)
             return
 
         if (port < 1 || port > 7)
@@ -150,7 +149,7 @@ namespace microX {
         
         powerblockPixels = new RgbMatrix(8, 8, PowerbrickDigitalPorts[port - 1][0])
         
-        initializedPowerbrickRgb = true
+        initializedPowerbrickPixels = true
     }
 
     //% block="initialize for Kittenbot Robotbit"
@@ -169,7 +168,7 @@ namespace microX {
     /**
      * Act on YB-EMH02 ver 1.2 remote button click (Click on Joystick (Z), B1, B2, B3, B4)
      */
-    //% block="onYBRemoteButton %pin |%state"
+    //% block="onYBRemoteButton %pin|%state"
     //% blockGap=10
     //% name.fieldEditor="gridpicker name.fieldOptions.columns=5
     //% group="Yahboom remote"
@@ -260,7 +259,7 @@ namespace microX {
      * @param motorNum Motor; e.g.: M1A
      * @param speed [-4096...4096] speed
     */
-    //% blockId=robotbit_motor_run block="Motor|%motorNum|speed %speed"
+    //% blockId=robotbit_motor_run block="Motor|motorNum %motorNum|speed %speed"
     //% weight=85
     //% speed.min=-4096 speed.max=4096
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
@@ -327,7 +326,7 @@ namespace microX {
      * @param servoNum Servo Channel; e.g.: S1
      * @param degree [-45...225] degree of servo; e.g.: -45, 90, 225
     */
-    //% blockId=setGreyGeekservoAngle block="set Geekservo angle (grey)|%servoNum|degree %degree"
+    //% blockId=setGreyGeekservoAngle block="set Geekservo angle (grey)|servoNum %servoNum|degree %degree"
     //% weight=99
     //% degree.min=-45 degree.max=225
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
@@ -353,7 +352,7 @@ namespace microX {
      * @param servoNum Servo Channel; e.g.: S1
      * @param degree [0...360) degree of servo; e.g.: -45, 90, 225
     */
-    //% blockId=setLargeGreygGeekservoAngle block="set large Geekservo angle (grey 2Kg)|%servoNum|degree %degree"
+    //% blockId=setLargeGreygGeekservoAngle block="set large Geekservo angle (grey 2Kg)|servoNum %servoNum|degree %degree"
     //% weight=99
     //% degree.min=0 degree.max=360
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
@@ -447,7 +446,7 @@ namespace microX {
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     //% group="Powerbrick pixels"
     export function setPowerbrickAllPixels(r: number, g: number, b: number): void {
-        if (initializedPowerbrickRgb == false)
+        if (initializedPowerbrickPixels == false)
             return
         powerblockPixels.setAllPixels(r, g, b)
     }
@@ -466,7 +465,7 @@ namespace microX {
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     //% group="Powerbrick pixels"
     export function setPowerbrickPixel(y: number, x: number, r: number, g: number, b: number): void {
-        if (initializedPowerbrickRgb == false)
+        if (initializedPowerbrickPixels == false)
             return
         powerblockPixels.setPixel(y, x, r, g, b)
     }
@@ -481,7 +480,7 @@ namespace microX {
     //% blockId=refreshPowerbrickPixels block="Refresh powerbrick pixels"
     //% group="Powerbrick pixels"
     export function refreshPowerbrickPixels() {
-        if (initializedPowerbrickRgb == false)
+        if (initializedPowerbrickPixels == false)
             return
         powerblockPixels.refresh()
     }
