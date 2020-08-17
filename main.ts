@@ -134,7 +134,7 @@ namespace microX {
         initializedYBRemote = true
     }
 
-    //% blockId=intializePowerbrickPixels block="initialize powerbit pixels|%port"
+    //% block="initialize powerbit pixels|%port"
     //% weight=99
     //% port.min=1 port.max=7
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
@@ -168,7 +168,7 @@ namespace microX {
     /**
      * Act on YB-EMH02 ver 1.2 remote button click (Click on Joystick (Z), B1, B2, B3, B4)
      */
-    //% block="onYBRemoteButton %pin|%state"
+    //% block="onYBRemoteButton|%button|%state"
     //% blockGap=10
     //% name.fieldEditor="gridpicker name.fieldOptions.columns=5
     //% group="Yahboom remote"
@@ -259,7 +259,7 @@ namespace microX {
      * @param motorNum Motor; e.g.: M1A
      * @param speed [-4096...4096] speed
     */
-    //% blockId=robotbit_motor_run block="Motor|motorNum %motorNum|speed %speed"
+    //% blockId=robotbit_motor_run block="MotorRun|motorNum %motorNum|speed %speed"
     //% weight=85
     //% speed.min=-4096 speed.max=4096
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
@@ -443,7 +443,7 @@ namespace microX {
     //% blockId=setPowerbrickAllPixels block="set powerbit pixel|%r|%g|%b"
     //% weight=99
     //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=5
     //% group="Powerbrick pixels"
     export function setPowerbrickAllPixels(r: number, g: number, b: number): void {
         if (initializedPowerbrickPixels == false)
@@ -462,7 +462,7 @@ namespace microX {
     //% blockId=setPowerbrickPixel block="set powerbit pixel|%y|%x|%r|%g|%b"
     //% weight=99
     //% y.min=0 y.max=7 x.min=0 x.max=7 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=7
     //% group="Powerbrick pixels"
     export function setPowerbrickPixel(y: number, x: number, r: number, g: number, b: number): void {
         if (initializedPowerbrickPixels == false)
@@ -496,7 +496,7 @@ namespace microX {
     //% blockId=setPowerbrickAllPixels block="set powerbit pixel|%r|%g|%b"
     //% weight=99
     //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=5
     //% group="Robotbit pixels"
     export function setRobotBitAllPixels(r: number, g: number, b: number): void {
         if (initializedRobotbit == false)
@@ -514,7 +514,7 @@ namespace microX {
     //% blockId=setPowerbrickPixel block="set powerbit pixel|%x|%r|%g|%b"
     //% weight=99
     //% x.min=0 x.max=7 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=6
     //% group="Robotbit pixels"
     export function setRobotBitPixel(x: number, r: number, g: number, b: number): void {
         if (initializedRobotbit == false)
