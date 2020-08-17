@@ -140,17 +140,17 @@ namespace microX {
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     //% blockId=intializePowerbrickRgb block="Initialize powerbrick pixels"
     //% group="Powerbrick pixels"
-    export function intializePowerbrickRgb(port: number): boolean {
+    export function intializePowerbrickRgb(port: number): void {
         if (initializedPowerbrickRgb)
-            return true
+            return
 
         if (port < 1 || port > 7)
-            return false
+            throw new RangeError("Port is out of range")
         
         powerblockPixels = new RgbMatrix(8, 8, PowerbrickDigitalPorts[port - 1][0])
         
         initializedPowerbrickRgb = true
-        return true
+        return
     }
 
     //% block="initialize for Kittenbot Robotbit"
