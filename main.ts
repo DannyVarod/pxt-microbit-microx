@@ -417,7 +417,7 @@ namespace microX {
         
         private setPixelPrivate(y: number, x: number, r: number, g: number, b: number): void {
             // 3 channels/sub-pixels (RGB) per pixel
-            let subPixelOffset = (y * this.columns + x) * 3
+            let subPixelOffset = y * this.columns * 3 + x
             this.displayBuffer[subPixelOffset + 0] = g
             this.displayBuffer[subPixelOffset + 1] = r
             this.displayBuffer[subPixelOffset + 2] = b
