@@ -471,6 +471,7 @@ namespace microX {
     //% block
     //% pulseWidth.min=1 pulseWidth.max=19999
     //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
+    //% inlineInputMode=inline
     //% group="Movement" advanced=true
     //% weight=6
     export function setServoPulseWidth(servoNum: Servo, pulseWidth: number): void {
@@ -491,6 +492,7 @@ namespace microX {
     //% block
     //% speed.min=-1000 speed.max=1000
     //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
+    //% inlineInputMode=inline
     //% group="Movement"
     //% weight=6
     export function setOrangeGreenGeekservoSpeed(servoNum: Servo, speed: number): void {
@@ -512,6 +514,7 @@ namespace microX {
     //% block
     //% degree.min=-45 degree.max=225
     //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
+    //% inlineInputMode=inline
     //% group="Movement"
     //% weight=6
     export function setGreyGeekservoAngle(servoNum: Servo, degree: number): void {
@@ -545,6 +548,7 @@ namespace microX {
     //% block
     //% degree.min=0 degree.max=360
     //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
+    //% inlineInputMode=inline
     //% group="Movement"
     //% weight=6
     export function setLargeGreyGeekservoAngle(servoNum: Servo, degree: number): void {
@@ -641,6 +645,7 @@ namespace microX {
     //% r.fieldEditor="gridpicker" r.fieldOptions.columns=2
     //% g.fieldEditor="gridpicker" g.fieldOptions.columns=2
     //% b.fieldEditor="gridpicker" b.fieldOptions.columns=2
+    //% inlineInputMode=inline
     //% group="Powerbrick pixels"
     //% weight=3
     export function setPowerbrickAllPixels(r: number, g: number, b: number): void {
@@ -664,6 +669,7 @@ namespace microX {
     //% r.fieldEditor="gridpicker" r.fieldOptions.columns=2
     //% g.fieldEditor="gridpicker" g.fieldOptions.columns=2
     //% b.fieldEditor="gridpicker" b.fieldOptions.columns=2
+    //% inlineInputMode=inline
     //% group="Powerbrick pixels"
     //% weight=3
     export function setPowerbrickPixel(y: number, x: number, r: number, g: number, b: number): void {
@@ -695,6 +701,7 @@ namespace microX {
     //% r.fieldEditor="gridpicker" r.fieldOptions.columns=2
     //% g.fieldEditor="gridpicker" g.fieldOptions.columns=2
     //% b.fieldEditor="gridpicker" b.fieldOptions.columns=2
+    //% inlineInputMode=inline
     //% group="Robotbit pixels"
     //% weight=3
     export function setRobotBitAllPixels(r: number, g: number, b: number): void {
@@ -715,6 +722,7 @@ namespace microX {
     //% r.fieldEditor="gridpicker" r.fieldOptions.columns=2
     //% g.fieldEditor="gridpicker" g.fieldOptions.columns=2
     //% b.fieldEditor="gridpicker" b.fieldOptions.columns=2
+    //% inlineInputMode=inline
     //% group="Robotbit pixels"
     //% weight=3
     export function setRobotBitPixel(x: number, r: number, g: number, b: number): void {
