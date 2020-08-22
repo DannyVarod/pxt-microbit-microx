@@ -17,6 +17,7 @@ namespace microX {
     let robotbitPixels: RgbMatrix = null
     let powerblockPixels: RgbMatrix = null
 
+    let usedPrevDistance = false
     let prevDistance: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
     let phaseWidthPeriodMicrosec = 20000
@@ -801,11 +802,13 @@ namespace microX {
         // read pulse
         let distance = pins.pulseIn(pin, PulseValue.High, 25000)
 
-        // on timeout return lastdistance
-        if (distance == 0) {
+        // on timeout return lastdistance (1 times in a row max, since distance can be 0)
+        if (distance == 0 && usedPrevDistance == false) {
             distance = prevDistance[pinNum]
+            usedPrevDistance = true
         } else {
             prevDistance[pinNum] = distance
+            usedPrevDistance = false
         }
         
         return Math.floor(distance * mult / div)
