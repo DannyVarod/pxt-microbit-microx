@@ -246,6 +246,10 @@ namespace microX {
         robotbitPixels = new RgbMatrix(1, 4, DigitalPin.P16)
         
         initializedRobotbit = true
+        
+        // After initializing port set to black to prevent first refresh error
+        setRobotBitAllPixels(0, 0, 0)
+        refreshRobotBitPixels()
     }
 
     /**
@@ -263,6 +267,10 @@ namespace microX {
         powerblockPixels = new RgbMatrix(8, 8, pin0)
         
         initializedPowerbrickPixels = true
+        
+        // After initializing port set to black to prevent first refresh error
+        setPowerbrickAllPixels(0, 0, 0)
+        refreshPowerbrickPixels()
     }
 
     /**
