@@ -473,7 +473,7 @@ namespace microX {
     //% pulseWidth.min=1 pulseWidth.max=19999
     //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
     //% inlineInputMode=inline
-    //% group="Movement"
+    //% group="Movement" advanced=true
     //% weight=6
     export function setServoPulseWidth(servoNum: Servo, pulseWidth: number): void {
         // TODO: Try to use 20480.0 uSec (48.828125 Hz) instead of 20000.0 uSec (50 Hz) to get more precise results (500uS pulse will be 512uS pulses instead)
