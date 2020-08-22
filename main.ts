@@ -174,6 +174,7 @@ namespace microX {
     //% block
     //% pinNumber.min=0 pinNumber.max=1
     //% group="Powerbrick"
+    //% weight=10
     export function PowerbrickDigitalPortToPin(port: PowerbrickDigitalPort, pinNumber: number = 0): DigitalPin {
         if (port < PowerbrickDigitalPort.DigialPort1 || port > PowerbrickDigitalPort.DigialPort7 || pinNumber < 0 || pinNumber > 1)
             return null
@@ -188,6 +189,7 @@ namespace microX {
     //% block
     //% pinNumber.min=0 pinNumber.max=1
     //% group="Powerbrick"
+    //% weight=10
     export function PowerbrickSerialPortToPin(port: PowerbrickSerialPort, pinNumber: number = 0): SerialPin {
         if (port < PowerbrickSerialPort.SerialPort1 || port > PowerbrickSerialPort.SerialPort4)
             return null
@@ -200,6 +202,7 @@ namespace microX {
      */
     //% block
     //% group="Powerbrick"
+    //% weight=10
     export function PowerbrickAnalogPortToPin(port: PowerbrickAnalogPort): AnalogPin {
         if (port < PowerbrickAnalogPort.AnalogPort1 || port > PowerbrickAnalogPort.AnalogPort7)
             return null
@@ -229,63 +232,11 @@ namespace microX {
     }
 
     /**
-     * Get X-axis value of YB-EMH02 ver 1.2 joystick (port2) between -1 (left) and 1 (right)
-     */
-    //% block
-    //% group="Yahboom remote"
-    export function joystickX(): number {
-        
-        // Normalize from [0,1023] to [-512,511]
-        let readValue = 512 - pins.analogReadPin(AnalogPin.P2)
-        
-        // Ignore values between -25 and 25 since joystick may not be calibrated (mine had an X-offset of 1)
-        if (-25 < readValue && readValue < 25)
-            readValue = 0
-        
-        // Normalize from -512..511 to -1.0 ... 1.0
-        return readValue / 512.0
-    }
-
-    /**
-     * Get Y-axis value of YB-EMH02 ver 1.2 joystick (port1) between -1 (bottom) and 1 (top)
-     */
-    //% block
-    //% group="Yahboom remote"
-    export function joystickY() {
-        
-        // Normalize from [0,1023] to [-512,511]
-        let readValue = 512 - pins.analogReadPin(AnalogPin.P1)
-        
-        // Ignore values between -25 and 25 since joystick may not be calibrated (mine had a Y-offset of 12)
-        if (-25 < readValue && readValue < 25)
-            readValue = 0
-        
-        // Normalize from -512..511 to -1.0 ... 1.0
-        return readValue / 512.0
-    }
-
-    /**
-     * Initialize for Yahoobom remote
-     */
-    //% block
-    //% group="Yahboom remote"
-    export function initializeYahboomRemote(): void {
-        if (initializedYBRemote)
-            return
-        pins.setPull(DigitalPin.P8, PinPullMode.PullUp)
-        pins.setPull(DigitalPin.P13, PinPullMode.PullUp)
-        pins.setPull(DigitalPin.P14, PinPullMode.PullUp)
-        pins.setPull(DigitalPin.P15, PinPullMode.PullUp)
-        pins.setPull(DigitalPin.P16, PinPullMode.PullUp)
-        initializePhaseWidthModulationDriver()
-        initializedYBRemote = true
-    }
-
-    /**
      * Initialize for Kittenbot Robotbit
      */
     //% block
     //% group="Robotbit"
+    //% weight=9
     export function intializeRobotbit(): void {
         if (initializedRobotbit)
             return
@@ -304,6 +255,7 @@ namespace microX {
     //% block
     //% port.fieldEditor="gridpicker" port.fieldOptions.columns=2
     //% group="Powerbrick pixels"
+    //% weight=8
     export function intializePowerbrickPixels(pin0: DigitalPin): void {
         if (initializedPowerbrickPixels || pin0 == null)
             return
@@ -319,11 +271,68 @@ namespace microX {
      */
     //% block
     //% group="MP3"
+    //% weight=8
     export function InitializeMp3Player(pin1: SerialPin): void {   
         if (initializedPowerbrickMp3Player)
             return
         
         serial.redirect(pin1, SerialPin.P16, BaudRate.BaudRate9600)
+    }
+
+    /**
+     * Initialize for Yahoobom remote
+     */
+    //% block
+    //% group="Yahboom remote"
+    //% weight=9
+    export function initializeYahboomRemote(): void {
+        if (initializedYBRemote)
+            return
+        pins.setPull(DigitalPin.P8, PinPullMode.PullUp)
+        pins.setPull(DigitalPin.P13, PinPullMode.PullUp)
+        pins.setPull(DigitalPin.P14, PinPullMode.PullUp)
+        pins.setPull(DigitalPin.P15, PinPullMode.PullUp)
+        pins.setPull(DigitalPin.P16, PinPullMode.PullUp)
+        initializePhaseWidthModulationDriver()
+        initializedYBRemote = true
+    }
+
+    /**
+     * Get X-axis value of YB-EMH02 ver 1.2 joystick (port2) between -1 (left) and 1 (right)
+     */
+    //% block
+    //% group="Yahboom remote"
+    //% weight=7
+    export function joystickX(): number {
+        
+        // Normalize from [0,1023] to [-512,511]
+        let readValue = 512 - pins.analogReadPin(AnalogPin.P2)
+        
+        // Ignore values between -25 and 25 since joystick may not be calibrated (mine had an X-offset of 1)
+        if (-25 < readValue && readValue < 25)
+            readValue = 0
+        
+        // Normalize from -512..511 to -1.0 ... 1.0
+        return readValue / 512.0
+    }
+
+    /**
+     * Get Y-axis value of YB-EMH02 ver 1.2 joystick (port1) between -1 (bottom) and 1 (top)
+     */
+    //% block
+    //% group="Yahboom remote"
+    //% weight=7
+    export function joystickY() {
+        
+        // Normalize from [0,1023] to [-512,511]
+        let readValue = 512 - pins.analogReadPin(AnalogPin.P1)
+        
+        // Ignore values between -25 and 25 since joystick may not be calibrated (mine had a Y-offset of 12)
+        if (-25 < readValue && readValue < 25)
+            readValue = 0
+        
+        // Normalize from -512..511 to -1.0 ... 1.0
+        return readValue / 512.0
     }
 
     /**
@@ -333,6 +342,7 @@ namespace microX {
     //% button.fieldEditor="gridpicker button.fieldOptions.columns=3
     //% state.fieldEditor="gridpicker state.fieldOptions.columns=3
     //% group="Yahboom remote"
+    //% weight=7
     export function onYahboomRemoteButton(button: YBRemoteButton, state: ButtonState, body: Action): void {
         
         let pulseValue: PulseValue = PulseValue.Low
@@ -392,8 +402,12 @@ namespace microX {
         i2cwrite(PWM_PCA9685_ADDRESS, 0x00, oldmode | 0xa1)
     }
 
+    /**
+     * Initialize the phase width modulation driver used for servos and motors
+     */
     //% block
     //% group="Movement"
+    //% weight=9
     export function initializePhaseWidthModulationDriver(): void {
         if (initializedPhaseWidthModulationDriver)
             return
@@ -428,6 +442,7 @@ namespace microX {
     //% motor.fieldEditor="gridpicker" motor.fieldOptions.columns=2
     //% inlineInputMode=inline
     //% group="Movement"
+    //% weight=6
     export function MotorRun(motorNum: Motor, speed: number): void {
         if (motorNum < 0 || 3 < motorNum)
             return
@@ -459,6 +474,7 @@ namespace microX {
     //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
     //% inlineInputMode=inline
     //% group="Movement"
+    //% weight=6
     export function setServoPulseWidth(servoNum: Servo, pulseWidth: number): void {
         // TODO: Try to use 20480.0 uSec (48.828125 Hz) instead of 20000.0 uSec (50 Hz) to get more precise results (500uS pulse will be 512uS pulses instead)
         initializePhaseWidthModulationDriver()
@@ -479,6 +495,7 @@ namespace microX {
     //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
     //% inlineInputMode=inline
     //% group="Movement"
+    //% weight=6
     export function setOrangeGreenGeekservoSpeed(servoNum: Servo, speed: number): void {
         // TODO: When trying to use 20480.0 uSec instead of 20000.0 uSec and change speed range from -1000...1000 to -1024...1024
         // reverse: 500uS-1500uS, 0: 1500uS, forward: 1500uS-2500uS
@@ -500,6 +517,7 @@ namespace microX {
     //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
     //% inlineInputMode=inline
     //% group="Movement"
+    //% weight=6
     export function setGreyGeekservoAngle(servoNum: Servo, degree: number): void {
         // -45deg: 600uS, 225deg: 2400uS (6.6667 uS/deg = 20.0/3.0)
         let degreeRange = 270
@@ -533,6 +551,7 @@ namespace microX {
     //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
     //% inlineInputMode=inline
     //% group="Movement"
+    //% weight=6
     export function setLargeGreyGeekservoAngle(servoNum: Servo, degree: number): void {
         // TODO: When I have a servo like this, check if this is 0 to 360 or 0 to 350 and if only goes to 350 degress, replace constants
         // 0deg: 500uS, 360deg: 2500uS
@@ -629,6 +648,7 @@ namespace microX {
     //% b.fieldEditor="gridpicker" b.fieldOptions.columns=2
     //% inlineInputMode=inline
     //% group="Powerbrick pixels"
+    //% weight=3
     export function setPowerbrickAllPixels(r: number, g: number, b: number): void {
         if (initializedPowerbrickPixels == false)
             return
@@ -652,6 +672,7 @@ namespace microX {
     //% b.fieldEditor="gridpicker" b.fieldOptions.columns=2
     //% inlineInputMode=inline
     //% group="Powerbrick pixels"
+    //% weight=3
     export function setPowerbrickPixel(y: number, x: number, r: number, g: number, b: number): void {
         if (initializedPowerbrickPixels == false)
             return
@@ -663,6 +684,7 @@ namespace microX {
     */
     //% block
     //% group="Powerbrick pixels"
+    //% weight=3
     export function refreshPowerbrickPixels() {
         if (initializedPowerbrickPixels == false)
             return
@@ -682,6 +704,7 @@ namespace microX {
     //% b.fieldEditor="gridpicker" b.fieldOptions.columns=2
     //% inlineInputMode=inline
     //% group="Robotbit pixels"
+    //% weight=3
     export function setRobotBitAllPixels(r: number, g: number, b: number): void {
         if (initializedRobotbit == false)
             return
@@ -702,6 +725,7 @@ namespace microX {
     //% b.fieldEditor="gridpicker" b.fieldOptions.columns=2
     //% inlineInputMode=inline
     //% group="Robotbit pixels"
+    //% weight=3
     export function setRobotBitPixel(x: number, r: number, g: number, b: number): void {
         if (initializedRobotbit == false)
             return
@@ -714,6 +738,7 @@ namespace microX {
     //% block
     //% port.min=0 port.max=6
     //% group="Robotbit pixels"
+    //% weight=3
     export function refreshRobotBitPixels() {
         if (initializedRobotbit == false)
             return
@@ -780,6 +805,7 @@ namespace microX {
      */
     //% block
     //% group="Sensors"
+    //% weight=4
     export function ultrasonicDistanceCatShapedSensor(pin: DigitalPin): number {
         return _ultrasonicDistance(pin, PinPullMode.PullDown, 21, 800)
     }
@@ -790,6 +816,7 @@ namespace microX {
      */
     //% block
     //% group="Sensors"
+    //% weight=4
     export function ultrasonicDistancePowerblockUltrasonicModule(pin0: DigitalPin): number {
         return _ultrasonicDistance(pin0, PinPullMode.PullNone, 10, 348)
     }
@@ -800,6 +827,7 @@ namespace microX {
      */
     //% block
     //% group="Sensors"
+    //% weight=4
     export function soundLevelPowerblockUltrasonicModule(pin: AnalogPin): number {
         return pins.analogReadPin(pin)
     }
@@ -810,6 +838,7 @@ namespace microX {
      */
     //% block
     //% group="Sensors"
+    //% weight=4
     export function ultrasonicDistanceCatShapedSensorWithLeds(pin: DigitalPin): number {
         return _ultrasonicDistance(pin, PinPullMode.PullNone, 9, 348)
     }
@@ -869,6 +898,7 @@ namespace microX {
      */
     //% block
     //% group="MP3"
+    //% weight=2
     export function mp3PlayerControl(controlAction: PowerbrickMp3ControlAction): void {
         if (controlAction < PowerbrickMp3ControlAction.Play || controlAction > PowerbrickMp3ControlAction.Prev)
             return
@@ -882,6 +912,7 @@ namespace microX {
     //% block
     //% volume.min=0 volume.max=31
     //% group="MP3"
+    //% weight=2
     export function mp3PlayerSetVolume(volume: number): void {
         volume = inRange(volume, 0, 31)
         _mp3PlayerSendArray(0xae, [volume])
@@ -894,6 +925,7 @@ namespace microX {
     //% block
     //% filenumber.min=1 filenumber.max=255
     //% group="MP3"
+    //% weight=2
     export function mp3PlayerPlayFilenumber(filenumber: number): void {
         filenumber = inRange(filenumber, 1, 255)
         _mp3PlayerSendArray(0xa2, [0, filenumber])
@@ -905,6 +937,7 @@ namespace microX {
      */
     //% block
     //% group="MP3"
+    //% weight=2
     export function mp3PlayerPlayFile(filename: string): void {
         if (filename == null || filename.length == 0)
             return
