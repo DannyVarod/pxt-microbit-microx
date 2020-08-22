@@ -746,7 +746,7 @@ namespace microX {
         
         let pinNum = digitalPinNumber(pin)
         if (pinNum < 0 || pinNum > 15)
-            return
+            return 0
 
         pins.setPull(pin, pullMode)
         
