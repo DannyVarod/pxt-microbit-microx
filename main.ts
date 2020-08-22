@@ -846,7 +846,7 @@ namespace microX {
     export function mp3PlayerControl(controlAction: PowerbrickMp3ControlAction): void {
         if (controlAction < PowerbrickMp3ControlAction.Play || controlAction > PowerbrickMp3ControlAction.Prev)
             return
-        _mp3PlayerSendArray(controlAction, Array<number>())
+        _mp3PlayerSendArray(controlAction, new Array<number>())
     }
 
     /**
@@ -858,7 +858,7 @@ namespace microX {
     //% group="MP3"
     export function mp3PlayerSetVolume(volume: number): void {
         volume = inRange(volume, 0, 31)
-        _mp3PlayerSendArray(0xae, Array<number>(volume))
+        _mp3PlayerSendArray(0xae, new Array<number>(volume))
     }
 
     /**
@@ -870,7 +870,7 @@ namespace microX {
     //% group="MP3"
     export function mp3PlayerPlayFilenumber(filenumber: number): void {
         filenumber = inRange(filenumber, 1, 255)
-        _mp3PlayerSendArray(0xa2, Array<number>(0, filenumber))
+        _mp3PlayerSendArray(0xa2, new Array<number>(0, filenumber))
     }
 
     /**
