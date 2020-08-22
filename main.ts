@@ -619,10 +619,10 @@ namespace microX {
         
         private _setPixel(y: number, x: number, r: number, g: number, b: number): void {
             // 3 channels/sub-pixels (RGB) per pixel
-            let subPixelOffset = y * this.columns * 3 + x
-            this.displayBuffer[subPixelOffset + 0] = g
-            this.displayBuffer[subPixelOffset + 1] = r
-            this.displayBuffer[subPixelOffset + 2] = b
+            let pixelOffset = (y * this.columns + x) * 3
+            this.displayBuffer[pixelOffset + 0] = g
+            this.displayBuffer[pixelOffset + 1] = r
+            this.displayBuffer[pixelOffset + 2] = b
         }
 
         /**
