@@ -299,26 +299,23 @@ namespace microX {
 
     /**
      * Initialize Kittenbot Powerbrick pixels module
-     * @param port port pixels module is connected to
+     * @param pin0 digital pin, use PowerbrickDigitalPortToPin(port=???, pinNumber=0) to select pin for the port you are using
      */
     //% block
     //% port.fieldEditor="gridpicker" port.fieldOptions.columns=2
     //% group="Powerbrick pixels"
-    export function intializePowerbrickPixels(port: PowerbrickDigitalPort): void {
-        if (initializedPowerbrickPixels)
+    export function intializePowerbrickPixels(pin0: DigitalPin): void {
+        if (initializedPowerbrickPixels || pin0 == null)
             return
 
-        if (port < 1 || port > 7)
-            return
-        
-        powerblockPixels = new RgbMatrix(8, 8, PowerbrickDigitalPortToPins[port][0])
+        powerblockPixels = new RgbMatrix(8, 8, pin0)
         
         initializedPowerbrickPixels = true
     }
 
     /**
      * Initializes the MP3 player connected to a specific serial pin (or Powerbrick serial port)
-     * @param pin1 analog pin use PowerbrickSerialPortToPin(port=???, pinNumber=1) to select pin for the port you are using
+     * @param pin1 serial pin, use PowerbrickSerialPortToPin(port=???, pinNumber=1) to select pin for the port you are using
      */
     //% block
     //% group="MP3"
@@ -751,6 +748,10 @@ namespace microX {
         return Math.floor(distance * mult / div)
     }
     
+    /**
+     * Measure distance using Cat-head shaped sensor v1.0 (with connection holes in ears)
+     * @param pin digital pin
+     */
     //% block
     //% group="Sensors"
     export function ultrasonicDistanceCatShapedSensor(pin: DigitalPin): number {
@@ -758,16 +759,18 @@ namespace microX {
     }
 
     /**
-     * Use PowerbrickDigitalPortToPin(port=???, pin=0) to select pin for the port you are using
+     * Measure distance using Powerblock's ultrasonic module
+     * @param pin0 digital pin, use PowerbrickDigitalPortToPin(port=???, pinNumber=0) to select pin for the port you are using
      */
     //% block
     //% group="Sensors"
-    export function ultrasonicDistancePowerblockUltrasonicModule(pin: DigitalPin): number {
-        return _ultrasonicDistance(pin, PinPullMode.PullNone, 10, 348)
+    export function ultrasonicDistancePowerblockUltrasonicModule(pin0: DigitalPin): number {
+        return _ultrasonicDistance(pin0, PinPullMode.PullNone, 10, 348)
     }
 
     /**
-     * Use PowerbrickAnalogPortToPin(port=???) to select pin for the port you are using
+     * Measure sound level using Powerblock's ultrasonic module
+     * @param pin analog pin, use PowerbrickAnalogPortToPin(port=???) to select pin for the port you are using
      */
     //% block
     //% group="Sensors"
@@ -775,6 +778,10 @@ namespace microX {
         return pins.analogReadPin(pin)
     }
 
+    /**
+     * Measure distance using Cat-head shaped sensor with LEDs in ears
+     * @param pin digital pin
+     */
     //% block
     //% group="Sensors"
     export function ultrasonicDistanceCatShapedSensorWithLeds(pin: DigitalPin): number {
