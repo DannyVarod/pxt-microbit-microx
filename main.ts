@@ -680,7 +680,7 @@ namespace microX {
         if (x % 2 == 0)
             powerblockPixels.setPixel(x, y, r, g, b)
         else
-            powerblockPixels.setPixel(x, (this.rows - 1 - y), r, g, b)
+            powerblockPixels.setPixel(x, 7 - y, r, g, b)
     }
 
     /**
