@@ -17,7 +17,7 @@ namespace microX {
     let robotbitPixels: RgbMatrix = null
     let powerblockPixels: RgbMatrix = null
 
-    let prevDistance: Map<DigitalPin, number> = new Map<DigitalPin, number>()
+    let prevDistance: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
     let phaseWidthPeriodMicrosec = 20000
     let phaseWidthLevels = 4096
@@ -720,8 +720,34 @@ namespace microX {
         robotbitPixels.refresh()
     }
 
+    function digitalPinNumber(pin: DigitalPin): number {
+        switch (pin) {
+            case DigitalPin.D0: return 0
+            case DigitalPin.D1: return 1
+            case DigitalPin.D2: return 2
+            case DigitalPin.D3: return 3
+            case DigitalPin.D4: return 4
+            case DigitalPin.D5: return 5
+            case DigitalPin.D6: return 6
+            case DigitalPin.D7: return 7
+            case DigitalPin.D8: return 8
+            case DigitalPin.D9: return 9
+            case DigitalPin.D10: return 10
+            case DigitalPin.D11: return 11
+            case DigitalPin.D12: return 12
+            case DigitalPin.D13: return 13
+            case DigitalPin.D14: return 14
+            case DigitalPin.D15: return 15
+        }
+        return -1
+    }
+
     function _ultrasonicDistance(pin: DigitalPin, pullMode: PinPullMode, mult: number, div: number): number {
         
+        let pinNum = digitalPinNumber(pin)
+        if (pinNum < 0 || pinNum > 15)
+            return
+
         pins.setPull(pin, pullMode)
         
         // turn off for 2uS
@@ -739,10 +765,10 @@ namespace microX {
         let distance = pins.pulseIn(pin, PulseValue.High, 25000)
 
         // on timeout return lastdistance
-        if (distance == 0 && prevDistance.has(pin)) {
-            distance = prevDistance.get(pin)
+        if (distance == 0) {
+            distance = prevDistance[pinNum]
         } else {
-            prevDistance.set(pin, distance)
+            prevDistance[pinNum] = distance
         }
         
         return Math.floor(distance * mult / div)
