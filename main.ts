@@ -620,10 +620,7 @@ namespace microX {
         private _setPixel(y: number, x: number, r: number, g: number, b: number): void {
             // 3 channels/sub-pixels (RGB) per pixel
             let pixelOffset = 0
-            if (y % 2 == 0)
-                pixelOffset = (y * this.columns + x) * 3
-            else
-            pixelOffset = (y * this.columns + (this.columns - x)) * 3
+            pixelOffset = (y * this.columns + x) * 3
             this.displayBuffer[pixelOffset + 0] = g
             this.displayBuffer[pixelOffset + 1] = r
             this.displayBuffer[pixelOffset + 2] = b
@@ -679,7 +676,11 @@ namespace microX {
     export function setPowerbrickPixel(y: number, x: number, r: number, g: number, b: number): void {
         if (initializedPowerbrickPixels == false)
             return
-        powerblockPixels.setPixel(y, x, r, g, b)
+        // The pixels are wired up in a weird order, workaround:
+        if (x % 2 == 0)
+            powerblockPixels.setPixel(x, y, r, g, b)
+        else
+            powerblockPixels.setPixel(x, (this.rows - 1 - y), r, g, b)
     }
 
     /**
@@ -732,7 +733,7 @@ namespace microX {
     export function setRobotBitPixel(x: number, r: number, g: number, b: number): void {
         if (initializedRobotbit == false)
             return
-            robotbitPixels.setPixel(0, x, r, g, b)
+        robotbitPixels.setPixel(0, x, r, g, b)
     }
 
     /**
