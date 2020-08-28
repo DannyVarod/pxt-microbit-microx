@@ -319,12 +319,8 @@ namespace microX {
     export function intializePowerbrickPixels(pinNumber: PinNumber): void {
         if (initializedPowerbrickPixels || pinNumber == null)
             return
-        
-        let pin = pinToDigitalPin(pinNumber)
-        if (pin == null)
-            return
 
-        powerblockPixels = new RgbMatrix(8, 8, pin)
+        powerblockPixels = new RgbMatrix(8, 8, pinNumber)
         
         initializedPowerbrickPixels = true
         
