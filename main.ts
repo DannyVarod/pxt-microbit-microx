@@ -18,7 +18,7 @@ namespace microX {
     let powerblockPixels: RgbMatrix = null
 
     let usedPrevDistance = false
-    let prevDistance: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    let prevDistance: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
     let phaseWidthPeriodMicrosec = 20000
     let phaseWidthLevels = 4096
@@ -50,7 +50,7 @@ namespace microX {
      */
     export enum Motor {
         //% block
-        RobitbitM1A = 0,
+        RobotbitM1A = 0,
         //% block
         RobotbitM1B = 1,
         //% block
@@ -106,108 +106,163 @@ namespace microX {
         DigialPort7 = 6
     }
 
-    /**
-     * PowerbrickDigitalPortToPins
-     */
-    const PowerbrickDigitalPortToPinsDict = [
-        [DigitalPin.P8, DigitalPin.P0],
-        [DigitalPin.P12, DigitalPin.P1],
-        [DigitalPin.P13, DigitalPin.P2],
-        [DigitalPin.P15, DigitalPin.P14],
-        [DigitalPin.P6, DigitalPin.P3],
-        [DigitalPin.P7, DigitalPin.P4],
-        [DigitalPin.P9, DigitalPin.P10]
-    ]
+    export enum PinNumber {
+        //% block
+        Pin0 = 0,
+        //% block
+        Pin1 = 1,
+        //% block
+        Pin2 = 2,
+        //% block
+        Pin3 = 3,
+        //% block
+        Pin4 = 4,
+        //% block
+        Pin6 = 6,
+        //% block
+        Pin7 = 7,
+        //% block
+        Pin8 = 8,
+        //% block
+        Pin9 = 9,
+        //% block
+        Pin10 = 10,
+        //% block
+        Pin12 = 12,
+        //% block
+        Pin13 = 13,
+        //% block
+        Pin14 = 14,
+        //% block
+        Pin15 = 15,
+        //% block
+        Pin16 = 16,
 
-    /**
-     * Powerbrick serial port (1 to 4)
-     */
-    export enum PowerbrickSerialPort {
         //% block
-        SerialPort1 = 0,
+        AnalogPin0 = Pin0,
         //% block
-        SerialPort2 = 1,
+        AnalogPin1 = Pin1,
         //% block
-        SerialPort3 = 2,
+        AnalogPin2 = Pin2,
         //% block
-        SerialPort4 = 3
+        AnalogPin3 = Pin3,
+        //% block
+        AnalogPin4 = Pin4,
+        //% block
+        AnalogPin10 = Pin10,
+
+        //% block
+        PowerbrickPort1_Pin1 = Pin0,
+        //% block
+        PowerbrickPort1_Pin2 = Pin8,
+        //% block
+        PowerbrickPort2_Pin1 = Pin1,
+        //% block
+        PowerbrickPort2_Pin2 = Pin12,
+        //% block
+        PowerbrickPort3_Pin1 = Pin2,
+        //% block
+        PowerbrickPort3_Pin2 = Pin13,
+        //% block
+        PowerbrickPort4_Pin1 = Pin14,
+        //% block
+        PowerbrickPort4_Pin2 = Pin15,
+        //% block
+        PowerbrickPort5_Pin1 = Pin3,
+        //% block
+        PowerbrickPort5_Pin2 = Pin6,
+        //% block
+        PowerbrickPort6_Pin1 = Pin4,
+        //% block
+        PowerbrickPort6_Pin2 = Pin7,
+        //% block
+        PowerbrickPort7_Pin1 = Pin10,
+        //% block
+        PowerbrickPort7_Pin2 = Pin9,
+
+        //% block
+        PowerbrickPort1_Digital = Pin0,
+        //% block
+        PowerbrickPort2_Digital = Pin1,
+        //% block
+        PowerbrickPort3_Digital = Pin2,
+        //% block
+        PowerbrickPort4_Digital = Pin14,
+        //% block
+        PowerbrickPort5_Digital = Pin3,
+        //% block
+        PowerbrickPort6_Digital = Pin4,
+        //% block
+        PowerbrickPort7_Digital = Pin10,
+
+        //% block
+        PowerbrickPort1_Analog = Pin0,
+        //% block
+        PowerbrickPort2_Analog = Pin1,
+        //% block
+        PowerbrickPort3_Analog = Pin2,
+        //% block
+        PowerbrickPort5_Analog = Pin3,
+        //% block
+        PowerbrickPort6_Analog = Pin4,
+        //% block
+        PowerbrickPort7_Analog = Pin10,
+
+        //% block
+        PowerbrickPort1_Serial = Pin0,
+        //% block
+        PowerbrickPort2_Serial = Pin1,
+        //% block
+        PowerbrickPort3_Serial = Pin2,
+        //% block
+        PowerbrickPort4_Serial = Pin14
     }
 
-    const PowerbrickSerialPortToPinsDict = [
-        [SerialPin.P8, SerialPin.P0],
-        [SerialPin.P12, SerialPin.P1],
-        [SerialPin.P13, SerialPin.P2],
-        [SerialPin.P15, SerialPin.P14]
-    ]
-
-    /**
-     * Powerbrick analog port (1, 2, 3, 5, 6, 7)
-     */
-    export enum PowerbrickAnalogPort {
-        //% block
-        AnalogPort1 = 0,
-        //% block
-        AnalogPort2 = 1,
-        //% block
-        AnalogPort3 = 2,
-        //% block
-        AnalogPort5 = 3,
-        //% block
-        AnalogPort6 = 4,
-        //% block
-        AnalogPort7 = 5
+    function pinToDigitalPin(pinNumber: PinNumber): DigitalPin {
+        switch (pinNumber) {
+            case PinNumber.Pin0: return DigitalPin.P0
+            case PinNumber.Pin1: return DigitalPin.P1
+            case PinNumber.Pin2: return DigitalPin.P2
+            case PinNumber.Pin3: return DigitalPin.P3
+            case PinNumber.Pin4: return DigitalPin.P4
+            case PinNumber.Pin6: return DigitalPin.P6
+            case PinNumber.Pin7: return DigitalPin.P7
+            case PinNumber.Pin8: return DigitalPin.P8
+            case PinNumber.Pin9: return DigitalPin.P9
+            case PinNumber.Pin10: return DigitalPin.P10
+            case PinNumber.Pin12: return DigitalPin.P12
+            case PinNumber.Pin13: return DigitalPin.P13
+            case PinNumber.Pin14: return DigitalPin.P14
+            case PinNumber.Pin15: return DigitalPin.P15
+            case PinNumber.Pin16: return DigitalPin.P16
+            default: return null
+        }
     }
 
-    const PowerbrickAnalogPortToPinDict = [
-        AnalogPin.P0,
-        AnalogPin.P1,
-        AnalogPin.P2,
-        AnalogPin.P3,
-        AnalogPin.P4,
-        AnalogPin.P10
-    ]
-
-    /**
-     * When you connect a module to a DIGITAL Powerbrick port, this returns the Microbit pin in use
-     * @param port port module is connected to
-     * @param pinNumber pin 0 or 1 of port
-     */
-    //% block="Powerbrick Digital port %port | pin0 or pin1 %pinNumber to Microbit pin"
-    //% pinNumber.min=0 pinNumber.max=1
-    //% group="Powerbrick"
-    //% weight=10
-    export function PowerbrickDigitalPortToPin(port: PowerbrickDigitalPort, pinNumber: number = 0): DigitalPin {
-        if (port < PowerbrickDigitalPort.DigialPort1 || port > PowerbrickDigitalPort.DigialPort7 || pinNumber < 0 || pinNumber > 1)
-            return null
-        return PowerbrickDigitalPortToPinsDict[port][pinNumber]
+    function pinToSerialPin(pinNumber: PinNumber): SerialPin {
+        switch (pinNumber) {
+            case PinNumber.Pin0: return SerialPin.P0
+            case PinNumber.Pin1: return SerialPin.P1
+            case PinNumber.Pin2: return SerialPin.P2
+            case PinNumber.Pin8: return SerialPin.P8
+            case PinNumber.Pin12: return SerialPin.P12
+            case PinNumber.Pin13: return SerialPin.P13
+            case PinNumber.Pin14: return SerialPin.P14
+            case PinNumber.Pin15: return SerialPin.P15
+            default: return null
+        }
     }
 
-    /**
-     * When you connect a module to a SERIAL Powerbrick port, this returns the Microbit pin in use
-     * @param port port module is connected to
-     * @param pinNumber pin 0 or 1 of port
-     */
-    //% block="Powerbrick Serial port %port | pin0 or pin1 %pinNumber to Microbit pin"
-    //% pinNumber.min=0 pinNumber.max=1
-    //% group="Powerbrick"
-    //% weight=10
-    export function PowerbrickSerialPortToPin(port: PowerbrickSerialPort, pinNumber: number = 0): SerialPin {
-        if (port < PowerbrickSerialPort.SerialPort1 || port > PowerbrickSerialPort.SerialPort4)
-            return null
-        return PowerbrickSerialPortToPinsDict[port][pinNumber]
-    }
-
-    /**
-     * When you connect a module to an ANALOG Powerbrick port, this returns the Microbit pin in use
-     * @param port port module is connected to
-     */
-    //% block="Powerbrick Analog port %port to Microbit pin"
-    //% group="Powerbrick"
-    //% weight=10
-    export function PowerbrickAnalogPortToPin(port: PowerbrickAnalogPort): AnalogPin {
-        if (port < PowerbrickAnalogPort.AnalogPort1 || port > PowerbrickAnalogPort.AnalogPort7)
-            return null
-        return PowerbrickAnalogPortToPinDict[port]
+    function pinToAnalogPin(pinNumber: PinNumber): AnalogPin {
+        switch (pinNumber) {
+            case PinNumber.Pin0: return AnalogPin.P0
+            case PinNumber.Pin1: return AnalogPin.P1
+            case PinNumber.Pin2: return AnalogPin.P2
+            case PinNumber.Pin3: return AnalogPin.P3
+            case PinNumber.Pin4: return AnalogPin.P4
+            case PinNumber.Pin10: return AnalogPin.P10
+            default: return null
+        }
     }
 
     /**
@@ -244,7 +299,7 @@ namespace microX {
         
         initializePhaseWidthModulationDriver()
         
-        robotbitPixels = new RgbMatrix(1, 4, DigitalPin.P16)
+        robotbitPixels = new RgbMatrix(1, 4, PinNumber.Pin16)
         
         initializedRobotbit = true
         
@@ -255,17 +310,21 @@ namespace microX {
 
     /**
      * Initialize Kittenbot Powerbrick pixels module
-     * @param pin0 digital pin, use PowerbrickDigitalPortToPin(port=???, pinNumber=0) to select pin for the port you are using
+     * @param pinNumber digital pin number
      */
-    //% block="Initialize Powerbrick Pixels module connected to digital pin0 %pin0 (convert from digital port)"
+    //% block="Initialize Powerbrick Pixels module connected to digital pin %pinNumber"
     //% port.fieldEditor="gridpicker" port.fieldOptions.columns=2
     //% group="Powerbrick pixels"
     //% weight=8
-    export function intializePowerbrickPixels(pin0: DigitalPin): void {
-        if (initializedPowerbrickPixels || pin0 == null)
+    export function intializePowerbrickPixels(pinNumber: PinNumber): void {
+        if (initializedPowerbrickPixels || pinNumber == null)
+            return
+        
+        let pin = pinToDigitalPin(pinNumber)
+        if (pin == null)
             return
 
-        powerblockPixels = new RgbMatrix(8, 8, pin0)
+        powerblockPixels = new RgbMatrix(8, 8, pin)
         
         initializedPowerbrickPixels = true
         
@@ -276,16 +335,20 @@ namespace microX {
 
     /**
      * Initializes the MP3 player connected to a specific serial pin (or Powerbrick serial port)
-     * @param pin1 serial pin, use PowerbrickSerialPortToPin(port=???, pinNumber=1) to select pin for the port you are using
+     * @param pinNumber serial pin number
      */
-    //% block="Initialize Powerbrick MP3 Player connected to serial pin1 %pin1 (convert from serial port)"
+    //% block="Initialize Powerbrick MP3 Player connected to serial pin %pinNumber"
     //% group="MP3"
     //% weight=8
-    export function InitializeMp3Player(pin1: SerialPin): void {   
+    export function InitializeMp3Player(pinNumber: PinNumber): void {   
         if (initializedPowerbrickMp3Player)
             return
         
-        serial.redirect(pin1, SerialPin.P16, BaudRate.BaudRate9600)
+        let pin = pinToSerialPin(pinNumber)
+        if (pin == null)
+            return
+
+        serial.redirect(pin, SerialPin.P16, BaudRate.BaudRate9600)
     }
 
     /**
@@ -582,13 +645,13 @@ namespace microX {
     export class RgbMatrix {
         rows: number
         columns: number
-        pin: DigitalPin
+        digitalPin: DigitalPin
         displayBuffer: Buffer
 
-        constructor(rows: number, columns: number, pin: DigitalPin) {
+        constructor(rows: number, columns: number, pinNumber: PinNumber) {
             this.rows = rows
             this.columns = columns
-            this.pin = pin
+            this.digitalPin = pinToDigitalPin(pinNumber)
             this.displayBuffer = pins.createBuffer(rows * columns * 3)
         }
     
@@ -639,7 +702,7 @@ namespace microX {
          * Refresh pixels
         */
         public refresh() {
-            ws2812b.sendBuffer(this.displayBuffer, this.pin)
+            ws2812b.sendBuffer(this.displayBuffer, this.digitalPin)
         }
 
     }
@@ -758,32 +821,9 @@ namespace microX {
         robotbitPixels.refresh()
     }
 
-    function digitalPinNumber(pin: DigitalPin): number {
-        switch (pin) {
-            case DigitalPin.P0: return 0
-            case DigitalPin.P1: return 1
-            case DigitalPin.P2: return 2
-            case DigitalPin.P3: return 3
-            case DigitalPin.P4: return 4
-            case DigitalPin.P5: return 5
-            case DigitalPin.P6: return 6
-            case DigitalPin.P7: return 7
-            case DigitalPin.P8: return 8
-            case DigitalPin.P9: return 9
-            case DigitalPin.P10: return 10
-            case DigitalPin.P11: return 11
-            case DigitalPin.P12: return 12
-            case DigitalPin.P13: return 13
-            case DigitalPin.P14: return 14
-            case DigitalPin.P15: return 15
-        }
-        return -1
-    }
-
-    function _ultrasonicDistance(pin: DigitalPin, pullMode: PinPullMode, mult: number, div: number): number {
-        
-        let pinNum = digitalPinNumber(pin)
-        if (pinNum < 0 || pinNum > 15)
+    function _ultrasonicDistance(pinNumber: PinNumber, pullMode: PinPullMode, mult: number, div: number): number {
+        let pin = pinToDigitalPin(pinNumber)
+        if (pin == null)
             return 0
 
         pins.setPull(pin, pullMode)
@@ -804,10 +844,10 @@ namespace microX {
 
         // on timeout return lastdistance (1 times in a row max, since distance can be 0)
         if (distance == 0 && usedPrevDistance == false) {
-            distance = prevDistance[pinNum]
+            distance = prevDistance[pinNumber]
             usedPrevDistance = true
         } else {
-            prevDistance[pinNum] = distance
+            prevDistance[pinNumber] = distance
             usedPrevDistance = false
         }
         
@@ -816,46 +856,49 @@ namespace microX {
     
     /**
      * Measure distance using Cat-head shaped sensor v1.0 (with connection holes in ears)
-     * @param pin digital pin
+     * @param pinNumber digital pin number
      */
-    //% block="Ultrasonic distance of cat-sensor connected to %pin"
+    //% block="Ultrasonic distance of cat-sensor connected to digital pin %pinNumber"
     //% group="Sensors"
     //% weight=4
-    export function ultrasonicDistanceCatShapedSensor(pin: DigitalPin): number {
-        return _ultrasonicDistance(pin, PinPullMode.PullDown, 21, 800)
+    export function ultrasonicDistanceCatShapedSensor(pinNumber: PinNumber): number {
+        return _ultrasonicDistance(pinNumber, PinPullMode.PullDown, 21, 800)
     }
 
     /**
      * Measure distance using Powerblock's ultrasonic module
-     * @param pin0 digital pin, use PowerbrickDigitalPortToPin(port=???, pinNumber=0) to select pin for the port you are using
+     * @param pinNumber digital pin number
      */
-    //% block="Ultrasonic distance of Powerbrick module connected to %pin (convert from Digital port)"
+    //% block="Ultrasonic distance of Powerbrick module connected to digital pin %pinNumber"
     //% group="Sensors"
     //% weight=4
-    export function ultrasonicDistancePowerblockUltrasonicModule(pin0: DigitalPin): number {
-        return _ultrasonicDistance(pin0, PinPullMode.PullNone, 10, 348)
+    export function ultrasonicDistancePowerblockUltrasonicModule(pinNumber: PinNumber): number {
+        return _ultrasonicDistance(pinNumber, PinPullMode.PullNone, 10, 348)
     }
 
     /**
      * Measure sound level using Powerblock's ultrasonic module
-     * @param pin analog pin, use PowerbrickAnalogPortToPin(port=???) to select pin for the port you are using
+     * @param pinNumber analog pin number
      */
-    //% block="Sound level of Powerbrick module connected to %pin (convert from Analog port)"
+    //% block="Sound level of Powerbrick module connected to analog pin %pinNumber"
     //% group="Sensors"
     //% weight=4
-    export function soundLevelPowerblockUltrasonicModule(pin: AnalogPin): number {
+    export function soundLevelPowerblockUltrasonicModule(pinNumber: PinNumber): number {
+        let pin = pinToAnalogPin(pinNumber)
+        if (pin == null)
+            return 0
         return pins.analogReadPin(pin)
     }
 
     /**
      * Measure distance using Cat-head shaped sensor with LEDs in ears
-     * @param pin digital pin
+     * @param pinNumber digital pin number
      */
-    //% block="Ultrasonic distance of cat-sensor with LED-ears connected to %pin"
+    //% block="Ultrasonic distance of cat-sensor with LED-ears connected to digital pin %pinNumber"
     //% group="Sensors"
     //% weight=4
-    export function ultrasonicDistanceCatShapedSensorWithLeds(pin: DigitalPin): number {
-        return _ultrasonicDistance(pin, PinPullMode.PullNone, 9, 348)
+    export function ultrasonicDistanceCatShapedSensorWithLeds(pinNumber: PinNumber): number {
+        return _ultrasonicDistance(pinNumber, PinPullMode.PullNone, 9, 348)
     }
 
     let mp3PlayerStartByte = 0x7e
