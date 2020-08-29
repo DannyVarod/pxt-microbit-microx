@@ -4,6 +4,7 @@
  * and then either wait for me to have time to learn to use it, or submit a pull request with your code changes.
  */
 //% color="#303030" weight=100 icon="\uf0e7"
+//% groups='["Remote", "Robotbit", "Motion", "Sensors", "Pixels", "MP3"]'
 namespace microX {
 
     const PWM_PCA9685_ADDRESS = 0x40
@@ -1035,7 +1036,7 @@ namespace microX {
      */
     //% block="Powerbrick Gesture+Color get hue"
     //% blockId="microX_powerbrickGestureColorModuleGetHue"
-    //% group="ColorSensors"
+    //% group="Sensors"
     //% weight=44
     export function powerbrickGestureColorModuleGetHue(): number {
         powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Ambient)
@@ -1049,7 +1050,7 @@ namespace microX {
      */
     //% block="Powerbrick Gesture+Color get brightness"
     //% blockId="microX_powerbrickGestureColorModuleGetBrightness"
-    //% group="ColorSensors"
+    //% group="Sensors"
     //% weight=45
     export function powerbrickGestureColorModuleGetBrightness(): number {
         powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Ambient)
@@ -1063,7 +1064,7 @@ namespace microX {
      */
     //% block="Powerbrick Gesture+Color set PWM|%pwm"
     //% blockId="microX_powerbrickGestureColorModuleSetPwm"
-    //% group="ColorSensors"
+    //% group="Sensors"
     //% weight=46
     export function powerbrickGestureColorModuleSetPwm(pwm: number): void {
         powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Active)
@@ -1077,7 +1078,7 @@ namespace microX {
     //% block="Powerbrick Gesture+Color set LED|ledNumber %ledNumber|on %on"
     //% ledNumber.min=0 ledNumber.max=4
     //% blockId="microX_powerbrickGestureColorModuleSetLed"
-    //% group="ColorSensors"
+    //% group="Sensors"
     //% weight=47
     export function powerbrickGestureColorModuleSetLed(ledNumber: number, on: boolean): void {
         powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Active)
@@ -1104,7 +1105,7 @@ namespace microX {
      */
     //% block="Powerbrick Gesture+Color set LEDs|%led1On|%led2On|%led3On|%led4On"
     //% blockId="microX_powerbrickGestureColorModuleSetLeds"
-    //% group="ColorSensors"
+    //% group="Sensors"
     //% weight=48
     export function powerbrickGestureColorModuleSetLeds(led1On: boolean, led2On: boolean, led3On: boolean, led4On: boolean): void {
         powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Proximity)
@@ -1120,7 +1121,7 @@ namespace microX {
      */
     //% block="Powerbrick Gesture+Color get promximity"
     //% blockId="microX_powerbrickGestureColorModuleGetProximity"
-    //% group="ColorSensors"
+    //% group="Sensors"
     //% weight=49
     export function powerbrickGestureColorModuleGetProximity(): number {
         powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Proximity)
@@ -1132,7 +1133,7 @@ namespace microX {
      */
     //% block="Powerbrick Gesture+Color get gesture"
     //% blockId="microX_powerbrickGestureColorModuleGetGesture"
-    //% group="ColorSensors"
+    //% group="Sensors"
     //% weight=50
     export function powerbrickGestureColorModuleGetGesture(): number {
         powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Gesture)
@@ -1144,7 +1145,7 @@ namespace microX {
      */
     //% block="Powerbrick Gesture+Color get gesture"
     //% blockId="microX_powerbrickGestureColorModuleGetRgb"
-    //% group="ColorSensors"
+    //% group="Sensors"
     //% weight=51
     export function powerbrickGestureColorModuleGetRgb(): string {
         powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Active)
