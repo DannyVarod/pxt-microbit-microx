@@ -296,7 +296,7 @@ namespace microX {
      * Initialize Kittenbot Powerbrick pixels module
      * @param pinNumber digital pin number
      */
-    //% block="Initialize Powerbrick Pixels module connected to digital pin %pinNumber"
+    //% block="Initialize Powerbrick Pixels module connected to|digital pin %pinNumber"
     //% blockId="microX_intializePowerbrickPixels"
     //% port.fieldEditor="gridpicker" port.fieldOptions.columns=2
     //% group="Pixels"
@@ -318,7 +318,7 @@ namespace microX {
      * Initializes the MP3 player connected to a specific serial pin (or Powerbrick serial port)
      * @param pinNumber serial pin number
      */
-    //% block="Initialize Powerbrick MP3 Player connected to serial pin %pinNumber"
+    //% block="Initialize Powerbrick MP3 Player connected to|serial pin %pinNumber"
     //% blockId="microX_initializePowerbrickMp3Player"
     //% group="MP3"
     //% weight=81
@@ -395,7 +395,7 @@ namespace microX {
     /**
      * Act on YB-EMH02 ver 1.2 remote button click (Click on Joystick (Z), B1, B2, B3, B4)
      */
-    //% block="On Yahboom remote button %button | state %state"
+    //% block="On Yahboom remote|button %button | state %state"
     //% blockId="microX_onYahboomRemoteButton"
     //% button.fieldEditor="gridpicker button.fieldOptions.columns=3
     //% state.fieldEditor="gridpicker state.fieldOptions.columns=3
@@ -496,7 +496,7 @@ namespace microX {
      * @param motorNum where motor is connected e.g.: M1A
      * @param speed [-4095...4095] speed
     */
-    //% block="Set motor speed for motor connected to %motorNum | to speed %speed"
+    //% block="Set motor speed for motor|connected to %motorNum|to speed %speed"
     //% blockId="microX_setMotor"
     //% speed.min=-4095 speed.max=4095
     //% motor.fieldEditor="gridpicker" motor.fieldOptions.columns=2
@@ -528,7 +528,7 @@ namespace microX {
      * @param servoNum where servo is connected e.g.: Servo1
      * @param pulseWidth [5...19990] pulse width in uSec
     */
-    //% block="Servo pulse width connected to %servoNum | to pulse widths (uSec) %pulseWidth"
+    //% block="Servo pulse width|connected to %servoNum|to pulse widths (uSec) %pulseWidth"
     //% blockId="microX_setServoPulseWidth"
     //% pulseWidth.min=1 pulseWidth.max=19999
     //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
@@ -550,7 +550,7 @@ namespace microX {
      * @param servoNum where servo is connected e.g.: Servo1
      * @param speed [-1000...1000] speed
     */
-    //% block="Orange/Green Geekservo connected to %servoNum | to speed %speed"
+    //% block="Orange/Green Geekservo|connected to %servoNum|to speed %speed"
     //% blockId="microX_setOrangeGreenGeekservoSpeed"
     //% speed.min=-1000 speed.max=1000
     //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
@@ -573,7 +573,7 @@ namespace microX {
      * @param servoNum where servo is connected e.g.: Servo1
      * @param degree [-45...225] angle in degrees e.g.: -45, 90, 225
     */
-    //% block="Grey Geekservo connected to %servoNum | to degree %degree"
+    //% block="Grey Geekservo|connected to %servoNum|to degree %degree"
     //% blockId="microX_setGreyGeekservoAngle"
     //% degree.min=-45 degree.max=225
     //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
@@ -608,7 +608,7 @@ namespace microX {
      * @param servoNum where servo is connected e.g.: Servo1
      * @param degree [0...360) angle in degrees e.g.: -45, 90, 225
     */
-    //% block="LARGE grey Geekservo connected to %servoNum | to degree %degree"
+    //% block="LARGE grey Geekservo|connected to %servoNum|to degree %degree"
     //% blockId="microX_setLargeGreyGeekservoAngle"
     //% degree.min=0 degree.max=360
     //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
@@ -705,7 +705,7 @@ namespace microX {
      * @param g pixel green intensity [0,255]
      * @param b pixel blue intensity [0,255]
     */
-    //% block="Set Powerbrick pixels to color red %r | green %g | blue %b"
+    //% block="Set Powerbrick pixels to color|red %r|green %g|blue %b"
     //% blockId="microX_setPowerbrickAllPixels"
     //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% r.fieldEditor="gridpicker" r.fieldOptions.columns=2
@@ -728,7 +728,7 @@ namespace microX {
      * @param g pixel green intensity [0,255]
      * @param b pixel blue intensity [0,255]
     */
-    //% block="Set Powerbrick pixel y %y | x %x | to color red %r | green %g | blue %b"
+    //% block="Set Powerbrick pixel to color|y %y|x %x|red %r|green %g|blue %b"
     //% blockId="microX_setPowerbrickPixel"
     //% y.min=0 y.max=7 x.min=0 x.max=7 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% y.fieldEditor="gridpicker" y.fieldOptions.columns=2
@@ -768,7 +768,7 @@ namespace microX {
      * @param g pixel green intensity [0,255]
      * @param b pixel blue intensity [0,255]
     */
-    //% block="Set Robotbit pixels to color red %r | green %g | blue %b"
+    //% block="Set Robotbit pixels to color|red %r|green %g|blue %b"
     //% blockId="microX_setRobotBitAllPixels"
     //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% r.fieldEditor="gridpicker" r.fieldOptions.columns=2
@@ -790,7 +790,7 @@ namespace microX {
      * @param g pixel green intensity [0,255]
      * @param b pixel blue intensity [0,255]
     */
-    //% block="Set Robotbit pixel x %x | to color red %r | green %g | blue %b"
+    //% block="Set Robotbit pixel to color|x %x|red %r|green %g|blue %b"
     //% blockId="microX_setRobotBitPixel"
     //% x.min=0 x.max=3 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% r.fieldEditor="gridpicker" r.fieldOptions.columns=2
@@ -856,7 +856,7 @@ namespace microX {
      * Measure distance using Cat-head shaped sensor v1.0 (with connection holes in ears)
      * @param pinNumber digital pin number
      */
-    //% block="Ultrasonic distance of cat-sensor connected to digital pin %pinNumber"
+    //% block="Ultrasonic distance of cat-sensor connected to|digital pin %pinNumber"
     //% blockId="microX_ultrasonicDistanceCatShapedSensor"
     //% group="Sensors"
     //% weight=40
@@ -868,7 +868,7 @@ namespace microX {
      * Measure distance using Powerblock's ultrasonic module
      * @param pinNumber digital pin number
      */
-    //% block="Ultrasonic distance of Powerbrick module connected to digital pin %pinNumber"
+    //% block="Ultrasonic distance of Powerbrick module connected to|digital pin %pinNumber"
     //% blockId="microX_ultrasonicDistancePowerblockUltrasonicModule"
     //% group="Sensors"
     //% weight=41
@@ -880,7 +880,7 @@ namespace microX {
      * Measure sound level using Powerblock's ultrasonic module
      * @param pinNumber analog pin number
      */
-    //% block="Sound level of Powerbrick module connected to analog pin %pinNumber"
+    //% block="Sound level of Powerbrick module connected to|analog pin %pinNumber"
     //% blockId="microX_soundLevelPowerblockUltrasonicModule"
     //% group="Sensors"
     //% weight=42
@@ -895,7 +895,7 @@ namespace microX {
      * Measure distance using Cat-head shaped sensor with LEDs in ears
      * @param pinNumber digital pin number
      */
-    //% block="Ultrasonic distance of cat-sensor with LED-ears connected to digital pin %pinNumber"
+    //% block="Ultrasonic distance of cat-sensor with LED-ears connected to|digital pin %pinNumber"
     //% blockId="microX_ultrasonicDistanceCatShapedSensorWithLeds"
     //% group="Sensors"
     //% weight=43
@@ -956,7 +956,7 @@ namespace microX {
      * Control the MP3 player
      * @param controlAction control action
      */
-    //% block="Powerbrick MP3 Player do %controlAction"
+    //% block="Powerbrick MP3 Player|do %controlAction"
     //% blockId="microX_mp3PlayerControl"
     //% group="MP3"
     //% weight=20
@@ -970,7 +970,7 @@ namespace microX {
      * Set volume
      * @param volume volume
      */
-    //% block="Powerbrick MP3 Player set volume to %volume"
+    //% block="Powerbrick MP3 Player set|volume to %volume"
     //% blockId="microX_mp3PlayerSetVolume"
     //% volume.min=0 volume.max=31
     //% group="MP3"
@@ -984,7 +984,7 @@ namespace microX {
      * Play a file by index
      * @param filenumber 1-based file number
      */
-    //% block="Powerbrick MP3 Player play file number %filenumber"
+    //% block="Powerbrick MP3 Player play|file number %filenumber"
     //% blockId="microX_mp3PlayerPlayFilenumber"
     //% filenumber.min=1 filenumber.max=255
     //% group="MP3"
@@ -998,7 +998,7 @@ namespace microX {
      * Play a file by name
      * @param filename file name, up to 250 characters
      */
-    //% block="Powerbrick MP3 Player play file name %filename"
+    //% block="Powerbrick MP3 Player play|file name %filename"
     //% blockId="microX_mp3PlayerPlayFile"
     //% group="MP3"
     //% weight=23
@@ -1061,7 +1061,7 @@ namespace microX {
     /**
      * Set Phase Width Modulation of Powerbrick Gesture+Color sensor's LEDs
      */
-    //% block="Powerbrick Gesture+Color set PWM"
+    //% block="Powerbrick Gesture+Color set PWM|%pwm"
     //% blockId="microX_powerbrickGestureColorModuleSetPwm"
     //% group="ColorSensors"
     //% weight=46
