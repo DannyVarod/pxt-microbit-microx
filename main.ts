@@ -297,7 +297,7 @@ namespace microX {
      */
     //% block="Initialize Powerbrick Pixels module connected to digital pin %pinNumber"
     //% port.fieldEditor="gridpicker" port.fieldOptions.columns=2
-    //% group="Powerbrick pixels"
+    //% group="Pixels"
     //% weight=8
     export function intializePowerbrickPixels(pinNumber: PinNumber): void {
         if (initializedPowerbrickPixels || pinNumber == null)
@@ -334,7 +334,7 @@ namespace microX {
      * Initialize for Yahboom remote
      */
     //% block="Initialize Yahboom remote"
-    //% group="Yahboom remote"
+    //% group="Remote"
     //% weight=9
     export function initializeYahboomRemote(): void {
         if (initializedYBRemote)
@@ -352,7 +352,7 @@ namespace microX {
      * Get X-axis value of YB-EMH02 ver 1.2 joystick (port2) between -1 (left) and 1 (right)
      */
     //% block="Yahboom remote X (-1=left to 1=right)"
-    //% group="Yahboom remote"
+    //% group="Remote"
     //% weight=7
     export function joystickX(): number {
         
@@ -371,7 +371,7 @@ namespace microX {
      * Get Y-axis value of YB-EMH02 ver 1.2 joystick (port1) between -1 (bottom) and 1 (top)
      */
     //% block="Yahboom remote Y (-1=down to 1=up)"
-    //% group="Yahboom remote"
+    //% group="Remote"
     //% weight=7
     export function joystickY() {
         
@@ -392,7 +392,7 @@ namespace microX {
     //% block="On Yahboom remote button %button | state %state"
     //% button.fieldEditor="gridpicker button.fieldOptions.columns=3
     //% state.fieldEditor="gridpicker state.fieldOptions.columns=3
-    //% group="Yahboom remote"
+    //% group="Remote"
     //% weight=7
     export function onYahboomRemoteButton(button: YBRemoteButton, state: ButtonState, body: Action): void {
         
@@ -457,7 +457,7 @@ namespace microX {
      * Initialize the phase width modulation driver used for servos and motors
      */
     //% block="Initialize Phase Width Modulation Driver (for servos and motors)"
-    //% group="Movement"
+    //% group="Motion"
     //% weight=9
     export function initializePhaseWidthModulationDriver(): void {
         if (initializedPhaseWidthModulationDriver)
@@ -491,7 +491,7 @@ namespace microX {
     //% block="Set motor speed for motor connected to %motorNum | to speed %speed"
     //% speed.min=-4096 speed.max=4096
     //% motor.fieldEditor="gridpicker" motor.fieldOptions.columns=2
-    //% group="Movement"
+    //% group="Motion"
     //% weight=6
     export function setMotor(motorNum: Motor, speed: number): void {
         if (motorNum < 0 || 3 < motorNum)
@@ -523,7 +523,7 @@ namespace microX {
     //% pulseWidth.min=1 pulseWidth.max=19999
     //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
     //% inlineInputMode=inline
-    //% group="Movement" advanced=true
+    //% group="Motion" advanced=true
     //% weight=6
     export function setServoPulseWidth(servoNum: Servo, pulseWidth: number): void {
         // TODO: Try to use 20480.0 uSec (48.828125 Hz) instead of 20000.0 uSec (50 Hz) to get more precise results (500uS pulse will be 512uS pulses instead)
@@ -544,7 +544,7 @@ namespace microX {
     //% speed.min=-1000 speed.max=1000
     //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
     //% inlineInputMode=inline
-    //% group="Movement"
+    //% group="Motion"
     //% weight=6
     export function setOrangeGreenGeekservoSpeed(servoNum: Servo, speed: number): void {
         // TODO: When trying to use 20480.0 uSec instead of 20000.0 uSec and change speed range from -1000...1000 to -1024...1024
@@ -566,7 +566,7 @@ namespace microX {
     //% degree.min=-45 degree.max=225
     //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
     //% inlineInputMode=inline
-    //% group="Movement"
+    //% group="Motion"
     //% weight=6
     export function setGreyGeekservoAngle(servoNum: Servo, degree: number): void {
         // -45deg: 600uS, 225deg: 2400uS (6.6667 uS/deg = 20.0/3.0)
@@ -600,7 +600,7 @@ namespace microX {
     //% degree.min=0 degree.max=360
     //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
     //% inlineInputMode=inline
-    //% group="Movement"
+    //% group="Motion"
     //% weight=6
     export function setLargeGreyGeekservoAngle(servoNum: Servo, degree: number): void {
         // TODO: When I have a servo like this, check if this is 0 to 360 or 0 to 350 and if only goes to 350 degress, replace constants
@@ -698,7 +698,7 @@ namespace microX {
     //% g.fieldEditor="gridpicker" g.fieldOptions.columns=2
     //% b.fieldEditor="gridpicker" b.fieldOptions.columns=2
     //% inlineInputMode=inline
-    //% group="Powerbrick pixels"
+    //% group="Pixels"
     //% weight=3
     export function setPowerbrickAllPixels(r: number, g: number, b: number): void {
         if (initializedPowerbrickPixels == false)
@@ -722,7 +722,7 @@ namespace microX {
     //% g.fieldEditor="gridpicker" g.fieldOptions.columns=2
     //% b.fieldEditor="gridpicker" b.fieldOptions.columns=2
     //% inlineInputMode=inline
-    //% group="Powerbrick pixels"
+    //% group="Pixels"
     //% weight=3
     export function setPowerbrickPixel(y: number, x: number, r: number, g: number, b: number): void {
         if (initializedPowerbrickPixels == false)
@@ -738,7 +738,7 @@ namespace microX {
      * Refresh powerbrick pixels
     */
     //% block="Refresh/update Powerbrick pixels"
-    //% group="Powerbrick pixels"
+    //% group="Pixels"
     //% weight=3
     export function refreshPowerbrickPixels() {
         if (initializedPowerbrickPixels == false)
@@ -758,7 +758,7 @@ namespace microX {
     //% g.fieldEditor="gridpicker" g.fieldOptions.columns=2
     //% b.fieldEditor="gridpicker" b.fieldOptions.columns=2
     //% inlineInputMode=inline
-    //% group="Robotbit pixels"
+    //% group="Pixels"
     //% weight=3
     export function setRobotBitAllPixels(r: number, g: number, b: number): void {
         if (initializedRobotbit == false)
@@ -779,7 +779,7 @@ namespace microX {
     //% g.fieldEditor="gridpicker" g.fieldOptions.columns=2
     //% b.fieldEditor="gridpicker" b.fieldOptions.columns=2
     //% inlineInputMode=inline
-    //% group="Robotbit pixels"
+    //% group="Pixels"
     //% weight=3
     export function setRobotBitPixel(x: number, r: number, g: number, b: number): void {
         if (initializedRobotbit == false)
@@ -792,7 +792,7 @@ namespace microX {
     */
     //% block="Refresh/update Robotbit pixels"
     //% port.min=0 port.max=6
-    //% group="Robotbit pixels"
+    //% group="Pixels"
     //% weight=3
     export function refreshRobotBitPixels() {
         if (initializedRobotbit == false)
@@ -880,109 +880,105 @@ namespace microX {
         return _ultrasonicDistance(pinNumber, PinPullMode.PullNone, 9, 348)
     }
 
-    namespace PowerblockMp3 {
+    let mp3PlayerStartByte = 0x7e
+    let mp3PlayerEndByte = 0xef
 
-        let mp3PlayerStartByte = 0x7e
-        let mp3PlayerEndByte = 0xef
-
-        function _mp3PlayerSendArray(command: number, data: Array<number>): void {
-            if (initializedPowerbrickMp3Player == false)
-                return
-            if (data == null)
-                return
-            let len = data.length
-            if (len > 250)
-                return
-            let buffer = pins.createBuffer(len + 5)
-            let sum: number = mp3PlayerStartByte + len + 3 + command
-            buffer[0] = mp3PlayerStartByte
-            buffer[1] = len + 3
-            buffer[2] = command
-            for (let i = 0; i < len; i++) {
-                let d = data[i]
-                buffer[3 + i] = d
-                sum += d
-            }
-            buffer[len + 3] = sum
-            buffer[len + 4] = mp3PlayerEndByte
-            serial.writeBuffer(buffer)
+    function _mp3PlayerSendArray(command: number, data: Array<number>): void {
+        if (initializedPowerbrickMp3Player == false)
+            return
+        if (data == null)
+            return
+        let len = data.length
+        if (len > 250)
+            return
+        let buffer = pins.createBuffer(len + 5)
+        let sum: number = mp3PlayerStartByte + len + 3 + command
+        buffer[0] = mp3PlayerStartByte
+        buffer[1] = len + 3
+        buffer[2] = command
+        for (let i = 0; i < len; i++) {
+            let d = data[i]
+            buffer[3 + i] = d
+            sum += d
         }
+        buffer[len + 3] = sum
+        buffer[len + 4] = mp3PlayerEndByte
+        serial.writeBuffer(buffer)
+    }
 
-        function _mp3PlayerSendString(command: number, data: string): void {
-            if (initializedPowerbrickMp3Player == false)
-                return
-            if (data == null)
-                return
-            let len = data.length
-            if (len > 250)
-                return
-            let buffer = pins.createBuffer(len + 5)
-            let sum: number = mp3PlayerStartByte + len + 3 + command
-            buffer[0] = mp3PlayerStartByte
-            buffer[1] = len + 3
-            buffer[2] = command
-            for (let i = 0; i < len; i++) {
-                let d = data.charCodeAt(i)
-                buffer[3 + i] = d
-                sum += d
-            }
-            buffer[len + 3] = sum
-            buffer[len + 4] = mp3PlayerEndByte
-            serial.writeBuffer(buffer)
+    function _mp3PlayerSendString(command: number, data: string): void {
+        if (initializedPowerbrickMp3Player == false)
+            return
+        if (data == null)
+            return
+        let len = data.length
+        if (len > 250)
+            return
+        let buffer = pins.createBuffer(len + 5)
+        let sum: number = mp3PlayerStartByte + len + 3 + command
+        buffer[0] = mp3PlayerStartByte
+        buffer[1] = len + 3
+        buffer[2] = command
+        for (let i = 0; i < len; i++) {
+            let d = data.charCodeAt(i)
+            buffer[3 + i] = d
+            sum += d
         }
+        buffer[len + 3] = sum
+        buffer[len + 4] = mp3PlayerEndByte
+        serial.writeBuffer(buffer)
+    }
 
-        /**
-         * Control the MP3 player
-         * @param controlAction control action
-         */
-        //% block="Powerbrick MP3 Player do %controlAction"
-        //% group="MP3"
-        //% weight=2
-        export function mp3PlayerControl(controlAction: PowerbrickMp3ControlAction): void {
-            if (controlAction < PowerbrickMp3ControlAction.Play || controlAction > PowerbrickMp3ControlAction.Prev)
-                return
-            _mp3PlayerSendArray(controlAction, [])
-        }
+    /**
+     * Control the MP3 player
+     * @param controlAction control action
+     */
+    //% block="Powerbrick MP3 Player do %controlAction"
+    //% group="MP3"
+    //% weight=2
+    export function mp3PlayerControl(controlAction: PowerbrickMp3ControlAction): void {
+        if (controlAction < PowerbrickMp3ControlAction.Play || controlAction > PowerbrickMp3ControlAction.Prev)
+            return
+        _mp3PlayerSendArray(controlAction, [])
+    }
 
-        /**
-         * Set volume
-         * @param volume volume
-         */
-        //% block="Powerbrick MP3 Player set volume to %volume"
-        //% volume.min=0 volume.max=31
-        //% group="MP3"
-        //% weight=2
-        export function mp3PlayerSetVolume(volume: number): void {
-            volume = inRange(volume, 0, 31)
-            _mp3PlayerSendArray(0xae, [volume])
-        }
+    /**
+     * Set volume
+     * @param volume volume
+     */
+    //% block="Powerbrick MP3 Player set volume to %volume"
+    //% volume.min=0 volume.max=31
+    //% group="MP3"
+    //% weight=2
+    export function mp3PlayerSetVolume(volume: number): void {
+        volume = inRange(volume, 0, 31)
+        _mp3PlayerSendArray(0xae, [volume])
+    }
 
-        /**
-         * Play a file by index
-         * @param filenumber 1-based file number
-         */
-        //% block="Powerbrick MP3 Player play file number %filenumber"
-        //% filenumber.min=1 filenumber.max=255
-        //% group="MP3"
-        //% weight=2
-        export function mp3PlayerPlayFilenumber(filenumber: number): void {
-            filenumber = inRange(filenumber, 1, 255)
-            _mp3PlayerSendArray(0xa2, [0, filenumber])
-        }
+    /**
+     * Play a file by index
+     * @param filenumber 1-based file number
+     */
+    //% block="Powerbrick MP3 Player play file number %filenumber"
+    //% filenumber.min=1 filenumber.max=255
+    //% group="MP3"
+    //% weight=2
+    export function mp3PlayerPlayFilenumber(filenumber: number): void {
+        filenumber = inRange(filenumber, 1, 255)
+        _mp3PlayerSendArray(0xa2, [0, filenumber])
+    }
 
-        /**
-         * Play a file by name
-         * @param filename file name, up to 250 characters
-         */
-        //% block="Powerbrick MP3 Player play file name %filename"
-        //% group="MP3"
-        //% weight=2
-        export function mp3PlayerPlayFile(filename: string): void {
-            if (filename == null || filename.length == 0)
-                return
-            _mp3PlayerSendString(0xa3, filename)
-        }
-
+    /**
+     * Play a file by name
+     * @param filename file name, up to 250 characters
+     */
+    //% block="Powerbrick MP3 Player play file name %filename"
+    //% group="MP3"
+    //% weight=2
+    export function mp3PlayerPlayFile(filename: string): void {
+        if (filename == null || filename.length == 0)
+            return
+        _mp3PlayerSendString(0xa3, filename)
     }
 
 }
