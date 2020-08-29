@@ -106,6 +106,9 @@ namespace microX {
         DigialPort7 = 6
     }
 
+    /**
+     * Pins
+     */
     export enum PinNumber {
         //% block
         Pin0 = 0,
