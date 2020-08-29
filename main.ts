@@ -584,7 +584,7 @@ namespace microX {
     export function setGreyGeekservoAngle(servoNum: Servo, degree: number): void {
         // -45deg: 600uS, 225deg: 2400uS (6.6667 uS/deg = 20.0/3.0)
         let degreeRange = 270
-        let phaseRangePercent = 9
+        let phaseRangePercent = 9 // (2400-600)/20000 * 100
 
         // Limit degrees to range [-45,225]
         let degree_norm = (degree + 45.0) % 360
@@ -599,7 +599,7 @@ namespace microX {
         let minPulse = PHASE_WIDTH_PERIOD_MICROSEC * 3 / 100
         let maxPulse = PHASE_WIDTH_PERIOD_MICROSEC * 6 / 50
         //let pulseWidth = degree_norm * 20.0 / 3.0 + minPulse
-        let pulseWidth = degree_norm * PHASE_WIDTH_PERIOD_MICROSEC * degreeRange / phaseRangePercent / 100 + minPulse
+        let pulseWidth = degree_norm * PHASE_WIDTH_PERIOD_MICROSEC * phaseRangePercent / 100 / degreeRange + minPulse
         pulseWidth = inRange(pulseWidth, minPulse, maxPulse)
         setServoPulseWidth(servoNum, pulseWidth)
     }
