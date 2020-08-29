@@ -27,21 +27,21 @@ namespace microX {
      * Servo number (1 to 8)
      */
     export enum Servo {
-        //% block
+        //% block=Servo1
         Servo1 = 1,
-        //% block
+        //% block=Servo2
         Servo2 = 2,
-        //% block
+        //% block=Servo3
         Servo3 = 3,
-        //% block
+        //% block=Servo4
         Servo4 = 4,
-        //% block
+        //% block=Servo5
         Servo5 = 5,
-        //% block
+        //% block=Servo6
         Servo6 = 6,
-        //% block
+        //% block=Servo7
         Servo7 = 7,
-        //% block
+        //% block=Servo8
         Servo8 = 8
     }
 
@@ -49,24 +49,24 @@ namespace microX {
      * Motor number
      */
     export enum Motor {
-        //% block
+        //% block=RobotbitM1A
         RobotbitM1A = 0,
-        //% block
+        //% block=RobotbitM1B
         RobotbitM1B = 1,
-        //% block
+        //% block=RobotbitM2A
         RobotbitM2A = 2,
-        //% block
+        //% block=RobotbitM2B
         RobotbitM2B = 3,
-        //% block
+        //% block=PowerblockM1
         PowerblockM1 = 0,
-        //% block
+        //% block=PowerblockM2
         PowerblockM2 = 1
     }
 
     export enum ButtonState {
-        //% block
+        //% block=Released
         Released = 0,
-        //% block
+        //% block=Pressed
         Pressed = 1
     }
     
@@ -74,150 +74,130 @@ namespace microX {
      * YB-EMH02 ver 1.2 remote buttons
      */
     export enum YBRemoteButton {
-        //% block
+        //% block=JoystickZ
         JoystickZ = 8,
-        //% block
+        //% block=B1Red
         B1Red = 13,
-        //% block
+        //% block=B2Green
         B2Green = 14,
-        //% block
+        //% block=B3Blue
         B3Blue = 15,
-        //% block
+        //% block=B4Yellow
         B4Yellow = 16
-    }
-
-    /**
-     * Powerbrick digital port (1 to 7)
-     */
-    export enum PowerbrickDigitalPort {
-        //% block
-        DigialPort1 = 0,
-        //% block
-        DigialPort2 = 1,
-        //% block
-        DigialPort3 = 2,
-        //% block
-        DigialPort4 = 3,
-        //% block
-        DigialPort5 = 4,
-        //% block
-        DigialPort6 = 5,
-        //% block
-        DigialPort7 = 6
     }
 
     /**
      * Pins
      */
     export enum PinNumber {
-        //% block
+        //% block=Pin0
         Pin0 = 0,
-        //% block
+        //% block=Pin1
         Pin1 = 1,
-        //% block
+        //% block=Pin2
         Pin2 = 2,
-        //% block
+        //% block=Pin3
         Pin3 = 3,
-        //% block
+        //% block=Pin4
         Pin4 = 4,
-        //% block
+        //% block=Pin6
         Pin6 = 6,
-        //% block
+        //% block=Pin7
         Pin7 = 7,
-        //% block
+        //% block=Pin8
         Pin8 = 8,
-        //% block
+        //% block=Pin9
         Pin9 = 9,
-        //% block
+        //% block=Pin10
         Pin10 = 10,
-        //% block
+        //% block=Pin12
         Pin12 = 12,
-        //% block
+        //% block=Pin13
         Pin13 = 13,
-        //% block
+        //% block=Pin14
         Pin14 = 14,
-        //% block
+        //% block=Pin15
         Pin15 = 15,
-        //% block
+        //% block=Pin16
         Pin16 = 16,
 
-        //% block
+        //% block=AnalogPin0
         AnalogPin0 = Pin0,
-        //% block
+        //% block=AnalogPin1
         AnalogPin1 = Pin1,
-        //% block
+        //% block=AnalogPin2
         AnalogPin2 = Pin2,
-        //% block
+        //% block=AnalogPin3
         AnalogPin3 = Pin3,
-        //% block
+        //% block=AnalogPin4
         AnalogPin4 = Pin4,
-        //% block
+        //% block=AnalogPin10
         AnalogPin10 = Pin10,
 
-        //% block
+        //% block=PowerbrickPort1_Pin1
         PowerbrickPort1_Pin1 = Pin0,
-        //% block
+        //% block=PowerbrickPort1_Pin2
         PowerbrickPort1_Pin2 = Pin8,
-        //% block
+        //% block=PowerbrickPort2_Pin1
         PowerbrickPort2_Pin1 = Pin1,
-        //% block
+        //% block=PowerbrickPort2_Pin2
         PowerbrickPort2_Pin2 = Pin12,
-        //% block
+        //% block=PowerbrickPort3_Pin1
         PowerbrickPort3_Pin1 = Pin2,
-        //% block
+        //% block=PowerbrickPort3_Pin2
         PowerbrickPort3_Pin2 = Pin13,
-        //% block
+        //% block=PowerbrickPort4_Pin1
         PowerbrickPort4_Pin1 = Pin14,
-        //% block
+        //% block=PowerbrickPort4_Pin2
         PowerbrickPort4_Pin2 = Pin15,
-        //% block
+        //% block=PowerbrickPort5_Pin1
         PowerbrickPort5_Pin1 = Pin3,
-        //% block
+        //% block=PowerbrickPort5_Pin2
         PowerbrickPort5_Pin2 = Pin6,
-        //% block
+        //% block=PowerbrickPort6_Pin1
         PowerbrickPort6_Pin1 = Pin4,
-        //% block
+        //% block=PowerbrickPort6_Pin2
         PowerbrickPort6_Pin2 = Pin7,
-        //% block
+        //% block=PowerbrickPort7_Pin1
         PowerbrickPort7_Pin1 = Pin10,
-        //% block
+        //% block=PowerbrickPort7_Pin2
         PowerbrickPort7_Pin2 = Pin9,
 
-        //% block
+        //% block=PowerbrickPort1_Digital
         PowerbrickPort1_Digital = Pin0,
-        //% block
+        //% block=PowerbrickPort2_Digital
         PowerbrickPort2_Digital = Pin1,
-        //% block
+        //% block=PowerbrickPort3_Digital
         PowerbrickPort3_Digital = Pin2,
-        //% block
+        //% block=PowerbrickPort4_Digital
         PowerbrickPort4_Digital = Pin14,
-        //% block
+        //% block=PowerbrickPort5_Digital
         PowerbrickPort5_Digital = Pin3,
-        //% block
+        //% block=PowerbrickPort6_Digital
         PowerbrickPort6_Digital = Pin4,
-        //% block
+        //% block=PowerbrickPort7_Digital
         PowerbrickPort7_Digital = Pin10,
 
-        //% block
+        //% block=PowerbrickPort1_Analog
         PowerbrickPort1_Analog = Pin0,
-        //% block
+        //% block=PowerbrickPort2_Analog
         PowerbrickPort2_Analog = Pin1,
-        //% block
+        //% block=PowerbrickPort3_Analog
         PowerbrickPort3_Analog = Pin2,
-        //% block
+        //% block=PowerbrickPort5_Analog
         PowerbrickPort5_Analog = Pin3,
-        //% block
+        //% block=PowerbrickPort6_Analog
         PowerbrickPort6_Analog = Pin4,
-        //% block
+        //% block=PowerbrickPort7_Analog
         PowerbrickPort7_Analog = Pin10,
 
-        //% block
+        //% block=PowerbrickPort1_Serial
         PowerbrickPort1_Serial = Pin0,
-        //% block
+        //% block=PowerbrickPort2_Serial
         PowerbrickPort2_Serial = Pin1,
-        //% block
+        //% block=PowerbrickPort3_Serial
         PowerbrickPort3_Serial = Pin2,
-        //% block
+        //% block=PowerbrickPort4_Serial
         PowerbrickPort4_Serial = Pin14
     }
 
