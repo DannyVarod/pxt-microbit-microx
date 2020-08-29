@@ -319,7 +319,7 @@ namespace microX {
     //% block="Initialize Powerbrick MP3 Player connected to serial pin %pinNumber"
     //% group="MP3"
     //% weight=8
-    export function InitializeMp3Player(pinNumber: PinNumber): void {   
+    export function initializeMp3Player(pinNumber: PinNumber): void {   
         if (initializedPowerbrickMp3Player)
             return
         
@@ -484,16 +484,16 @@ namespace microX {
     }
 
     /**
-     * Set servo pulse width
+     * Set motor speed
      * @param motorNum where motor is connected e.g.: M1A
      * @param speed [-4096...4096] speed
     */
-    //% block="Motor run connected to %motorNum | to speed %speed"
+    //% block="Set motor speed for motor connected to %motorNum | to speed %speed"
     //% speed.min=-4096 speed.max=4096
     //% motor.fieldEditor="gridpicker" motor.fieldOptions.columns=2
     //% group="Movement"
     //% weight=6
-    export function MotorRun(motorNum: Motor, speed: number): void {
+    export function setMotor(motorNum: Motor, speed: number): void {
         if (motorNum < 0 || 3 < motorNum)
             return
         
