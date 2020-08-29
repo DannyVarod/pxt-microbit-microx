@@ -1129,7 +1129,7 @@ namespace microX {
     }
 
     /**
-     * Get Proximity using Powerbrick Gesture+Color sensor
+     * Get gesture using Powerbrick Gesture+Color sensor
      */
     //% block="Powerbrick Gesture+Color get gesture"
     //% blockId="microX_powerbrickGestureColorModuleGetGesture"
@@ -1141,9 +1141,9 @@ namespace microX {
     }
 
     /**
-     * Get Proximity using Powerbrick Gesture+Color sensor
+     * Get RGB using Powerbrick Gesture+Color sensor
      */
-    //% block="Powerbrick Gesture+Color get gesture"
+    //% block="Powerbrick Gesture+Color get RGB"
     //% blockId="microX_powerbrickGestureColorModuleGetRgb"
     //% group="Sensors"
     //% weight=51
