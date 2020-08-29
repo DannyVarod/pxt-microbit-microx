@@ -880,105 +880,109 @@ namespace microX {
         return _ultrasonicDistance(pinNumber, PinPullMode.PullNone, 9, 348)
     }
 
-    let mp3PlayerStartByte = 0x7e
-    let mp3PlayerEndByte = 0xef
+    namespace PowerblockMp3 {
 
-    function _mp3PlayerSendArray(command: number, data: Array<number>): void {
-        if (initializedPowerbrickMp3Player == false)
-            return
-        if (data == null)
-            return
-        let len = data.length
-        if (len > 250)
-            return
-        let buffer = pins.createBuffer(len + 5)
-        let sum: number = mp3PlayerStartByte + len + 3 + command
-        buffer[0] = mp3PlayerStartByte
-        buffer[1] = len + 3
-        buffer[2] = command
-        for (let i = 0; i < len; i++) {
-            let d = data[i]
-            buffer[3 + i] = d
-            sum += d
+        let mp3PlayerStartByte = 0x7e
+        let mp3PlayerEndByte = 0xef
+
+        function _mp3PlayerSendArray(command: number, data: Array<number>): void {
+            if (initializedPowerbrickMp3Player == false)
+                return
+            if (data == null)
+                return
+            let len = data.length
+            if (len > 250)
+                return
+            let buffer = pins.createBuffer(len + 5)
+            let sum: number = mp3PlayerStartByte + len + 3 + command
+            buffer[0] = mp3PlayerStartByte
+            buffer[1] = len + 3
+            buffer[2] = command
+            for (let i = 0; i < len; i++) {
+                let d = data[i]
+                buffer[3 + i] = d
+                sum += d
+            }
+            buffer[len + 3] = sum
+            buffer[len + 4] = mp3PlayerEndByte
+            serial.writeBuffer(buffer)
         }
-        buffer[len + 3] = sum
-        buffer[len + 4] = mp3PlayerEndByte
-        serial.writeBuffer(buffer)
-    }
 
-    function _mp3PlayerSendString(command: number, data: string): void {
-        if (initializedPowerbrickMp3Player == false)
-            return
-        if (data == null)
-            return
-        let len = data.length
-        if (len > 250)
-            return
-        let buffer = pins.createBuffer(len + 5)
-        let sum: number = mp3PlayerStartByte + len + 3 + command
-        buffer[0] = mp3PlayerStartByte
-        buffer[1] = len + 3
-        buffer[2] = command
-        for (let i = 0; i < len; i++) {
-            let d = data.charCodeAt(i)
-            buffer[3 + i] = d
-            sum += d
+        function _mp3PlayerSendString(command: number, data: string): void {
+            if (initializedPowerbrickMp3Player == false)
+                return
+            if (data == null)
+                return
+            let len = data.length
+            if (len > 250)
+                return
+            let buffer = pins.createBuffer(len + 5)
+            let sum: number = mp3PlayerStartByte + len + 3 + command
+            buffer[0] = mp3PlayerStartByte
+            buffer[1] = len + 3
+            buffer[2] = command
+            for (let i = 0; i < len; i++) {
+                let d = data.charCodeAt(i)
+                buffer[3 + i] = d
+                sum += d
+            }
+            buffer[len + 3] = sum
+            buffer[len + 4] = mp3PlayerEndByte
+            serial.writeBuffer(buffer)
         }
-        buffer[len + 3] = sum
-        buffer[len + 4] = mp3PlayerEndByte
-        serial.writeBuffer(buffer)
-    }
 
-    /**
-     * Control the MP3 player
-     * @param controlAction control action
-     */
-    //% block="Powerbrick MP3 Player do %controlAction"
-    //% group="MP3"
-    //% weight=2
-    export function mp3PlayerControl(controlAction: PowerbrickMp3ControlAction): void {
-        if (controlAction < PowerbrickMp3ControlAction.Play || controlAction > PowerbrickMp3ControlAction.Prev)
-            return
-        _mp3PlayerSendArray(controlAction, [])
-    }
+        /**
+         * Control the MP3 player
+         * @param controlAction control action
+         */
+        //% block="Powerbrick MP3 Player do %controlAction"
+        //% group="MP3"
+        //% weight=2
+        export function mp3PlayerControl(controlAction: PowerbrickMp3ControlAction): void {
+            if (controlAction < PowerbrickMp3ControlAction.Play || controlAction > PowerbrickMp3ControlAction.Prev)
+                return
+            _mp3PlayerSendArray(controlAction, [])
+        }
 
-    /**
-     * Set volume
-     * @param volume volume
-     */
-    //% block="Powerbrick MP3 Player set volume to %volume"
-    //% volume.min=0 volume.max=31
-    //% group="MP3"
-    //% weight=2
-    export function mp3PlayerSetVolume(volume: number): void {
-        volume = inRange(volume, 0, 31)
-        _mp3PlayerSendArray(0xae, [volume])
-    }
+        /**
+         * Set volume
+         * @param volume volume
+         */
+        //% block="Powerbrick MP3 Player set volume to %volume"
+        //% volume.min=0 volume.max=31
+        //% group="MP3"
+        //% weight=2
+        export function mp3PlayerSetVolume(volume: number): void {
+            volume = inRange(volume, 0, 31)
+            _mp3PlayerSendArray(0xae, [volume])
+        }
 
-    /**
-     * Play a file by index
-     * @param filenumber 1-based file number
-     */
-    //% block="Powerbrick MP3 Player play file number %filenumber"
-    //% filenumber.min=1 filenumber.max=255
-    //% group="MP3"
-    //% weight=2
-    export function mp3PlayerPlayFilenumber(filenumber: number): void {
-        filenumber = inRange(filenumber, 1, 255)
-        _mp3PlayerSendArray(0xa2, [0, filenumber])
-    }
+        /**
+         * Play a file by index
+         * @param filenumber 1-based file number
+         */
+        //% block="Powerbrick MP3 Player play file number %filenumber"
+        //% filenumber.min=1 filenumber.max=255
+        //% group="MP3"
+        //% weight=2
+        export function mp3PlayerPlayFilenumber(filenumber: number): void {
+            filenumber = inRange(filenumber, 1, 255)
+            _mp3PlayerSendArray(0xa2, [0, filenumber])
+        }
 
-    /**
-     * Play a file by name
-     * @param filename file name, up to 250 characters
-     */
-    //% block="Powerbrick MP3 Player play file name %filename"
-    //% group="MP3"
-    //% weight=2
-    export function mp3PlayerPlayFile(filename: string): void {
-        if (filename == null || filename.length == 0)
-            return
-        _mp3PlayerSendString(0xa3, filename)
+        /**
+         * Play a file by name
+         * @param filename file name, up to 250 characters
+         */
+        //% block="Powerbrick MP3 Player play file name %filename"
+        //% group="MP3"
+        //% weight=2
+        export function mp3PlayerPlayFile(filename: string): void {
+            if (filename == null || filename.length == 0)
+                return
+            _mp3PlayerSendString(0xa3, filename)
+        }
+
     }
 
 }
