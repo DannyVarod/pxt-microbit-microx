@@ -74,6 +74,16 @@ namespace microX {
         //% block=Pressed
         Pressed = 1
     }
+
+    /**
+     * Line state
+     */
+    export enum LineState {
+        //% block=White
+        White = 0,
+        //% block=Black
+        Black = 1
+    }
     
     /**
      * YB-EMH02 ver 1.2 remote buttons
@@ -295,6 +305,8 @@ namespace microX {
         // After initializing port set to black to prevent first refresh error
         setRobotBitAllPixels(0, 0, 0)
         refreshRobotBitPixels()
+        setRobotBitAllPixels(0, 0, 0)
+        refreshRobotBitPixels()
     }
 
     /**
@@ -317,6 +329,85 @@ namespace microX {
         // After initializing port set to black to prevent first refresh error
         setPowerbrickAllPixels(0, 0, 0)
         refreshPowerbrickPixels()
+        setPowerbrickAllPixels(0, 0, 0)
+        refreshPowerbrickPixels()
+    }
+
+    /**
+     * Initializes a line tracker sensor with 2 channels connected to 2 specific digial pins
+     * @param ch1 digital pin number
+     */
+    //% block="Initialize Line Tracker 2CH connected to|digial pin %ch1|digial pin %ch2"
+    //% blockId="microX_initializeLineTracker2Channels"
+    //% group="Sensors"
+    //% weight=82
+    export function initializeLineTracker2Channels(ch1: PinNumber, ch2: PinNumber): void {
+        pins.setPull(pinToDigitalPin(ch1), PinPullMode.PullUp)
+        pins.setPull(pinToDigitalPin(ch2), PinPullMode.PullUp)
+    }
+
+    /**
+     * Initializes a line tracker sensor with 3 channels connected to 3 specific digial pins
+     * @param ch1 digital pin number
+     */
+    //% block="Initialize Line Tracker 3CH connected to|digial pin %ch1|digial pin %ch2|digial pin %ch3"
+    //% blockId="microX_initializeLineTracker3Channels"
+    //% group="Sensors"
+    //% weight=83
+    export function initializeLineTracker3Channels(ch1: PinNumber, ch2: PinNumber, ch3: PinNumber): void {
+        pins.setPull(pinToDigitalPin(ch1), PinPullMode.PullUp)
+        pins.setPull(pinToDigitalPin(ch2), PinPullMode.PullUp)
+        pins.setPull(pinToDigitalPin(ch3), PinPullMode.PullUp)
+    }
+
+    /**
+     * Initializes a line tracker sensor with 4 channels connected to 4 specific digial pins
+     * @param ch1 digital pin number
+     */
+    //% block="Initialize Line Tracker 4CH connected to|digial pin %ch1|digial pin %ch2|digial pin %ch3|digial pin %ch4"
+    //% blockId="microX_initializeLineTracker4Channels"
+    //% group="Sensors"
+    //% weight=84
+    export function initializeLineTracker4Channels(ch1: PinNumber, ch2: PinNumber, ch3: PinNumber, ch4: PinNumber): void {
+        pins.setPull(pinToDigitalPin(ch1), PinPullMode.PullUp)
+        pins.setPull(pinToDigitalPin(ch2), PinPullMode.PullUp)
+        pins.setPull(pinToDigitalPin(ch3), PinPullMode.PullUp)
+        pins.setPull(pinToDigitalPin(ch4), PinPullMode.PullUp)
+    }
+
+    /**
+     * Initializes a line tracker sensor with 5 channels connected to 5 specific digial pins
+     * @param ch1 digital pin number
+     */
+    //% block="Initialize Line Tracker 5CH connected to|digial pin %ch1|digial pin %ch2|digial pin %ch3|digial pin %ch4|digial pin %ch5"
+    //% blockId="microX_initializeLineTracker5Channels"
+    //% group="Sensors"
+    //% weight=85
+    export function initializeLineTracker5Channels(ch1: PinNumber, ch2: PinNumber, ch3: PinNumber, ch4: PinNumber, ch5: PinNumber): void {
+        pins.setPull(pinToDigitalPin(ch1), PinPullMode.PullUp)
+        pins.setPull(pinToDigitalPin(ch2), PinPullMode.PullUp)
+        pins.setPull(pinToDigitalPin(ch3), PinPullMode.PullUp)
+        pins.setPull(pinToDigitalPin(ch4), PinPullMode.PullUp)
+        pins.setPull(pinToDigitalPin(ch5), PinPullMode.PullUp)
+    }
+
+    /**
+     * On Line Tracker Event (on/off line)
+     */
+    //% block="On Line Tracker event remote|channel pin %channel|line state %lineState"
+    //% blockId="microX_onLineTrackerEvent"
+    //% button.fieldEditor="gridpicker button.fieldOptions.columns=3
+    //% state.fieldEditor="gridpicker state.fieldOptions.columns=3
+    //% group="Remote"
+    //% weight=86
+    export function onLineTrackerEvent(channel: PinNumber, lineState: LineState, body: Action): void {
+        
+        let pulseValue: PulseValue = PulseValue.Low
+        if (lineState == LineState.Black)
+            pulseValue = PulseValue.High
+        
+        let pin = pinToDigitalPin(channel)
+        pins.onPulsed(pin, pulseValue, body)
     }
 
     /**
@@ -326,7 +417,7 @@ namespace microX {
     //% block="Initialize Powerbrick MP3 Player connected to|serial pin %pinNumber"
     //% blockId="microX_initializePowerbrickMp3Player"
     //% group="MP3"
-    //% weight=81
+    //% weight=88
     export function initializePowerbrickMp3Player(pinNumber: PinNumber): void {   
         if (initializedPowerbrickMp3Player)
             return
