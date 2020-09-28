@@ -554,11 +554,11 @@ namespace microX {
     /**
      * Set Orange/Green Geekservo speed
      * @param servoNum where servo is connected e.g.: Servo1
-     * @param speed [-1000...1000] speed
+     * @param speed [-1024...1024] speed
     */
     //% block="Orange/Green Geekservo|connected to %servoNum|to speed %speed"
     //% blockId="microX_setOrangeGreenGeekservoSpeed"
-    //% speed.min=-1000 speed.max=1000
+    //% speed.min=-1024 speed.max=1024
     //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
     //% inlineInputMode=inline
     //% group="Motion"
