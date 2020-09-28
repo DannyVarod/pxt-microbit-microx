@@ -335,6 +335,7 @@ namespace microX {
             return
 
         serial.redirect(pin, SerialPin.P16, BaudRate.BaudRate9600)
+        initializedPowerbrickMp3Player = true
     }
 
     /**
