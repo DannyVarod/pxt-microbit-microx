@@ -336,6 +336,7 @@ namespace microX {
     /**
      * Initializes a line tracker sensor with 2 channels connected to 2 specific digial pins
      * @param ch1 digital pin number
+     * @param ch2 digital pin number
      */
     //% block="Initialize Line Tracker 2CH connected to|digial pin %ch1|digial pin %ch2"
     //% blockId="microX_initializeLineTracker2Channels"
@@ -349,6 +350,8 @@ namespace microX {
     /**
      * Initializes a line tracker sensor with 3 channels connected to 3 specific digial pins
      * @param ch1 digital pin number
+     * @param ch2 digital pin number
+     * @param ch3 digital pin number
      */
     //% block="Initialize Line Tracker 3CH connected to|digial pin %ch1|digial pin %ch2|digial pin %ch3"
     //% blockId="microX_initializeLineTracker3Channels"
@@ -361,34 +364,55 @@ namespace microX {
     }
 
     /**
-     * Initializes a line tracker sensor with 4 channels connected to 4 specific digial pins
+     * Get line position from 2 channel tracker
      * @param ch1 digital pin number
+     * @param ch2 digital pin number
      */
-    //% block="Initialize Line Tracker 4CH connected to|digial pin %ch1|digial pin %ch2|digial pin %ch3|digial pin %ch4"
-    //% blockId="microX_initializeLineTracker4Channels"
+    //% block="Get line position from 2 channel tracker connected to|digial pin %ch1|digial pin %ch2"
+    //% blockId="microX_getLinePosition2Channels"
     //% group="Sensors"
-    //% weight=84
-    export function initializeLineTracker4Channels(ch1: PinNumber, ch2: PinNumber, ch3: PinNumber, ch4: PinNumber): void {
-        pins.setPull(pinToDigitalPin(ch1), PinPullMode.PullUp)
-        pins.setPull(pinToDigitalPin(ch2), PinPullMode.PullUp)
-        pins.setPull(pinToDigitalPin(ch3), PinPullMode.PullUp)
-        pins.setPull(pinToDigitalPin(ch4), PinPullMode.PullUp)
+    //% weight=86
+    export function getLinePosition2Channels(ch1: PinNumber, ch2: PinNumber): string {
+        ch1 = 1 - pins.digitalReadPin(pinToDigitalPin(ch1))
+        ch2 = 1 - pins.digitalReadPin(pinToDigitalPin(ch2))
+        if (ch1 == 0 && ch2 == 0)
+            return "?" //  0 0
+        else if (ch1 > ch2)
+            return "<" // 1 0
+        else if (ch1 > ch2)
+            return ">" // 0 1
+        else return "-" // 1 1
     }
 
     /**
-     * Initializes a line tracker sensor with 5 channels connected to 5 specific digial pins
+     * Get line position from 3 channel tracker
      * @param ch1 digital pin number
+     * @param ch2 digital pin number
+     * @param ch3 digital pin number
      */
-    //% block="Initialize Line Tracker 5CH connected to|digial pin %ch1|digial pin %ch2|digial pin %ch3|digial pin %ch4|digial pin %ch5"
-    //% blockId="microX_initializeLineTracker5Channels"
+    //% block="Get line position from 3 channel tracker connected to|digial pin %ch1|digial pin %ch2|digial pin %ch3"
+    //% blockId="microX_getLinePosition3Channels"
     //% group="Sensors"
-    //% weight=85
-    export function initializeLineTracker5Channels(ch1: PinNumber, ch2: PinNumber, ch3: PinNumber, ch4: PinNumber, ch5: PinNumber): void {
-        pins.setPull(pinToDigitalPin(ch1), PinPullMode.PullUp)
-        pins.setPull(pinToDigitalPin(ch2), PinPullMode.PullUp)
-        pins.setPull(pinToDigitalPin(ch3), PinPullMode.PullUp)
-        pins.setPull(pinToDigitalPin(ch4), PinPullMode.PullUp)
-        pins.setPull(pinToDigitalPin(ch5), PinPullMode.PullUp)
+    //% weight=87
+    export function getLinePosition3Channels(ch1: PinNumber, ch2: PinNumber, ch3: PinNumber): string {
+        ch1 = 1 - pins.digitalReadPin(pinToDigitalPin(ch1))
+        ch2 = 1 - pins.digitalReadPin(pinToDigitalPin(ch2))
+        ch3 = 1 - pins.digitalReadPin(pinToDigitalPin(ch3))
+        if (ch1 == 0 && ch2 == 0 && ch3 == 0)
+            return "?" // 0 0 0
+        else if (ch1 > ch2 && ch2 == ch3)
+            return "<" // 1 0 0
+        else if (ch1 == ch2 && ch2 < ch3)
+            return ">" // 0 0 1
+        else if (ch1 == ch2 && ch2 > ch3)
+            return "\\" // 1 1 0
+        else if (ch1 < ch2 && ch2 == ch3)
+            return "/" // 0 1 1
+        else if (ch1 < ch2 && ch2 > ch3)
+            return "|" // 0 1 0
+        else if (ch1 > ch2 && ch2 < ch3)
+            return "H" // 1 0 1
+        else return "-" // 1 1 1
     }
 
     /**
@@ -399,7 +423,7 @@ namespace microX {
     //% button.fieldEditor="gridpicker button.fieldOptions.columns=3
     //% state.fieldEditor="gridpicker state.fieldOptions.columns=3
     //% group="Sensors"
-    //% weight=86
+    //% weight=88
     export function onLineTrackerEvent(channel: PinNumber, lineState: LineState, body: Action): void {
         
         let pulseValue: PulseValue = PulseValue.Low
@@ -417,7 +441,7 @@ namespace microX {
     //% block="Initialize Powerbrick MP3 Player connected to|serial pin %pinNumber"
     //% blockId="microX_initializePowerbrickMp3Player"
     //% group="MP3"
-    //% weight=88
+    //% weight=89
     export function initializePowerbrickMp3Player(pinNumber: PinNumber): void {   
         if (initializedPowerbrickMp3Player)
             return
