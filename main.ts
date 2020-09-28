@@ -415,24 +415,25 @@ namespace microX {
         else return "-" // 1 1 1
     }
 
-    /**
-     * On Line Tracker Event (on/off line)
-     */
-    //% block="On Line Tracker event remote|channel pin %channel|line state %lineState"
-    //% blockId="microX_onLineTrackerEvent"
-    //% button.fieldEditor="gridpicker button.fieldOptions.columns=3
-    //% state.fieldEditor="gridpicker state.fieldOptions.columns=3
-    //% group="Sensors"
-    //% weight=88
-    export function onLineTrackerEvent(channel: PinNumber, lineState: LineState, body: Action): void {
+    // Commented out because it causes out of memory exception (020) - seems like bug in MakeCode thread handling
+    // /**
+    //  * On Line Tracker Event (on/off line)
+    //  */
+    // //% block="On Line Tracker event remote|channel pin %channel|line state %lineState"
+    // //% blockId="microX_onLineTrackerEvent"
+    // //% button.fieldEditor="gridpicker button.fieldOptions.columns=3
+    // //% state.fieldEditor="gridpicker state.fieldOptions.columns=3
+    // //% group="Sensors"
+    // //% weight=88
+    // export function onLineTrackerEvent(channel: PinNumber, lineState: LineState, body: Action): void {
         
-        let pulseValue: PulseValue = PulseValue.Low
-        if (lineState == LineState.Black)
-            pulseValue = PulseValue.High
+    //     let pulseValue: PulseValue = PulseValue.Low
+    //     if (lineState == LineState.Black)
+    //         pulseValue = PulseValue.High
         
-        let pin = pinToDigitalPin(channel)
-        pins.onPulsed(pin, pulseValue, body)
-    }
+    //     let pin = pinToDigitalPin(channel)
+    //     pins.onPulsed(pin, pulseValue, body)
+    // }
 
     /**
      * Initializes the MP3 player connected to a specific serial pin (or Powerbrick serial port)

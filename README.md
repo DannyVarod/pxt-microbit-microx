@@ -1,9 +1,57 @@
-An experiment (beta) unofficial extension for MakeCode and micro:bit supporting multiple hardware extenions,
-e.g. boards, sensors, servos, motors, enabling mixing the different modules together in one project.
-I will copy the working blocks into a different stable repository (name TBD).
+# MicroX
 
-Currently includes support for (in development):
+An experiment (beta) unofficial extension for MakeCode (pxt) enviroment for micro:bit hardware supporting multiple hardware modules, e.g. boards, sensors, motors, servos, enabling combining the different modules together in one project which is simpler to use than original extensions and clearly states what **should** work (test it yourself and decide) and what still does not (i.e. still hasn't passed my own tests). Repository will be renamed when stable.
+
+This repository is **NOT affiliated with** BBC, Microsoft, KittenBot, Yahboom, Robotbit, Geekservo, keyestudio or any other company. It is completely **unofficial**!
+
+All company and product names are owned by their owners and are mentioned here only for sake of clarification of what this code may work with (test it yourself!).
+
+**Absolutely no warranty, guarantee or support are provided, use at your own risk!**
+
+I will list which hardware modules worked for me, however, your hardware may produce different results. Use at your own risk, I take no responsibilty for any potential damange to your hardware.
+
+Current license [LGPL v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html).
+
+If you want to volenteer to help with writing or documenting this extension and have your own hardware for testing it yourself, please let me know.
+Requirements:
+* High level of English (grammar and spelling)
+* Have your own hardware and want to get it working smoothly using this extension
+* Have time to spare for free
+* Either an experienced programmer or experienced as both a tester and a technical writer
+
+## Currently includes functionality (in development) for:
+
+### Boards:
 
 * Yahboom remote / game handle
-* Kittenbot Powerblock / Armorbit
-* Kittenbot Robotbit
+* KittenBot Powerblock / Armorbit
+* KittenBot Robotbit
+
+### Sensors:
+
+* Line tracker with 2 channels or 3 channels (2 channel line tracker / 3 channel line tracker)
+    * Tested with "Tracker Sensor V2.1" (a red board), 3 channels, worked
+    * Tested with keyestudio, 3 channels, only 2 channels worked, 3rd didn't work due to hardware problem (potentiometer issue - either always on or always off, no in between)
+    * Tested with Armorbit sensor - 2 channels, over sensitive, couldn't use
+* Ultrasonic distance
+    * Tested with Armorbit sensor
+    * Tested with KittenBot "Ultrasonic Sensor V1.0"
+
+### Motors and Servos:
+
+* Geekservo small red motor
+* Geekservo small grey servo / gray servo / 270 degree angle servo
+* Geekservo small green servo / orange servo / speed servo
+* Geekservo large red motor / 2Kg motor
+
+### Displays:
+
+* Powerblock / Armorbit 8*8 RGB pixel display
+* Robotbit RGB 4 pixel display
+
+### In development / parially working or not working:
+
+* Powerblock / Armorbit color and gesture sensor - partially working
+* Powerblock / Armorbit MP3 player - not working
+* Blocks menu layout currently broken - use JavaScript or Python menus instead
+* Geekservo large grey servor / large gray servo / 360 degree angle servo - waiting for HW
