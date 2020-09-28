@@ -21,8 +21,8 @@ namespace microX {
     let usedPrevDistance = false
     let prevDistance: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-    const PHASE_WIDTH_PERIOD_MICROSEC = 20000
-    // const PHASE_WIDTH_PERIOD_MICROSEC = 20480
+    // const PHASE_WIDTH_PERIOD_MICROSEC = 20000
+    const PHASE_WIDTH_PERIOD_MICROSEC = 20480
     const PHASE_WIDTH_LEVELS = 4096
 
     /**
