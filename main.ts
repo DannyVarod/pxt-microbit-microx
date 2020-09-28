@@ -65,7 +65,7 @@ namespace microX {
     }
 
     /**
-     * Buttom state
+     * Button state
      */
     export enum ButtonState {
         //% block=Released
