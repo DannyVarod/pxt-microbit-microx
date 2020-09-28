@@ -823,7 +823,7 @@ namespace microX {
         robotbitPixels.refresh()
     }
 
-    function _ultrasonicDistance(pinNumber: PinNumber, pullMode: PinPullMode, mult: number, div: number): number {
+    function _ultrasonicDistance(pinNumber: PinNumber, pullMode: PinPullMode, mult: number, div: number, attempt: number): number {
         let pin = pinToDigitalPin(pinNumber)
         if (pin == null)
             return 0
@@ -844,12 +844,18 @@ namespace microX {
         // read pulse
         let distance = pins.pulseIn(pin, PulseValue.High, 25000)
 
-        // on timeout return lastdistance (1 times in a row max, since distance can be 0)
-        if (distance == 0 && usedPrevDistance == false) {
-            distance = prevDistance[pinNumber]
-            usedPrevDistance = true
+        // on timeout
+        if (distance == 0) {
+            if (attempt < 1) {
+                control.waitMicros(10000)
+                return _ultrasonicDistance(pinNumber, pullMode, mult, div, attempt + 1)
+            } else if (!usedPrevDistance) {
+                distance = prevDistance[pinNumber]
+                usedPrevDistance = true
+            } else {
+                usedPrevDistance = false
+            }
         } else {
-            prevDistance[pinNumber] = distance
             usedPrevDistance = false
         }
         
@@ -865,7 +871,7 @@ namespace microX {
     //% group="Sensors"
     //% weight=40
     export function ultrasonicDistanceCatShapedSensor(pinNumber: PinNumber): number {
-        return _ultrasonicDistance(pinNumber, PinPullMode.PullDown, 21, 800)
+        return _ultrasonicDistance(pinNumber, PinPullMode.PullDown, 21, 800, 0)
     }
 
     /**
@@ -877,7 +883,7 @@ namespace microX {
     //% group="Sensors"
     //% weight=41
     export function ultrasonicDistancePowerblockUltrasonicModule(pinNumber: PinNumber): number {
-        return _ultrasonicDistance(pinNumber, PinPullMode.PullNone, 10, 348)
+        return _ultrasonicDistance(pinNumber, PinPullMode.PullNone, 10, 348, 0)
     }
 
     /**
@@ -904,7 +910,7 @@ namespace microX {
     //% group="Sensors"
     //% weight=43
     export function ultrasonicDistanceCatShapedSensorWithLeds(pinNumber: PinNumber): number {
-        return _ultrasonicDistance(pinNumber, PinPullMode.PullNone, 9, 348)
+        return _ultrasonicDistance(pinNumber, PinPullMode.PullNone, 9, 348, 0)
     }
 
     let mp3PlayerStartByte = 0x7e
