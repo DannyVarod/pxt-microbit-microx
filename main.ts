@@ -421,8 +421,8 @@ namespace microX {
     //  */
     // //% block="On Line Tracker event remote|channel pin %channel|line state %lineState"
     // //% blockId="microX_onLineTrackerEvent"
-    // //% button.fieldEditor="gridpicker button.fieldOptions.columns=3
-    // //% state.fieldEditor="gridpicker state.fieldOptions.columns=3
+    // //% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
+    // //% state.fieldEditor="gridpicker" state.fieldOptions.columns=3
     // //% group="Sensors"
     // //% weight=88
     // export function onLineTrackerEvent(channel: PinNumber, lineState: LineState, body: Action): void {
@@ -517,10 +517,10 @@ namespace microX {
     /**
      * Act on YB-EMH02 ver 1.2 remote button click (Click on Joystick (Z), B1, B2, B3, B4)
      */
-    //% block="On Yahboom remote|button %button | state %state"
+    //% block="On Yahboom remote|button %button|state %state"
     //% blockId="microX_onYahboomRemoteButton"
-    //% button.fieldEditor="gridpicker button.fieldOptions.columns=3
-    //% state.fieldEditor="gridpicker state.fieldOptions.columns=3
+    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
+    //% state.fieldEditor="gridpicker" state.fieldOptions.columns=3
     //% group="Remote"
     //% weight=72
     export function onYahboomRemoteButton(button: YBRemoteButton, state: ButtonState, body: Action): void {
