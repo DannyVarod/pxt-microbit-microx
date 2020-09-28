@@ -398,7 +398,7 @@ namespace microX {
     //% blockId="microX_onLineTrackerEvent"
     //% button.fieldEditor="gridpicker button.fieldOptions.columns=3
     //% state.fieldEditor="gridpicker state.fieldOptions.columns=3
-    //% group="Remote"
+    //% group="Sensors"
     //% weight=86
     export function onLineTrackerEvent(channel: PinNumber, lineState: LineState, body: Action): void {
         
