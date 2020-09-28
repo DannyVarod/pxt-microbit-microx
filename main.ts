@@ -64,6 +64,9 @@ namespace microX {
         PowerblockM2 = 1
     }
 
+    /**
+     * Buttom state
+     */
     export enum ButtonState {
         //% block=Released
         Released = 0,
@@ -253,13 +256,13 @@ namespace microX {
      * Powerbrick MP3 action (1, 2, 3, 5, 6, 7)
      */
     export enum PowerbrickMp3ControlAction {
-        //% block
+        //% block=Play
         Play = 0xaa,
-        //% block
+        //% block=Stop
         Stop = 0xab,
-        //% block
+        //% block=Next
         Next = 0xac,
-        //% block
+        //% block=Prev
         Prev = 0xad
     }
 
@@ -1009,10 +1012,17 @@ namespace microX {
         _mp3PlayerSendString(0xa3, filename)
     }
 
+    /**
+     * Powerbrick gesture and color sensor mode
+     */
     enum PowerbrickGestureColorSensorMode {
+        //% block=Ambient
         Ambient = 1,
+        //% block=Proximity
         Proximity = 2,
+        //% block=Gesture
         Gesture = 3,
+        //% block=Active
         Active = 4
     }
 
