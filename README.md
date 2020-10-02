@@ -1,6 +1,6 @@
 # MicroX
 
-An experiment (beta) unofficial extension for MakeCode (pxt) environment for micro:bit hardware supporting multiple hardware modules, e.g. boards, sensors, motors, servos, enabling combining the different modules together in one project which is simpler to use than original extensions and clearly states what **should** work (test it yourself and decide) and what still does not (i.e. still hasn't passed my own tests).
+An experimental (beta) unofficial extension for MakeCode (pxt) environment for micro:bit hardware supporting multiple hardware modules, e.g. boards, sensors, motors, servos, enabling combining the different modules together in one project which is simpler to use than original extensions and clearly states what **should** work (test it yourself and decide) and what still does not (i.e. still hasn't passed my own tests).
 
 This repository is **NOT affiliated with** BBC, Microsoft, KittenBot, Yahboom, Robotbit, Geekservo, keyestudio or any other company. It is completely **unofficial**!
 
