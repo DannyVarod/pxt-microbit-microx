@@ -10,6 +10,8 @@ All company and product names are owned by their owners and are mentioned here o
 
 I will list which hardware modules worked for me, however, your hardware may produce different results. Use at your own risk, I take no responsibilty for any potential damange to your hardware.
 
+If you would like to see support for your hardware here, you are welcome to send hardware for development and testing of this extension. No guarantee for if and when support will be added, depends on existence, clarity and correctness of documentation of the hardware and on if and when I have time to spare.
+
 Current license [LGPL v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html).
 
 If you want to volenteer to help with writing or documenting this extension and have your own hardware for testing it yourself, please let me know.
