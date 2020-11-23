@@ -745,8 +745,8 @@ namespace microX {
         if (degree_norm < 0)
             degree_norm += 360
 
-        let pulseWidth = degree_norm * PHASE_WIDTH_PERIOD_MICROSEC * 157 / 256 / 360 + (PHASE_WIDTH_PERIOD_MICROSEC / 8)
-        pulseWidth = inRange(pulseWidth, PHASE_WIDTH_PERIOD_MICROSEC / 8, PHASE_WIDTH_PERIOD_MICROSEC * 5 / 8)
+        let pulseWidth = degree_norm * PHASE_WIDTH_PERIOD_MICROSEC * PHASE_WIDTH_LEVELS * 157 / 256 / 360 + (PHASE_WIDTH_PERIOD_MICROSEC * PHASE_WIDTH_LEVELS / 8)
+        pulseWidth = inRange(pulseWidth, PHASE_WIDTH_PERIOD_MICROSEC * PHASE_WIDTH_LEVELS / 8, PHASE_WIDTH_PERIOD_MICROSEC * PHASE_WIDTH_LEVELS * 5 / 8)
         setServoPulseWidth(servoNum, pulseWidth)
     }
 
