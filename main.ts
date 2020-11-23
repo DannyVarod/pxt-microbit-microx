@@ -728,7 +728,7 @@ namespace microX {
     /**
      * Set LARGE Grey Geekservo angle
      * @param servoNum where servo is connected e.g.: Servo1
-     * @param degree [0...360) angle in degrees e.g.: -45, 90, 225
+     * @param degree [0...360] angle in degrees e.g.: 0, 15, 30, 90, 180, 270, 360
     */
     //% block="LARGE grey Geekservo|connected to %servoNum|to degree %degree"
     //% blockId="microX_setLargeGreyGeekservoAngle"
@@ -738,18 +738,15 @@ namespace microX {
     //% group="Motion"
     //% weight=64
     export function setLargeGreyGeekservoAngle(servoNum: Servo, degree: number): void {
-        // TODO: When I have a servo like this, check if this is 0 to 360 or 0 to 350 and if only goes to 350 degress, replace constants
-        // 0deg: 500uS, 360deg: 2500uS
+        // 0deg: 512uS, 360deg: 2512uS, max: 2560us
         
-        // Shift degrees to range [0,360)
+        // Shift degrees to range [0,360]
         let degree_norm = (degree % 360)
         if (degree_norm < 0)
             degree_norm += 360
 
-        let minPulse = PHASE_WIDTH_PERIOD_MICROSEC / 40
-        let maxPulse = PHASE_WIDTH_PERIOD_MICROSEC  / 8
-        let pulseWidth = degree_norm * maxPulse / 360 + minPulse
-        pulseWidth = inRange(pulseWidth, minPulse, maxPulse)
+        let pulseWidth = degree_norm * PHASE_WIDTH_PERIOD_MICROSEC * 157 / 256 / 360 + (PHASE_WIDTH_PERIOD_MICROSEC / 8)
+        pulseWidth = inRange(pulseWidth, PHASE_WIDTH_PERIOD_MICROSEC / 8, PHASE_WIDTH_PERIOD_MICROSEC * 5 / 8)
         setServoPulseWidth(servoNum, pulseWidth)
     }
 
