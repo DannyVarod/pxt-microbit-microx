@@ -45,6 +45,7 @@ Requirements:
 * Geekservo small grey servo / gray servo / 270 degree angle servo
 * Geekservo small green servo / orange servo / speed servo
 * Geekservo large red motor / 2Kg motor
+* Geekservo large grey servo / 2Kg servo / 360 degree angle servo
 
 ### Displays:
 
@@ -56,4 +57,3 @@ Requirements:
 * Powerblock / Armorbit color and gesture sensor - partially working
 * Powerblock / Armorbit MP3 player - not working
 * Blocks menu layout currently broken - use JavaScript or Python menus instead
-* Geekservo large grey servor / large gray servo / 360 degree angle servo - waiting for HW
