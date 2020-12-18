@@ -12,14 +12,16 @@ I will list which hardware modules worked for me, however, your hardware may pro
 
 If you would like to see support for your hardware here, you are welcome to send hardware for development and testing of this extension. No guarantee for if and when support will be added, depends on existence, clarity and correctness of documentation of the hardware and on if and when I have time to spare.
 
-Current license [LGPL v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html).
+Current license [LGPL v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html) (free to use, however, you need to share any changes you make, changed code must use same license).
 
-If you want to volenteer to help with writing or documenting this extension and have your own hardware for testing it yourself, please let me know.
-Requirements:
-* High level of English (grammar and spelling)
-* Have your own hardware and want to get it working smoothly using this extension
-* Have time to spare for free
-* Either an experienced programmer or experienced as both a tester and a technical writer
+## Usage:
+
+1. Run [MakeCode for micro:bit from here](https://makecode.microbit.org/) or [download offline version](https://makecode.microbit.org/offline-app)
+2. Create a new project (or open an existing one)
+3. Click on "Advanced" --> "Extensions"
+4. Copy the URL of this repository [https://github.com/DannyVarod/pxt-microbit-microx/](https://github.com/DannyVarod/pxt-microbit-microx/) into the "Search or enter project URL..." box
+5. Click on extension (MicroX)
+6. This extension has now been added to your project, you can find the commands under "MicroX" in the UI (currently works under "JavaScript" and "Python", not under "Blocks").
 
 ## Currently includes functionality (in development) for:
 
@@ -57,3 +59,12 @@ Requirements:
 * Powerblock / Armorbit color and gesture sensor - partially working
 * Powerblock / Armorbit MP3 player - not working
 * Blocks menu layout currently broken - use JavaScript or Python menus instead
+
+## Join project:
+
+If you want to volenteer to help with the writing or documenting of this extension and have your own hardware for testing it yourself, let me know.
+Requirements:
+* High level of English (grammar and spelling)
+* Have your own hardware and want to get it working smoothly using this extension
+* Have time to spare for free
+* Either an experienced programmer or experienced as both a tester and a technical writer
