@@ -206,14 +206,26 @@ namespace microX {
         //% block=PowerbrickPort7_Analog
         PowerbrickPort7_Analog = Pin10,
 
-        //% block=PowerbrickPort1_Serial
-        PowerbrickPort1_Serial = Pin0,
-        //% block=PowerbrickPort2_Serial
-        PowerbrickPort2_Serial = Pin1,
-        //% block=PowerbrickPort3_Serial
-        PowerbrickPort3_Serial = Pin2,
-        //% block=PowerbrickPort4_Serial
-        PowerbrickPort4_Serial = Pin14
+        //% block=PowerbrickPort1_Serial_Pin1
+        PowerbrickPort1_Serial_Pin1 = Pin0,
+        //% block=PowerbrickPort1_Serial_Pin2
+        PowerbrickPort1_Serial_Pin2 = Pin8,
+        //% block=PowerbrickPort2_Serial_Pin1
+        PowerbrickPort2_Serial_Pin1 = Pin1,
+        //% block=PowerbrickPort2_Serial_Pin2
+        PowerbrickPort2_Serial_Pin2 = Pin12,
+        //% block=PowerbrickPort3_Serial_Pin1
+        PowerbrickPort3_Serial_Pin1 = Pin2,
+        //% block=PowerbrickPort3_Serial_Pin2
+        PowerbrickPort3_Serial_Pin2 = Pin13,
+        //% block=PowerbrickPort4_Serial_Pin1
+        PowerbrickPort4_Serial_Pin1 = Pin14,
+        //% block=PowerbrickPort4_Serial_Pin2
+        PowerbrickPort4_Serial_Pin2 = Pin15,
+        //% block=PowerbrickPort7_Serial_Pin1
+        PowerbrickPort7_Serial_Pin1 = Pin10,
+        //% block=PowerbrickPort7_Serial_Pin2
+        PowerbrickPort7_Serial_Pin2 = Pin9
     }
 
     function pinToDigitalPin(pinNumber: PinNumber): DigitalPin {
@@ -247,6 +259,7 @@ namespace microX {
             case PinNumber.Pin13: return SerialPin.P13
             case PinNumber.Pin14: return SerialPin.P14
             case PinNumber.Pin15: return SerialPin.P15
+            case PinNumber.Pin16: return SerialPin.P16
             default: return null
         }
     }
@@ -423,15 +436,16 @@ namespace microX {
     //% blockId="microX_initializePowerbrickMp3Player"
     //% group="MP3"
     //% weight=89
-    export function initializePowerbrickMp3Player(pinNumber: PinNumber): void {   
+    export function initializePowerbrickMp3Player(serialPinTx: PinNumber, serialPinRx: PinNumber): void {   
         if (initializedPowerbrickMp3Player)
             return
         
-        let pin = pinToSerialPin(pinNumber)
-        if (pin == null)
+        let txPin = pinToSerialPin(serialPinTx)
+        let rxPin = pinToSerialPin(serialPinRx)
+        if (txPin == null || rxPin == null)
             return
 
-        serial.redirect(pin, SerialPin.P16, BaudRate.BaudRate9600)
+        serial.redirect(txPin, rxPin, BaudRate.BaudRate9600)
         initializedPowerbrickMp3Player = true
     }
 
