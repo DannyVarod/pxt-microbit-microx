@@ -68,3 +68,11 @@ Requirements:
 * Have your own hardware and want to get it working smoothly using this extension
 * Have time to spare for free
 * Either an experienced programmer or experienced as both a tester and a technical writer
+
+## Development environment:
+
+```
+npm install -g pxt
+pxt target microbit
+pxt install
+```

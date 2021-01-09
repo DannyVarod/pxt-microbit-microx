@@ -415,26 +415,6 @@ namespace microX {
         else return "-" // 1 1 1
     }
 
-    // Commented out because it causes out of memory exception (020) - seems like bug in MakeCode thread handling
-    // /**
-    //  * On Line Tracker Event (on/off line)
-    //  */
-    // //% block="On Line Tracker event remote|channel pin %channel|line state %lineState"
-    // //% blockId="microX_onLineTrackerEvent"
-    // //% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
-    // //% state.fieldEditor="gridpicker" state.fieldOptions.columns=3
-    // //% group="Sensors"
-    // //% weight=88
-    // export function onLineTrackerEvent(channel: PinNumber, lineState: LineState, body: Action): void {
-        
-    //     let pulseValue: PulseValue = PulseValue.Low
-    //     if (lineState == LineState.Black)
-    //         pulseValue = PulseValue.High
-        
-    //     let pin = pinToDigitalPin(channel)
-    //     pins.onPulsed(pin, pulseValue, body)
-    // }
-
     /**
      * Initializes the MP3 player connected to a specific serial pin (or Powerbrick serial port)
      * @param pinNumber serial pin number
@@ -648,21 +628,21 @@ namespace microX {
     /**
      * Set servo pulse width
      * @param servoNum where servo is connected e.g.: Servo1
-     * @param pulseWidth [5...19990] pulse width in uSec
+     * @param pulseWidth [5...20470] pulse width in uSec
     */
     //% block="Servo pulse width|connected to %servoNum|to pulse widths (uSec) %pulseWidth"
     //% blockId="microX_setServoPulseWidth"
-    //% pulseWidth.min=1 pulseWidth.max=19999
+    //% pulseWidth.min=5 pulseWidth.max=20470
     //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
     //% inlineInputMode=inline
     //% advanced=true
     //% weight=61
     export function setServoPulseWidth(servoNum: Servo, pulseWidth: number): void {
-        // TODO: Try to use 20480.0 uSec (48.828125 Hz) instead of 20000.0 uSec (50 Hz) to get more precise results (500uS pulse will be 512uS pulses instead)
+        
         initializePhaseWidthModulationDriver()
         // 50Hz --> Full cycle is 20mS (20000uS), normalize this from range 0...20000uS to 0...4096
         let value = Math.round(pulseWidth * PHASE_WIDTH_LEVELS / PHASE_WIDTH_PERIOD_MICROSEC)
-        value = inRange(value, 0, PHASE_WIDTH_LEVELS)
+        value = inRange(value, 1, PHASE_WIDTH_LEVELS - 1)
         // Servos are mapped to channels [8, 9, 10, 11, 12, 13, 14, 15]
         setPwm(servoNum + 7, 0, value)
     }
@@ -680,8 +660,7 @@ namespace microX {
     //% group="Motion"
     //% weight=62
     export function setOrangeGreenGeekservoSpeed(servoNum: Servo, speed: number): void {
-        // TODO: When trying to use 20480.0 uSec instead of 20000.0 uSec and change speed range from -1000...1000 to -1024...1024
-        // reverse: 500uS-1500uS, 0: 1500uS, forward: 1500uS-2500uS
+        // For 20000uSec cycle: reverse=500uS-1500uS, 0: 1500uS, forward=1500uS-2500uS
         let zeroPulse = PHASE_WIDTH_PERIOD_MICROSEC * 3 / 40
         let minPulse = PHASE_WIDTH_PERIOD_MICROSEC / 40
         let maxPulse = PHASE_WIDTH_PERIOD_MICROSEC  / 8
@@ -703,7 +682,7 @@ namespace microX {
     //% group="Motion"
     //% weight=63
     export function setGreyGeekservoAngle(servoNum: Servo, degree: number): void {
-        // -45deg: 600uS, 225deg: 2400uS (6.6667 uS/deg = 20.0/3.0)
+        // For 20000uSec cycle: -45deg: 600uS, 225deg: 2400uS (6.6667 uS/deg = 20.0/3.0)
         let degreeRange = 270
         let phaseRangePercent = 9 // (2400-600)/20000 * 100
 
@@ -719,7 +698,6 @@ namespace microX {
         }
         let minPulse = PHASE_WIDTH_PERIOD_MICROSEC * 3 / 100
         let maxPulse = PHASE_WIDTH_PERIOD_MICROSEC * 6 / 50
-        //let pulseWidth = degree_norm * 20.0 / 3.0 + minPulse
         let pulseWidth = degree_norm * PHASE_WIDTH_PERIOD_MICROSEC * phaseRangePercent / 100 / degreeRange + minPulse
         pulseWidth = inRange(pulseWidth, minPulse, maxPulse)
         setServoPulseWidth(servoNum, pulseWidth)

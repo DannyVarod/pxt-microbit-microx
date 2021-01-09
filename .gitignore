@@ -1,5 +1,6 @@
 microbit/**
 .vscode/
+pxt_modules/
 node_modules/
 .node_modules/
 built/*
