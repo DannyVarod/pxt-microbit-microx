@@ -58,7 +58,6 @@ Current license [LGPL v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.e
 
 * Powerblock / Armorbit color and gesture sensor - partially working
 * Powerblock / Armorbit MP3 player - not working
-* Blocks menu layout currently broken - use JavaScript or Python menus instead
 
 ## Join project:
 
