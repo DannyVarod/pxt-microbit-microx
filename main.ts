@@ -342,7 +342,6 @@ namespace microX {
      */
     //% block="Initialize Powerbrick Pixels module connected to|digital pin %pinNumber"
     //% blockId="microX_intializePowerbrickPixels"
-    //% port.fieldEditor="gridpicker" port.fieldOptions.columns=2
     //% group="Pixels"
     //% weight=80
     export function intializePowerbrickPixels(pinNumber: PinNumber): void {
@@ -527,8 +526,6 @@ namespace microX {
      */
     //% block="On Yahboom remote|button %button|state %state"
     //% blockId="microX_onYahboomRemoteButton"
-    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
-    //% state.fieldEditor="gridpicker" state.fieldOptions.columns=3
     //% group="Remote"
     //% weight=72
     export function onYahboomRemoteButton(button: YBRemoteButton, state: ButtonState, body: Action): void {
@@ -629,7 +626,6 @@ namespace microX {
     //% block="Set motor speed for motor|connected to %motorNum|to speed %speed"
     //% blockId="microX_setMotor"
     //% speed.min=-4095 speed.max=4095
-    //% motor.fieldEditor="gridpicker" motor.fieldOptions.columns=2
     //% group="Motion"
     //% weight=60
     export function setMotor(motorNum: Motor, speed: number): void {
@@ -661,7 +657,6 @@ namespace microX {
     //% block="Servo pulse width|connected to %servoNum|to pulse widths (uSec) %pulseWidth"
     //% blockId="microX_setServoPulseWidth"
     //% pulseWidth.min=5 pulseWidth.max=20470
-    //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
     //% inlineInputMode=inline
     //% advanced=true
     //% weight=61
@@ -683,7 +678,6 @@ namespace microX {
     //% block="Orange/Green Geekservo|connected to %servoNum|to speed %speed"
     //% blockId="microX_setOrangeGreenGeekservoSpeed"
     //% speed.min=-1024 speed.max=1024
-    //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
     //% inlineInputMode=inline
     //% group="Motion"
     //% weight=62
@@ -705,7 +699,6 @@ namespace microX {
     //% block="Grey Geekservo|connected to %servoNum|to degree %degree"
     //% blockId="microX_setGreyGeekservoAngle"
     //% degree.min=-45 degree.max=225
-    //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
     //% inlineInputMode=inline
     //% group="Motion"
     //% weight=63
@@ -739,7 +732,6 @@ namespace microX {
     //% block="LARGE grey Geekservo|connected to %servoNum|to degree %degree"
     //% blockId="microX_setLargeGreyGeekservoAngle"
     //% degree.min=0 degree.max=360
-    //% servoNum.fieldEditor="gridpicker" servoNum.fieldOptions.columns=2
     //% inlineInputMode=inline
     //% group="Motion"
     //% weight=64
@@ -833,9 +825,6 @@ namespace microX {
     //% block="Set Powerbrick pixels to color|red %r|green %g|blue %b"
     //% blockId="microX_setPowerbrickAllPixels"
     //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
-    //% r.fieldEditor="gridpicker" r.fieldOptions.columns=2
-    //% g.fieldEditor="gridpicker" g.fieldOptions.columns=2
-    //% b.fieldEditor="gridpicker" b.fieldOptions.columns=2
     //% inlineInputMode=inline
     //% group="Pixels"
     //% weight=30
@@ -856,11 +845,6 @@ namespace microX {
     //% block="Set Powerbrick pixel to color|y %y|x %x|red %r|green %g|blue %b"
     //% blockId="microX_setPowerbrickPixel"
     //% y.min=0 y.max=7 x.min=0 x.max=7 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
-    //% y.fieldEditor="gridpicker" y.fieldOptions.columns=2
-    //% x.fieldEditor="gridpicker" x.fieldOptions.columns=2
-    //% r.fieldEditor="gridpicker" r.fieldOptions.columns=2
-    //% g.fieldEditor="gridpicker" g.fieldOptions.columns=2
-    //% b.fieldEditor="gridpicker" b.fieldOptions.columns=2
     //% inlineInputMode=inline
     //% group="Pixels"
     //% weight=31
@@ -896,9 +880,6 @@ namespace microX {
     //% block="Set Robotbit pixels to color|red %r|green %g|blue %b"
     //% blockId="microX_setRobotBitAllPixels"
     //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
-    //% r.fieldEditor="gridpicker" r.fieldOptions.columns=2
-    //% g.fieldEditor="gridpicker" g.fieldOptions.columns=2
-    //% b.fieldEditor="gridpicker" b.fieldOptions.columns=2
     //% inlineInputMode=inline
     //% group="Pixels"
     //% weight=33
@@ -918,9 +899,6 @@ namespace microX {
     //% block="Set Robotbit pixel to color|x %x|red %r|green %g|blue %b"
     //% blockId="microX_setRobotBitPixel"
     //% x.min=0 x.max=3 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
-    //% r.fieldEditor="gridpicker" r.fieldOptions.columns=2
-    //% g.fieldEditor="gridpicker" g.fieldOptions.columns=2
-    //% b.fieldEditor="gridpicker" b.fieldOptions.columns=2
     //% inlineInputMode=inline
     //% group="Pixels"
     //% weight=34
