@@ -7,7 +7,12 @@
         "microphone": "*"
     },
     "files": [
-        "main.ts",
+        "ux.ts",
+        "uxRemotes.ts",
+        "uxMotion.ts",
+        "uxSensors.ts",
+        "uxDisplays.ts",
+        "uxMp3.ts",
         "README.md"
     ]
 }
