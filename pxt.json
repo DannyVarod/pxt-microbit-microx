@@ -18,7 +18,7 @@
     "testFiles": [
         "exampleJoystick.ts",
         "exampleRobotbit.ts",
-        "examplepowerbrick.ts"
+        "examplePowerbrick.ts"
     ],
     "public": true
 }
