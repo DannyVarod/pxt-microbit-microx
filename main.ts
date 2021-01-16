@@ -443,9 +443,10 @@ namespace microX {
 
     /**
      * Initializes the MP3 player connected to a specific serial pin (or Powerbrick serial port)
-     * @param pinNumber serial pin number
+     * @param serialPinTx serial pin number (transmit)
+     * @param serialPinRx serial pin number (receive)
      */
-    //% block="Initialize Powerbrick MP3 Player connected to|serial pin %pinNumber"
+    //% block="Initialize Powerbrick MP3 Player connected to|serial pin (TX) %pinNumber|serial pin (RX) %pinNumber"
     //% blockId="microX_initializePowerbrickMp3Player"
     //% group="MP3"
     //% weight=89
