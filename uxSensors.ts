@@ -61,26 +61,26 @@ namespace uxSensors {
     }
 
     /**
-     * Measure distance using Powerblock's ultrasonic module
+     * Measure distance using Powerbrick's ultrasonic module
      * @param pinNumber digital pin number
      */
     //% block="Ultrasonic distance of Powerbrick module connected to|digital pin %pinNumber"
-    //% blockId="ux_ultrasonicDistancePowerblockUltrasonicModule"
+    //% blockId="ux_ultrasonicDistancePowerbrickUltrasonicModule"
     //% group="Distance"
     //% weight=81
-    export function ultrasonicDistancePowerblockUltrasonicModule(pinNumber: ux.PinNumber): number {
+    export function ultrasonicDistancePowerbrickUltrasonicModule(pinNumber: ux.PinNumber): number {
         return _ultrasonicDistance(pinNumber, PinPullMode.PullNone, 10, 348, 0)
     }
 
     /**
-     * Measure sound level using Powerblock's ultrasonic module
+     * Measure sound level using Powerbrick's ultrasonic module
      * @param pinNumber analog pin number
      */
     //% block="Sound level of Powerbrick module connected to|analog pin %pinNumber"
-    //% blockId="ux_soundLevelPowerblockUltrasonicModule"
+    //% blockId="ux_soundLevelPowerbrickUltrasonicModule"
     //% group="Sound"
     //% weight=78
-    export function soundLevelPowerblockUltrasonicModule(pinNumber: ux.PinNumber): number {
+    export function soundLevelPowerbrickUltrasonicModule(pinNumber: ux.PinNumber): number {
         let pin = ux.pinToAnalogPin(pinNumber)
         if (pin == null)
             return 0

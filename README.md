@@ -28,7 +28,7 @@ Current license [LGPL v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.e
 ### Boards:
 
 * Yahboom remote / game handle
-* KittenBot Powerblock / Armorbit
+* KittenBot PowerBrick / Armourbit
 * KittenBot Robotbit
 
 ### Sensors:
@@ -36,9 +36,9 @@ Current license [LGPL v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.e
 * Line tracker with 2 channels or 3 channels (2 channel line tracker / 3 channel line tracker)
     * Tested with "Tracker Sensor V2.1" (a red board), 3 channels, worked
     * Tested with keyestudio, 3 channels, only 2 channels worked, 3rd didn't work due to hardware problem (potentiometer issue - either always on or always off, no in between)
-    * Tested with Armorbit sensor - 2 channels, over sensitive, couldn't use
+    * Tested with PowerBrick sensor - 2 channels, sensor was over sensitive, couldn't use with paper
 * Ultrasonic distance
-    * Tested with Armorbit sensor
+    * Tested with PowerBrick sensor
     * Tested with KittenBot "Ultrasonic Sensor V1.0"
 
 ### Motors and Servos:
@@ -51,13 +51,13 @@ Current license [LGPL v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.e
 
 ### Displays:
 
-* Powerblock / Armorbit 8*8 RGB pixel display
+* PowerBrick 8*8 RGB pixel display
 * Robotbit RGB 4 pixel display
 
 ### In development / parially working or not working:
 
-* Powerblock / Armorbit color and gesture sensor - partially working
-* Powerblock / Armorbit MP3 player - not working
+* PowerBrick color and gesture sensor - partially working
+* PowerBrick MP3 player - not working
 
 ## Join project:
 

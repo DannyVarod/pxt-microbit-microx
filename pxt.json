@@ -1,6 +1,6 @@
 {
     "name": "MicroX",
-    "description": "",
+    "description": "An all-in-one (beta) extension for micro:bit supporting multiple hardware modules, e.g. boards, sensors, motors, servos.",
     "dependencies": {
         "core": "*",
         "ws2812b": "github:Microsoft/pxt-ws2812b#v0.1.1",
@@ -14,5 +14,11 @@
         "uxDisplays.ts",
         "uxMp3.ts",
         "README.md"
-    ]
+    ],
+    "testFiles": [
+        "exampleJoystick.ts",
+        "exampleRobotbit.ts",
+        "examplepowerbrick.ts"
+    ],
+    "public": true
 }

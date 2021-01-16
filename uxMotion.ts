@@ -48,10 +48,10 @@ namespace uxMotion {
         RobotbitM2A = 2,
         //% block=RobotbitM2B
         RobotbitM2B = 3,
-        //% block=PowerblockM1
-        PowerblockM1 = 0,
-        //% block=PowerblockM2
-        PowerblockM2 = 1
+        //% block=PowerbrickM1
+        PowerbrickM1 = 0,
+        //% block=PowerbrickM2
+        PowerbrickM2 = 1
     }
 
     function setPeriod(periodMicrosecs: number): void {
