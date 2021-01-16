@@ -623,7 +623,7 @@ namespace microX {
      * @param motorNum where motor is connected e.g.: M1A
      * @param speed [-4095...4095] speed
     */
-    //% block="Set motor speed for motor|connected to %motorNum|to speed %speed"
+    //% block="Set motor speed for motor|connected to %motorNum|speed %speed"
     //% blockId="microX_setMotor"
     //% speed.min=-4095 speed.max=4095
     //% group="Motion"
@@ -654,7 +654,7 @@ namespace microX {
      * @param servoNum where servo is connected e.g.: Servo1
      * @param pulseWidth [5...20470] pulse width in uSec
     */
-    //% block="Servo pulse width|connected to %servoNum|to pulse widths (uSec) %pulseWidth"
+    //% block="Servo pulse width|connected to %servoNum|pulse width (uSec) %pulseWidth"
     //% blockId="microX_setServoPulseWidth"
     //% pulseWidth.min=5 pulseWidth.max=20470
     //% inlineInputMode=inline
@@ -675,7 +675,7 @@ namespace microX {
      * @param servoNum where servo is connected e.g.: Servo1
      * @param speed [-1024...1024] speed
     */
-    //% block="Orange/Green Geekservo|connected to %servoNum|to speed %speed"
+    //% block="Orange/Green Geekservo|connected to %servoNum|speed %speed"
     //% blockId="microX_setOrangeGreenGeekservoSpeed"
     //% speed.min=-1024 speed.max=1024
     //% inlineInputMode=inline
@@ -696,7 +696,7 @@ namespace microX {
      * @param servoNum where servo is connected e.g.: Servo1
      * @param degree [-45...225] angle in degrees e.g.: -45, 90, 225
     */
-    //% block="Grey Geekservo|connected to %servoNum|to degree %degree"
+    //% block="Grey Geekservo|connected to %servoNum|degree %degree"
     //% blockId="microX_setGreyGeekservoAngle"
     //% degree.min=-45 degree.max=225
     //% inlineInputMode=inline
@@ -729,7 +729,7 @@ namespace microX {
      * @param servoNum where servo is connected e.g.: Servo1
      * @param degree [0...360] angle in degrees e.g.: 0, 15, 30, 90, 180, 270, 360
     */
-    //% block="LARGE grey Geekservo|connected to %servoNum|to degree %degree"
+    //% block="LARGE grey Geekservo|connected to %servoNum|degree %degree"
     //% blockId="microX_setLargeGreyGeekservoAngle"
     //% degree.min=0 degree.max=360
     //% inlineInputMode=inline
@@ -1079,7 +1079,7 @@ namespace microX {
      * Set volume
      * @param volume volume
      */
-    //% block="Powerbrick MP3 Player set|volume to %volume"
+    //% block="Powerbrick MP3 Player set|volume %volume"
     //% blockId="microX_mp3PlayerSetVolume"
     //% volume.min=0 volume.max=31
     //% group="MP3"
@@ -1177,7 +1177,7 @@ namespace microX {
     /**
      * Set Phase Width Modulation of Powerbrick Gesture+Color sensor's LEDs
      */
-    //% block="Powerbrick Gesture+Color set PWM|%pwm"
+    //% block="Powerbrick Gesture+Color set PWM|phase width %pwm"
     //% blockId="microX_powerbrickGestureColorModuleSetPwm"
     //% group="Sensors"
     //% weight=46
@@ -1190,7 +1190,7 @@ namespace microX {
      * Set Phase Width Modulation of Powerbrick Gesture+Color sensor's LEDs
      * @param ledNumber 0 for all otherwise 1...4
      */
-    //% block="Powerbrick Gesture+Color set LED|ledNumber %ledNumber|on %on"
+    //% block="Powerbrick Gesture+Color set LED|led number %ledNumber|on %on"
     //% ledNumber.min=0 ledNumber.max=4
     //% blockId="microX_powerbrickGestureColorModuleSetLed"
     //% group="Sensors"
@@ -1218,7 +1218,7 @@ namespace microX {
      * @param led3On led3On
      * @param led4On led4On
      */
-    //% block="Powerbrick Gesture+Color set LEDs|%led1On|%led2On|%led3On|%led4On"
+    //% block="Powerbrick Gesture+Color set LEDs|led1 %led1On|led2 %led2On|led3 %led3On|led4 %led4On"
     //% blockId="microX_powerbrickGestureColorModuleSetLeds"
     //% group="Sensors"
     //% weight=48
