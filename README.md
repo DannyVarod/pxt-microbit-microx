@@ -20,8 +20,8 @@ Current license [LGPL v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.e
 2. Create a new project (or open an existing one)
 3. Click on "Advanced" --> "Extensions"
 4. Copy the URL of this repository [https://github.com/DannyVarod/pxt-microbit-microx/](https://github.com/DannyVarod/pxt-microbit-microx/) into the "Search or enter project URL..." box
-5. Click on extension (MicroX)
-6. This extension has now been added to your project, you can find the commands under "MicroX" in the UI (currently works under "JavaScript" and "Python", not under "Blocks").
+5. Click on extension (uxRemotes, uxMotion, uxSensors,  uxDisplays, ...)
+6. This extension has now been added to your project, you can find the commands under "MicroX" in the UI.
 
 ## Currently includes functionality (in development) for:
 
