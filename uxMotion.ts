@@ -2,7 +2,7 @@
  * microX support for motion (motors, servos).
  */
 //% block=uxMotion
-//% color="#303030" weight=48 icon="\uf0e7"
+//% color="#303030" weight=48 icon="\uf085"
 //% groups='["Initialization", "Motors", "Speed Servos", "Angle Servos"]'
 namespace uxMotion {
 

@@ -2,7 +2,7 @@
  * microX support for LED matrices.
  */
 //% block=uxDisplays
-//% color="#303030" weight=46 icon="\uf0e7"
+//% color="#303030" weight=46 icon="\uf0eb"
 //% groups='["Robotbit", "Powerbrick"]'
 namespace uxDisplays {
 

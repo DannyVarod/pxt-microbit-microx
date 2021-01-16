@@ -2,10 +2,10 @@
  * microX support for MP3 players.
  */
 //% block=uxMp3
-//% color="#303030" weight=45 icon="\uf0e7"
+//% color="#303030" weight=45 icon="\uf001"
 //% groups='["Powerbrick"]'
 namespace uxMp3 {
-    
+
     let mp3PlayerStartByte = 0x7e
     let mp3PlayerEndByte = 0xef
 

@@ -2,7 +2,7 @@
  * microX, support for remotes
  */
 //% block=uxRemotes
-//% color="#303030" weight=49 icon="\uf0e7"
+//% color="#303030" weight=49 icon="\uf11b"
 //% groups='["Yahboom"]'
 namespace uxRemotes {
 

@@ -1,11 +1,8 @@
 /**
  * microX support for sensors.
  */
-//% block=ux
-//% color="#303030" weight=50 icon="\uf0e7"
-//% groups='["Remotes", "Motion", "Sensors", "Displays", "MP3"]'
 //% block=uxSensors
-//% color="#303030" weight=47 icon="\uf0e7"
+//% color="#303030" weight=47 icon="\uf06e"
 //% groups='["Distance", "Sound", "Line Trackers", "Light", "Proximity", "Gestures"]'
 namespace uxSensors {
 

@@ -7,6 +7,7 @@
 //% color="#303030" weight=50 icon="\uf0e7"
 //% groups='["Remotes", "Motion", "Sensors", "Displays", "MP3"]'
 namespace ux {
+    
     /**
      * Pins
      */
