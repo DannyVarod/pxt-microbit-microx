@@ -3,104 +3,10 @@
  * If you want support for you hardware added to here, post me the hardware for me to test and use
  * and then either wait for me to have time to learn to use it, or submit a pull request with your code changes.
  */
-//% color="#303030" weight=100 icon="\uf0e7"
-//% groups='["Remote", "Robotbit", "Motion", "Sensors", "Pixels", "MP3"]'
+//% block=ux
+//% color="#303030" weight=50 icon="\uf0e7"
+//% groups='["Robotbit", "Motion", "Sensors", "Pixels", "MP3"]'
 namespace microX {
-
-    const PWM_PCA9685_ADDRESS = 0x40
-
-    let initializedPhaseWidthModulationDriver = false
-    let initializedRobotbit = false
-    let initializedPowerbrickPixels = false
-    let initializedPowerbrickMp3Player = false
-    let initializedYBRemote = false
-
-    let robotbitPixels: RgbMatrix = null
-    let powerblockPixels: RgbMatrix = null
-
-    let usedPrevDistance = false
-    let prevDistance: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-    // const PHASE_WIDTH_PERIOD_MICROSEC = 20000
-    const PHASE_WIDTH_PERIOD_MICROSEC = 20480
-    const PHASE_WIDTH_LEVELS = 4096
-
-    /**
-     * Servo number (1 to 8)
-     */
-    export enum Servo {
-        //% block=Servo1
-        Servo1 = 1,
-        //% block=Servo2
-        Servo2 = 2,
-        //% block=Servo3
-        Servo3 = 3,
-        //% block=Servo4
-        Servo4 = 4,
-        //% block=Servo5
-        Servo5 = 5,
-        //% block=Servo6
-        Servo6 = 6,
-        //% block=Servo7
-        Servo7 = 7,
-        //% block=Servo8
-        Servo8 = 8
-    }
-
-    /**
-     * Motor number
-     */
-    export enum Motor {
-        //% block=RobotbitM1A
-        RobotbitM1A = 0,
-        //% block=RobotbitM1B
-        RobotbitM1B = 1,
-        //% block=RobotbitM2A
-        RobotbitM2A = 2,
-        //% block=RobotbitM2B
-        RobotbitM2B = 3,
-        //% block=PowerblockM1
-        PowerblockM1 = 0,
-        //% block=PowerblockM2
-        PowerblockM2 = 1
-    }
-
-    /**
-     * Button state
-     */
-    export enum ButtonState {
-        //% block=Released
-        Released = 0,
-        //% block=Pressed
-        Pressed = 1
-    }
-
-    /**
-     * Line state
-     */
-    export enum LineState {
-        //% block=White
-        White = 0,
-        //% block=Black
-        Black = 1
-    }
-    
-    /**
-     * YB-EMH02 ver 1.2 remote buttons
-     */
-    export enum YBRemoteButton {
-        //% block=JoystickZ
-        JoystickZ = 8,
-        //% block=B1Red
-        B1Red = 13,
-        //% block=B2Green
-        B2Green = 14,
-        //% block=B3Blue
-        B3Blue = 15,
-        //% block=B4Yellow
-        B4Yellow = 16
-    }
-
     /**
      * Pins
      */
@@ -242,7 +148,7 @@ namespace microX {
         PowerbrickPort7_SerialB = Pin9
     }
 
-    function pinToDigitalPin(pinNumber: PinNumber): DigitalPin {
+    export function pinToDigitalPin(pinNumber: PinNumber): DigitalPin {
         switch (pinNumber) {
             case PinNumber.Pin0: return DigitalPin.P0
             case PinNumber.Pin1: return DigitalPin.P1
@@ -263,7 +169,7 @@ namespace microX {
         }
     }
 
-    function pinToSerialPin(pinNumber: PinNumber): SerialPin {
+    export function pinToSerialPin(pinNumber: PinNumber): SerialPin {
         switch (pinNumber) {
             case PinNumber.Pin0: return SerialPin.P0
             case PinNumber.Pin1: return SerialPin.P1
@@ -278,7 +184,7 @@ namespace microX {
         }
     }
 
-    function pinToAnalogPin(pinNumber: PinNumber): AnalogPin {
+    export function pinToAnalogPin(pinNumber: PinNumber): AnalogPin {
         switch (pinNumber) {
             case PinNumber.Pin0: return AnalogPin.P0
             case PinNumber.Pin1: return AnalogPin.P1
@@ -290,21 +196,7 @@ namespace microX {
         }
     }
 
-    /**
-     * Powerbrick MP3 action (1, 2, 3, 5, 6, 7)
-     */
-    export enum PowerbrickMp3ControlAction {
-        //% block=Play
-        Play = 0xaa,
-        //% block=Stop
-        Stop = 0xab,
-        //% block=Next
-        Next = 0xac,
-        //% block=Prev
-        Prev = 0xad
-    }
-
-    function inRange(x: number, minValue: number, maxValue: number): number {
+    export function inRange(x: number, minValue: number, maxValue: number): number {
         if (x < minValue)
             x = minValue
         else if (x > maxValue)
@@ -312,155 +204,57 @@ namespace microX {
         return x
     }
 
-    /**
-     * Initialize for Kittenbot Robotbit
-     */
-    //% block="Initialize Robotbit"
-    //% blockId="microX_intializeRobotbit"
-    //% group="Robotbit"
-    //% weight=90
-    export function intializeRobotbit(): void {
-        if (initializedRobotbit)
-            return
-        
-        initializePhaseWidthModulationDriver()
-        
-        robotbitPixels = new RgbMatrix(1, 4, PinNumber.Pin16)
-        
-        initializedRobotbit = true
-        
-        // After initializing port set to black to prevent first refresh error
-        setRobotBitAllPixels(0, 0, 0)
-        refreshRobotBitPixels()
-        setRobotBitAllPixels(0, 0, 0)
-        refreshRobotBitPixels()
+    export function i2cwrite(address: number, reg: number, value: number) {
+        let buffer = pins.createBuffer(2)
+        buffer[0] = reg
+        buffer[1] = value
+        pins.i2cWriteBuffer(address, buffer)
     }
 
-    /**
-     * Initialize Kittenbot Powerbrick pixels module
-     * @param pinNumber digital pin number
-     */
-    //% block="Initialize Powerbrick Pixels module connected to|digital pin %pinNumber"
-    //% blockId="microX_intializePowerbrickPixels"
-    //% group="Pixels"
-    //% weight=80
-    export function intializePowerbrickPixels(pinNumber: PinNumber): void {
-        if (initializedPowerbrickPixels || pinNumber == null)
-            return
+    // function i2ccmd(address: number, value: number) {
+    //     let buffer = pins.createBuffer(1)
+    //     buffer[0] = value
+    //     pins.i2cWriteBuffer(address, buffer)
+    // }
 
-        powerblockPixels = new RgbMatrix(8, 8, pinNumber)
+    export function i2cread(address: number, reg: number) {
+        pins.i2cWriteNumber(address, reg, NumberFormat.UInt8BE)
+        let val = pins.i2cReadNumber(address, NumberFormat.UInt8BE)
+        return val
+    }
+}
+
+//% block=uxRemotes
+//% color="#303030" weight=49 icon="\uf0e7"
+//% groups='["Yahboom"]'
+namespace microX_Remotes {
+
+    let initializedYBRemote = false
+    
+    /**
+     * Button state
+     */
+    export enum ButtonState {
+        //% block=Released
+        Released = 0,
+        //% block=Pressed
+        Pressed = 1
+    }
         
-        initializedPowerbrickPixels = true
-        
-        // After initializing port set to black to prevent first refresh error
-        setPowerbrickAllPixels(0, 0, 0)
-        refreshPowerbrickPixels()
-        setPowerbrickAllPixels(0, 0, 0)
-        refreshPowerbrickPixels()
-    }
-
     /**
-     * Initializes a line tracker sensor with 2 channels connected to 2 specific digial pins
-     * @param ch1 digital pin number
-     * @param ch2 digital pin number
+     * YB-EMH02 ver 1.2 remote buttons
      */
-    //% block="Initialize Line Tracker 2CH connected to|digial pin %ch1|digial pin %ch2"
-    //% blockId="microX_initializeLineTracker2Channels"
-    //% group="Sensors"
-    //% weight=82
-    export function initializeLineTracker2Channels(ch1: PinNumber, ch2: PinNumber): void {
-        pins.setPull(pinToDigitalPin(ch1), PinPullMode.PullUp)
-        pins.setPull(pinToDigitalPin(ch2), PinPullMode.PullUp)
-    }
-
-    /**
-     * Initializes a line tracker sensor with 3 channels connected to 3 specific digial pins
-     * @param ch1 digital pin number
-     * @param ch2 digital pin number
-     * @param ch3 digital pin number
-     */
-    //% block="Initialize Line Tracker 3CH connected to|digial pin %ch1|digial pin %ch2|digial pin %ch3"
-    //% blockId="microX_initializeLineTracker3Channels"
-    //% group="Sensors"
-    //% weight=83
-    export function initializeLineTracker3Channels(ch1: PinNumber, ch2: PinNumber, ch3: PinNumber): void {
-        pins.setPull(pinToDigitalPin(ch1), PinPullMode.PullUp)
-        pins.setPull(pinToDigitalPin(ch2), PinPullMode.PullUp)
-        pins.setPull(pinToDigitalPin(ch3), PinPullMode.PullUp)
-    }
-
-    /**
-     * Get line position from 2 channel tracker
-     * @param ch1 digital pin number
-     * @param ch2 digital pin number
-     */
-    //% block="Get line position from 2 channel tracker connected to|digial pin %ch1|digial pin %ch2"
-    //% blockId="microX_getLinePosition2Channels"
-    //% group="Sensors"
-    //% weight=86
-    export function getLinePosition2Channels(ch1: PinNumber, ch2: PinNumber): string {
-        ch1 = 1 - pins.digitalReadPin(pinToDigitalPin(ch1))
-        ch2 = 1 - pins.digitalReadPin(pinToDigitalPin(ch2))
-        if (ch1 == 0 && ch2 == 0)
-            return "?" //  0 0
-        else if (ch1 > ch2)
-            return "<" // 1 0
-        else if (ch1 > ch2)
-            return ">" // 0 1
-        else return "-" // 1 1
-    }
-
-    /**
-     * Get line position from 3 channel tracker
-     * @param ch1 digital pin number
-     * @param ch2 digital pin number
-     * @param ch3 digital pin number
-     */
-    //% block="Get line position from 3 channel tracker connected to|digial pin %ch1|digial pin %ch2|digial pin %ch3"
-    //% blockId="microX_getLinePosition3Channels"
-    //% group="Sensors"
-    //% weight=87
-    export function getLinePosition3Channels(ch1: PinNumber, ch2: PinNumber, ch3: PinNumber): string {
-        ch1 = 1 - pins.digitalReadPin(pinToDigitalPin(ch1))
-        ch2 = 1 - pins.digitalReadPin(pinToDigitalPin(ch2))
-        ch3 = 1 - pins.digitalReadPin(pinToDigitalPin(ch3))
-        if (ch1 == 0 && ch2 == 0 && ch3 == 0)
-            return "?" // 0 0 0
-        else if (ch1 > ch2 && ch2 == ch3)
-            return "<" // 1 0 0
-        else if (ch1 == ch2 && ch2 < ch3)
-            return ">" // 0 0 1
-        else if (ch1 == ch2 && ch2 > ch3)
-            return "\\" // 1 1 0
-        else if (ch1 < ch2 && ch2 == ch3)
-            return "/" // 0 1 1
-        else if (ch1 < ch2 && ch2 > ch3)
-            return "|" // 0 1 0
-        else if (ch1 > ch2 && ch2 < ch3)
-            return "H" // 1 0 1
-        else return "-" // 1 1 1
-    }
-
-    /**
-     * Initializes the MP3 player connected to a specific serial pin (or Powerbrick serial port)
-     * @param serialPinTx serial pin number (transmit)
-     * @param serialPinRx serial pin number (receive)
-     */
-    //% block="Initialize Powerbrick MP3 Player connected to|serial pin (TX) %pinNumber|serial pin (RX) %pinNumber"
-    //% blockId="microX_initializePowerbrickMp3Player"
-    //% group="MP3"
-    //% weight=89
-    export function initializePowerbrickMp3Player(serialPinTx: PinNumber, serialPinRx: PinNumber): void {   
-        if (initializedPowerbrickMp3Player)
-            return
-        
-        let txPin = pinToSerialPin(serialPinTx)
-        let rxPin = pinToSerialPin(serialPinRx)
-        if (txPin == null || rxPin == null)
-            return
-
-        serial.redirect(txPin, rxPin, BaudRate.BaudRate9600)
-        initializedPowerbrickMp3Player = true
+    export enum YBRemoteButton {
+        //% block=JoystickZ
+        JoystickZ = 8,
+        //% block=B1Red
+        B1Red = 13,
+        //% block=B2Green
+        B2Green = 14,
+        //% block=B3Blue
+        B3Blue = 15,
+        //% block=B4Yellow
+        B4Yellow = 16
     }
 
     /**
@@ -468,8 +262,8 @@ namespace microX {
      */
     //% block="Initialize Yahboom remote"
     //% blockId="microX_initializeYahboomRemote"
-    //% group="Remote"
-    //% weight=91
+    //% group="Yahboom"
+    //% weight=99
     export function initializeYahboomRemote(): void {
         if (initializedYBRemote)
             return
@@ -478,7 +272,7 @@ namespace microX {
         pins.setPull(DigitalPin.P14, PinPullMode.PullUp)
         pins.setPull(DigitalPin.P15, PinPullMode.PullUp)
         pins.setPull(DigitalPin.P16, PinPullMode.PullUp)
-        initializePhaseWidthModulationDriver()
+        microX_Motion.initializePhaseWidthModulationDriver()
         initializedYBRemote = true
     }
 
@@ -487,8 +281,8 @@ namespace microX {
      */
     //% block="Yahboom remote X (-1=left to 1=right)"
     //% blockId="microX_joystickX"
-    //% group="Remote"
-    //% weight=70
+    //% group="Yahboom"
+    //% weight=98
     export function joystickX(): number {
         
         // Normalize from [0,1023] to [-512,511]
@@ -507,8 +301,8 @@ namespace microX {
      */
     //% block="Yahboom remote Y (-1=down to 1=up)"
     //% blockId="microX_joystickY"
-    //% group="Remote"
-    //% weight=71
+    //% group="Yahboom"
+    //% weight=97
     export function joystickY() {
         
         // Normalize from [0,1023] to [-512,511]
@@ -527,8 +321,8 @@ namespace microX {
      */
     //% block="On Yahboom remote|button %button|state %state"
     //% blockId="microX_onYahboomRemoteButton"
-    //% group="Remote"
-    //% weight=72
+    //% group="Yahboom"
+    //% weight=96
     export function onYahboomRemoteButton(button: YBRemoteButton, state: ButtonState, body: Action): void {
         
         let pulseValue: PulseValue = PulseValue.Low
@@ -556,49 +350,84 @@ namespace microX {
 
         pins.onPulsed(pin, pulseValue, body)
     }
+}
 
-    function i2cwrite(address: number, reg: number, value: number) {
-        let buffer = pins.createBuffer(2)
-        buffer[0] = reg
-        buffer[1] = value
-        pins.i2cWriteBuffer(address, buffer)
+//% block=uxMotion
+//% color="#303030" weight=48 icon="\uf0e7"
+//% groups='["Initialization", "Motors", "Speed Servos", "Angle Servos"]'
+namespace microX_Motion {
+
+    const PWM_PCA9685_ADDRESS = 0x40
+    
+    // const PHASE_WIDTH_PERIOD_MICROSEC = 20000
+    const PHASE_WIDTH_PERIOD_MICROSEC = 20480
+    const PHASE_WIDTH_LEVELS = 4096
+
+    let initializedPhaseWidthModulationDriver = false
+
+    /**
+     * Servo number (1 to 8)
+     */
+    export enum Servo {
+        //% block=Servo1
+        Servo1 = 1,
+        //% block=Servo2
+        Servo2 = 2,
+        //% block=Servo3
+        Servo3 = 3,
+        //% block=Servo4
+        Servo4 = 4,
+        //% block=Servo5
+        Servo5 = 5,
+        //% block=Servo6
+        Servo6 = 6,
+        //% block=Servo7
+        Servo7 = 7,
+        //% block=Servo8
+        Servo8 = 8
     }
 
-    // function i2ccmd(address: number, value: number) {
-    //     let buffer = pins.createBuffer(1)
-    //     buffer[0] = value
-    //     pins.i2cWriteBuffer(address, buffer)
-    // }
-
-    function i2cread(address: number, reg: number) {
-        pins.i2cWriteNumber(address, reg, NumberFormat.UInt8BE)
-        let val = pins.i2cReadNumber(address, NumberFormat.UInt8BE)
-        return val
+    /**
+     * Motor number
+     */
+    export enum Motor {
+        //% block=RobotbitM1A
+        RobotbitM1A = 0,
+        //% block=RobotbitM1B
+        RobotbitM1B = 1,
+        //% block=RobotbitM2A
+        RobotbitM2A = 2,
+        //% block=RobotbitM2B
+        RobotbitM2B = 3,
+        //% block=PowerblockM1
+        PowerblockM1 = 0,
+        //% block=PowerblockM2
+        PowerblockM2 = 1
     }
 
     function setPeriod(periodMicrosecs: number): void {
         // Constrain the frequency
         let prescale = 25 * periodMicrosecs / PHASE_WIDTH_LEVELS - 1
-        let oldmode = i2cread(PWM_PCA9685_ADDRESS, 0x00)
+        let oldmode = microX.i2cread(PWM_PCA9685_ADDRESS, 0x00)
         let newmode = (oldmode & 0x7f) | 0x10 // sleep
-        i2cwrite(PWM_PCA9685_ADDRESS, 0x00, newmode) // go to sleep
-        i2cwrite(PWM_PCA9685_ADDRESS, 0xfe, prescale) // set the prescaler
-        i2cwrite(PWM_PCA9685_ADDRESS, 0x00, oldmode)
+        microX.i2cwrite(PWM_PCA9685_ADDRESS, 0x00, newmode) // go to sleep
+        microX.i2cwrite(PWM_PCA9685_ADDRESS, 0xfe, prescale) // set the prescaler
+        microX.i2cwrite(PWM_PCA9685_ADDRESS, 0x00, oldmode)
         control.waitMicros(5000)
-        i2cwrite(PWM_PCA9685_ADDRESS, 0x00, oldmode | 0xa1)
+        microX.i2cwrite(PWM_PCA9685_ADDRESS, 0x00, oldmode | 0xa1)
     }
-
+    
     /**
      * Initialize the phase width modulation driver used for servos and motors
      */
     //% block="Initialize Phase Width Modulation Driver (for servos and motors)"
     //% blockId="microX_initializePhaseWidthModulationDriver"
-    //% group="Motion"
-    //% weight=92
+    //% group="Initialization"
+    //% weight=89
     export function initializePhaseWidthModulationDriver(): void {
         if (initializedPhaseWidthModulationDriver)
             return
-        i2cwrite(PWM_PCA9685_ADDRESS, 0x00, 0x00)
+        microX.i2cwrite(PWM_PCA9685_ADDRESS, 0x00, 0x00)
         // Operate at 50Hz
         setPeriod(PHASE_WIDTH_PERIOD_MICROSEC)
         initializedPhaseWidthModulationDriver = true
@@ -627,8 +456,8 @@ namespace microX {
     //% block="Set motor speed for motor|connected to %motorNum|speed %speed"
     //% blockId="microX_setMotor"
     //% speed.min=-4095 speed.max=4095
-    //% group="Motion"
-    //% weight=60
+    //% group="Motors"
+    //% weight=88
     export function setMotor(motorNum: Motor, speed: number): void {
         if (motorNum < 0 || 3 < motorNum)
             return
@@ -636,7 +465,7 @@ namespace microX {
         initializePhaseWidthModulationDriver()
         
         let speed1 = speed
-        speed1 = inRange(speed1, -PHASE_WIDTH_LEVELS+1, PHASE_WIDTH_LEVELS-1)
+        speed1 = microX.inRange(speed1, -PHASE_WIDTH_LEVELS+1, PHASE_WIDTH_LEVELS-1)
 
         let speed2 = 0
         if (speed1 < 0) {
@@ -660,13 +489,13 @@ namespace microX {
     //% pulseWidth.min=5 pulseWidth.max=20470
     //% inlineInputMode=inline
     //% advanced=true
-    //% weight=61
+    //% weight=87
     export function setServoPulseWidth(servoNum: Servo, pulseWidth: number): void {
         
         initializePhaseWidthModulationDriver()
         // 50Hz --> Full cycle is 20mS (20000uS), normalize this from range 0...20000uS to 0...4096
         let value = Math.round(pulseWidth * PHASE_WIDTH_LEVELS / PHASE_WIDTH_PERIOD_MICROSEC)
-        value = inRange(value, 1, PHASE_WIDTH_LEVELS - 1)
+        value = microX.inRange(value, 1, PHASE_WIDTH_LEVELS - 1)
         // Servos are mapped to channels [8, 9, 10, 11, 12, 13, 14, 15]
         setPwm(servoNum + 7, 0, value)
     }
@@ -680,15 +509,15 @@ namespace microX {
     //% blockId="microX_setOrangeGreenGeekservoSpeed"
     //% speed.min=-1024 speed.max=1024
     //% inlineInputMode=inline
-    //% group="Motion"
-    //% weight=62
+    //% group="Speed Servos"
+    //% weight=86
     export function setOrangeGreenGeekservoSpeed(servoNum: Servo, speed: number): void {
         // For 20000uSec cycle: reverse=500uS-1500uS, 0: 1500uS, forward=1500uS-2500uS
         let zeroPulse = PHASE_WIDTH_PERIOD_MICROSEC * 3 / 40
         let minPulse = PHASE_WIDTH_PERIOD_MICROSEC / 40
         let maxPulse = PHASE_WIDTH_PERIOD_MICROSEC  / 8
         let pulseWidth = zeroPulse + speed
-        pulseWidth = inRange(pulseWidth, minPulse, maxPulse)
+        pulseWidth = microX.inRange(pulseWidth, minPulse, maxPulse)
         setServoPulseWidth(servoNum, pulseWidth)
     }
 
@@ -701,8 +530,8 @@ namespace microX {
     //% blockId="microX_setGreyGeekservoAngle"
     //% degree.min=-45 degree.max=225
     //% inlineInputMode=inline
-    //% group="Motion"
-    //% weight=63
+    //% group="Angle Servos"
+    //% weight=85
     export function setGreyGeekservoAngle(servoNum: Servo, degree: number): void {
         // For 20000uSec cycle: -45deg: 600uS, 225deg: 2400uS (6.6667 uS/deg = 20.0/3.0)
         let degreeRange = 270
@@ -721,7 +550,7 @@ namespace microX {
         let minPulse = PHASE_WIDTH_PERIOD_MICROSEC * 3 / 100
         let maxPulse = PHASE_WIDTH_PERIOD_MICROSEC * 6 / 50
         let pulseWidth = degree_norm * PHASE_WIDTH_PERIOD_MICROSEC * phaseRangePercent / 100 / degreeRange + minPulse
-        pulseWidth = inRange(pulseWidth, minPulse, maxPulse)
+        pulseWidth = microX.inRange(pulseWidth, minPulse, maxPulse)
         setServoPulseWidth(servoNum, pulseWidth)
     }
 
@@ -734,8 +563,8 @@ namespace microX {
     //% blockId="microX_setLargeGreyGeekservoAngle"
     //% degree.min=0 degree.max=360
     //% inlineInputMode=inline
-    //% group="Motion"
-    //% weight=64
+    //% group="Angle Servos"
+    //% weight=84
     export function setLargeGreyGeekservoAngle(servoNum: Servo, degree: number): void {
         // 0deg: 512uS, 360deg: 2512uS, max: 2560us
         
@@ -745,186 +574,21 @@ namespace microX {
             degree_norm += 360
 
         let pulseWidth = degree_norm * PHASE_WIDTH_LEVELS * 125 / 256 / 360 + (PHASE_WIDTH_LEVELS / 8)
-        pulseWidth = inRange(pulseWidth, PHASE_WIDTH_LEVELS / 8, PHASE_WIDTH_LEVELS * 5 / 8)
+        pulseWidth = microX.inRange(pulseWidth, PHASE_WIDTH_LEVELS / 8, PHASE_WIDTH_LEVELS * 5 / 8)
         setServoPulseWidth(servoNum, pulseWidth)
     }
+}
 
-    /**
-     * Abstraction for led matrices
-     */
-    export class RgbMatrix {
-        rows: number
-        columns: number
-        digitalPin: DigitalPin
-        displayBuffer: Buffer
+//% block=uxSensors
+//% color="#303030" weight=47 icon="\uf0e7"
+//% groups='["Distance", "Sound", "Line Trackers", "Light", "Proximity", "Gestures"]'
+namespace microX_Sensors {
 
-        constructor(rows: number, columns: number, pinNumber: PinNumber) {
-            this.rows = rows
-            this.columns = columns
-            this.digitalPin = pinToDigitalPin(pinNumber)
-            this.displayBuffer = pins.createBuffer(rows * columns * 3)
-        }
-    
-        /**
-         * Set powerbrick all pixels' color
-         * @param r pixel red intensity [0,255]
-         * @param g pixel green intensity [0,255]
-         * @param b pixel blue intensity [0,255]
-        */
-        public setAllPixels(r: number, g: number, b: number): void {
-            r = inRange(r, 0, 255)
-            g = inRange(g, 0, 255)
-            b = inRange(b, 0, 255)
-            for (let y = 0; y < this.rows; y++) {
-                for (let x = 0; x < this.columns; x++) {
-                    this._setPixel(y, x, r, g, b)
-                }
-            }
-        }
-        
-        /**
-         * Set pixel color
-         * @param y pixel y-coordinate [0,7]
-         * @param x pixel y-coordinate [0,7]
-         * @param r pixel red intensity [0,255]
-         * @param g pixel green intensity [0,255]
-         * @param b pixel blue intensity [0,255]
-        */
-       public setPixel(y: number, x: number, r: number, g: number, b: number): void {
-            y = inRange(y, 0, this.rows - 1)
-            x = inRange(x, 0, this.columns - 1)
-            r = inRange(r, 0, 255)
-            g = inRange(g, 0, 255)
-            b = inRange(b, 0, 255)
-            this._setPixel(y, x, r, g, b)
-        }
-        
-        private _setPixel(y: number, x: number, r: number, g: number, b: number): void {
-            // 3 channels/sub-pixels (RGB) per pixel
-            let pixelOffset = 0
-            pixelOffset = (y * this.columns + x) * 3
-            this.displayBuffer[pixelOffset + 0] = g
-            this.displayBuffer[pixelOffset + 1] = r
-            this.displayBuffer[pixelOffset + 2] = b
-        }
+    let usedPrevDistance = false
+    let prevDistance: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-        /**
-         * Refresh pixels
-        */
-        public refresh() {
-            ws2812b.sendBuffer(this.displayBuffer, this.digitalPin)
-        }
-
-    }
-
-    /**
-     * Set powerbrick all pixels color
-     * @param r pixel red intensity [0,255]
-     * @param g pixel green intensity [0,255]
-     * @param b pixel blue intensity [0,255]
-    */
-    //% block="Set Powerbrick pixels to color|red %r|green %g|blue %b"
-    //% blockId="microX_setPowerbrickAllPixels"
-    //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
-    //% inlineInputMode=inline
-    //% group="Pixels"
-    //% weight=30
-    export function setPowerbrickAllPixels(r: number, g: number, b: number): void {
-        if (initializedPowerbrickPixels == false)
-            return
-        powerblockPixels.setAllPixels(r, g, b)
-    }
-    
-    /**
-     * Set powerbrick pixel color
-     * @param y pixel y-coordinate [0,7]
-     * @param x pixel x-coordinate [0,7]
-     * @param r pixel red intensity [0,255]
-     * @param g pixel green intensity [0,255]
-     * @param b pixel blue intensity [0,255]
-    */
-    //% block="Set Powerbrick pixel to color|y %y|x %x|red %r|green %g|blue %b"
-    //% blockId="microX_setPowerbrickPixel"
-    //% y.min=0 y.max=7 x.min=0 x.max=7 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
-    //% inlineInputMode=inline
-    //% group="Pixels"
-    //% weight=31
-    export function setPowerbrickPixel(y: number, x: number, r: number, g: number, b: number): void {
-        if (initializedPowerbrickPixels == false)
-            return
-        // The pixels are wired up in a weird order, workaround:
-        if (x % 2 == 0)
-            powerblockPixels.setPixel(x, y, r, g, b)
-        else
-            powerblockPixels.setPixel(x, 7 - y, r, g, b)
-    }
-
-    /**
-     * Refresh powerbrick pixels
-    */
-    //% block="Refresh/update Powerbrick pixels"
-    //% blockId="microX_refreshPowerbrickPixels"
-    //% group="Pixels"
-    //% weight=32
-    export function refreshPowerbrickPixels() {
-        if (initializedPowerbrickPixels == false)
-            return
-        powerblockPixels.refresh()
-    }
-
-    /**
-     * Set robotbit all pixels color
-     * @param r pixel red intensity [0,255]
-     * @param g pixel green intensity [0,255]
-     * @param b pixel blue intensity [0,255]
-    */
-    //% block="Set Robotbit pixels to color|red %r|green %g|blue %b"
-    //% blockId="microX_setRobotBitAllPixels"
-    //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
-    //% inlineInputMode=inline
-    //% group="Pixels"
-    //% weight=33
-    export function setRobotBitAllPixels(r: number, g: number, b: number): void {
-        if (initializedRobotbit == false)
-            return
-        robotbitPixels.setAllPixels(r, g, b)
-    }
-    
-    /**
-     * Set robotbit pixel color
-     * @param x pixel x-coordinate [0,3]
-     * @param r pixel red intensity [0,255]
-     * @param g pixel green intensity [0,255]
-     * @param b pixel blue intensity [0,255]
-    */
-    //% block="Set Robotbit pixel to color|x %x|red %r|green %g|blue %b"
-    //% blockId="microX_setRobotBitPixel"
-    //% x.min=0 x.max=3 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
-    //% inlineInputMode=inline
-    //% group="Pixels"
-    //% weight=34
-    export function setRobotBitPixel(x: number, r: number, g: number, b: number): void {
-        if (initializedRobotbit == false)
-            return
-        robotbitPixels.setPixel(0, x, r, g, b)
-    }
-
-    /**
-     * Refresh robotbit pixels
-    */
-    //% block="Refresh/update Robotbit pixels"
-    //% blockId="microX_refreshRobotBitPixels"
-    //% port.min=0 port.max=6
-    //% group="Pixels"
-    //% weight=35
-    export function refreshRobotBitPixels() {
-        if (initializedRobotbit == false)
-            return
-        robotbitPixels.refresh()
-    }
-
-    function _ultrasonicDistance(pinNumber: PinNumber, pullMode: PinPullMode, mult: number, div: number, attempt: number): number {
-        let pin = pinToDigitalPin(pinNumber)
+    function _ultrasonicDistance(pinNumber: microX.PinNumber, pullMode: PinPullMode, mult: number, div: number, attempt: number): number {
+        let pin = microX.pinToDigitalPin(pinNumber)
         if (pin == null)
             return 0
 
@@ -968,9 +632,9 @@ namespace microX {
      */
     //% block="Ultrasonic distance of cat-sensor connected to|digital pin %pinNumber"
     //% blockId="microX_ultrasonicDistanceCatShapedSensor"
-    //% group="Sensors"
-    //% weight=40
-    export function ultrasonicDistanceCatShapedSensor(pinNumber: PinNumber): number {
+    //% group="Distance"
+    //% weight=79
+    export function ultrasonicDistanceCatShapedSensor(pinNumber: microX.PinNumber): number {
         return _ultrasonicDistance(pinNumber, PinPullMode.PullDown, 21, 800, 0)
     }
 
@@ -980,9 +644,9 @@ namespace microX {
      */
     //% block="Ultrasonic distance of Powerbrick module connected to|digital pin %pinNumber"
     //% blockId="microX_ultrasonicDistancePowerblockUltrasonicModule"
-    //% group="Sensors"
-    //% weight=41
-    export function ultrasonicDistancePowerblockUltrasonicModule(pinNumber: PinNumber): number {
+    //% group="Distance"
+    //% weight=81
+    export function ultrasonicDistancePowerblockUltrasonicModule(pinNumber: microX.PinNumber): number {
         return _ultrasonicDistance(pinNumber, PinPullMode.PullNone, 10, 348, 0)
     }
 
@@ -992,10 +656,10 @@ namespace microX {
      */
     //% block="Sound level of Powerbrick module connected to|analog pin %pinNumber"
     //% blockId="microX_soundLevelPowerblockUltrasonicModule"
-    //% group="Sensors"
-    //% weight=42
-    export function soundLevelPowerblockUltrasonicModule(pinNumber: PinNumber): number {
-        let pin = pinToAnalogPin(pinNumber)
+    //% group="Sound"
+    //% weight=78
+    export function soundLevelPowerblockUltrasonicModule(pinNumber: microX.PinNumber): number {
+        let pin = microX.pinToAnalogPin(pinNumber)
         if (pin == null)
             return 0
         return pins.analogReadPin(pin)
@@ -1007,14 +671,559 @@ namespace microX {
      */
     //% block="Ultrasonic distance of cat-sensor with LED-ears connected to|digital pin %pinNumber"
     //% blockId="microX_ultrasonicDistanceCatShapedSensorWithLeds"
-    //% group="Sensors"
-    //% weight=43
-    export function ultrasonicDistanceCatShapedSensorWithLeds(pinNumber: PinNumber): number {
+    //% group="Distance"
+    //% weight=76
+    export function ultrasonicDistanceCatShapedSensorWithLeds(pinNumber: microX.PinNumber): number {
         return _ultrasonicDistance(pinNumber, PinPullMode.PullNone, 9, 348, 0)
     }
 
+    /**
+     * Line state
+     */
+    export enum LineState {
+        //% block=White
+        White = 0,
+        //% block=Black
+        Black = 1
+    }
+
+    /**
+     * Initializes a line tracker sensor with 2 channels connected to 2 specific digial pins
+     * @param ch1 digital pin number
+     * @param ch2 digital pin number
+     */
+    //% block="Initialize Line Tracker 2CH connected to|digial pin %ch1|digial pin %ch2"
+    //% blockId="microX_initializeLineTracker2Channels"
+    //% group="Line Trackers"
+    //% weight=75
+    export function initializeLineTracker2Channels(ch1: microX.PinNumber, ch2: microX.PinNumber): void {
+        pins.setPull(microX.pinToDigitalPin(ch1), PinPullMode.PullUp)
+        pins.setPull(microX.pinToDigitalPin(ch2), PinPullMode.PullUp)
+    }
+
+    /**
+     * Initializes a line tracker sensor with 3 channels connected to 3 specific digial pins
+     * @param ch1 digital pin number
+     * @param ch2 digital pin number
+     * @param ch3 digital pin number
+     */
+    //% block="Initialize Line Tracker 3CH connected to|digial pin %ch1|digial pin %ch2|digial pin %ch3"
+    //% blockId="microX_initializeLineTracker3Channels"
+    //% group="Line Trackers"
+    //% weight=74
+    export function initializeLineTracker3Channels(ch1: microX.PinNumber, ch2: microX.PinNumber, ch3: microX.PinNumber): void {
+        pins.setPull(microX.pinToDigitalPin(ch1), PinPullMode.PullUp)
+        pins.setPull(microX.pinToDigitalPin(ch2), PinPullMode.PullUp)
+        pins.setPull(microX.pinToDigitalPin(ch3), PinPullMode.PullUp)
+    }
+
+    /**
+     * Get line position from 2 channel tracker
+     * @param ch1 digital pin number
+     * @param ch2 digital pin number
+     */
+    //% block="Get line position from 2 channel tracker connected to|digial pin %ch1|digial pin %ch2"
+    //% blockId="microX_getLinePosition2Channels"
+    //% group="Line Trackers"
+    //% weight=73
+    export function getLinePosition2Channels(ch1: microX.PinNumber, ch2: microX.PinNumber): string {
+        ch1 = 1 - pins.digitalReadPin(microX.pinToDigitalPin(ch1))
+        ch2 = 1 - pins.digitalReadPin(microX.pinToDigitalPin(ch2))
+        if (ch1 == 0 && ch2 == 0)
+            return "?" //  0 0
+        else if (ch1 > ch2)
+            return "<" // 1 0
+        else if (ch1 > ch2)
+            return ">" // 0 1
+        else return "-" // 1 1
+    }
+
+    /**
+     * Get line position from 3 channel tracker
+     * @param ch1 digital pin number
+     * @param ch2 digital pin number
+     * @param ch3 digital pin number
+     */
+    //% block="Get line position from 3 channel tracker connected to|digial pin %ch1|digial pin %ch2|digial pin %ch3"
+    //% blockId="microX_getLinePosition3Channels"
+    //% group="Line Trackers"
+    //% weight=72
+    export function getLinePosition3Channels(ch1: microX.PinNumber, ch2: microX.PinNumber, ch3: microX.PinNumber): string {
+        ch1 = 1 - pins.digitalReadPin(microX.pinToDigitalPin(ch1))
+        ch2 = 1 - pins.digitalReadPin(microX.pinToDigitalPin(ch2))
+        ch3 = 1 - pins.digitalReadPin(microX.pinToDigitalPin(ch3))
+        if (ch1 == 0 && ch2 == 0 && ch3 == 0)
+            return "?" // 0 0 0
+        else if (ch1 > ch2 && ch2 == ch3)
+            return "<" // 1 0 0
+        else if (ch1 == ch2 && ch2 < ch3)
+            return ">" // 0 0 1
+        else if (ch1 == ch2 && ch2 > ch3)
+            return "\\" // 1 1 0
+        else if (ch1 < ch2 && ch2 == ch3)
+            return "/" // 0 1 1
+        else if (ch1 < ch2 && ch2 > ch3)
+            return "|" // 0 1 0
+        else if (ch1 > ch2 && ch2 < ch3)
+            return "H" // 1 0 1
+        else return "-" // 1 1 1
+    }
+
+    /**
+     * Powerbrick gesture and color sensor mode
+     */
+    enum PowerbrickGestureColorSensorMode {
+        //% block=Ambient
+        Ambient = 1,
+        //% block=Proximity
+        Proximity = 2,
+        //% block=Gesture
+        Gesture = 3,
+        //% block=Active
+        Active = 4
+    }
+
+    const KC_ADDR = 0x6D
+    const KC_VERSION = 0x00
+    const KC_MODE = 1
+    const KC_READCOLOR = 21
+    const KC_READCOLORRAW = 23
+    const KC_LEDPWM = 24
+    const KC_LEDONOFF = 25
+    const KC_LEDBIT = 26
+    const KC_PROXIMITY = 31
+    const KC_GESTURE = 41
+
+    function powerbrickGestureColorModuleSetMode(mode: PowerbrickGestureColorSensorMode): void {
+        microX.i2cwrite(KC_ADDR, KC_MODE, mode);
+    }
+
+    /**
+     * Get brightness using Powerbrick Gesture+Color sensor
+     */
+    //% block="Powerbrick Gesture+Color get brightness"
+    //% blockId="microX_powerbrickGestureColorModuleGetBrightness"
+    //% group="Light"
+    //% weight=71
+    export function powerbrickGestureColorModuleGetBrightness(): number {
+        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Ambient)
+        pins.i2cWriteNumber(KC_ADDR, KC_READCOLOR, NumberFormat.UInt8BE)
+        let buff = pins.i2cReadBuffer(KC_ADDR, 2)
+        return buff[1]
+    }
+
+    /**
+     * Get hue using Powerbrick Gesture+Color sensor
+     */
+    //% block="Powerbrick Gesture+Color get hue"
+    //% blockId="microX_powerbrickGestureColorModuleGetHue"
+    //% group="Light"
+    //% weight=70
+    export function powerbrickGestureColorModuleGetHue(): number {
+        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Ambient)
+        pins.i2cWriteNumber(KC_ADDR, KC_READCOLOR, NumberFormat.UInt8BE)
+        let buff = pins.i2cReadBuffer(KC_ADDR, 2)
+        return buff[0] * 2
+    }
+
+    /**
+     * Get RGB using Powerbrick Gesture+Color sensor
+     */
+    //% block="Powerbrick Gesture+Color get RGB"
+    //% blockId="microX_powerbrickGestureColorModuleGetRgb"
+    //% group="Light"
+    //% weight=69
+    export function powerbrickGestureColorModuleGetRgb(): string {
+        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Active)
+        pins.i2cWriteNumber(KC_ADDR, KC_READCOLORRAW, NumberFormat.UInt8BE);
+        let buff = pins.i2cReadBuffer(KC_ADDR, 4)
+        return numberToHex(buff[0]) + numberToHex(buff[1]) + numberToHex(buff[2]) + numberToHex(buff[3])
+    }
+
+    /**
+     * Set LED of Powerbrick Gesture+Color sensor on/off
+     * @param ledNumber 0 for all otherwise 1...4
+     */
+    //% block="Powerbrick Gesture+Color set LED|led number %ledNumber|on %on"
+    //% ledNumber.min=0 ledNumber.max=4
+    //% blockId="microX_powerbrickGestureColorModuleSetLed"
+    //% group="Proximity"
+    //% weight=68
+    export function powerbrickGestureColorModuleSetLed(ledNumber: number, on: boolean): void {
+        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Active)
+        if (ledNumber < 0 || ledNumber > 4)
+            return
+        let buf = pins.createBuffer(3)
+        buf[0] = KC_LEDONOFF
+        buf[1] = ledNumber
+        buf[2] = bool2Num(on)
+        pins.i2cWriteBuffer(KC_ADDR, buf)
+        basic.pause(1)
+    }
+
+    /**
+     * Set Phase Width Modulation of Powerbrick Gesture+Color sensor's LEDs
+     * @param led1On led1On
+     * @param led2On led2On
+     * @param led3On led3On
+     * @param led4On led4On
+     */
+    //% block="Powerbrick Gesture+Color set LEDs|led1 %led1On|led2 %led2On|led3 %led3On|led4 %led4On"
+    //% blockId="microX_powerbrickGestureColorModuleSetLeds"
+    //% group="Proximity"
+    //% weight=67
+    export function powerbrickGestureColorModuleSetLeds(led1On: boolean, led2On: boolean, led3On: boolean, led4On: boolean): void {
+        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Proximity)
+        let buf = pins.createBuffer(2)
+        buf[0] = KC_LEDBIT
+        buf[1] = bool2Num(led1On) + (bool2Num(led2On) << 1) + (bool2Num(led3On) << 2) + (bool2Num(led4On) << 3)
+        pins.i2cWriteBuffer(KC_ADDR, buf)
+        basic.pause(1)
+    }
+
+    /**
+     * Set Phase Width Modulation of Powerbrick Gesture+Color sensor's LEDs
+     */
+    //% block="Powerbrick Gesture+Color set PWM|phase width %pwm"
+    //% blockId="microX_powerbrickGestureColorModuleSetPwm"
+    //% group="Proximity"
+    //% weight=66
+    export function powerbrickGestureColorModuleSetPwm(pwm: number): void {
+        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Active)
+        microX.i2cwrite(KC_ADDR, KC_LEDPWM, pwm);
+    }
+
+    function bool2Num(b: boolean): number {
+        return b == true ? 1 : 0
+    }
+
+    /**
+     * Get Proximity using Powerbrick Gesture+Color sensor
+     */
+    //% block="Powerbrick Gesture+Color get proximity"
+    //% blockId="microX_powerbrickGestureColorModuleGetProximity"
+    //% group="Proximity"
+    //% weight=65
+    export function powerbrickGestureColorModuleGetProximity(): number {
+        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Proximity)
+        return microX.i2cread(KC_ADDR, KC_PROXIMITY)
+    }
+
+    /**
+     * Get gesture using Powerbrick Gesture+Color sensor
+     */
+    //% block="Powerbrick Gesture+Color get gesture"
+    //% blockId="microX_powerbrickGestureColorModuleGetGesture"
+    //% group="Gestures"
+    //% weight=64
+    export function powerbrickGestureColorModuleGetGesture(): number {
+        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Gesture)
+        return microX.i2cread(KC_ADDR, KC_GESTURE)
+    }
+
+    function hexToNumber(h: string, offset: number): number {
+        return ((h.charCodeAt(offset) - 0x30) << 4) + h.charCodeAt(offset + 1) - 0x30
+    }
+
+    function numberToHex(n: number): string {
+        return String.fromCharCode((n & 0xf0 >> 4) + 0x30) + String.fromCharCode((n & 0xf) + 0x30)
+    }
+
+    export function rgbPixelToRed(rgb: string): number {
+        return hexToNumber(rgb, 0)
+    }
+
+    export function rgbPixelToGreen(rgb: string): number {
+        return hexToNumber(rgb, 2)
+    }
+
+    export function rgbPixelToBlue(rgb: string): number {
+        return hexToNumber(rgb, 4)
+    }
+
+    export function redGreenBlueToRgbPixel(red: number, green: number, blue: number): string {
+        let result = numberToHex(red) + numberToHex(green) + numberToHex(blue)
+        return result
+    }
+}
+
+//% block=uxDisplays
+//% color="#303030" weight=46 icon="\uf0e7"
+//% groups='["Robotbit", "Powerbrick"]'
+namespace microX_Displays {
+
+    let robotbitPixels: RgbMatrix = null
+    let powerbrickPixels: RgbMatrix = null
+
+    let initializedRobotbitPixels = false
+    let initializedPowerbrickPixels = false
+
+    /**
+     * Abstraction for led matrices
+     */
+    export class RgbMatrix {
+        rows: number
+        columns: number
+        digitalPin: DigitalPin
+        displayBuffer: Buffer
+
+        constructor(rows: number, columns: number, pinNumber: microX.PinNumber) {
+            this.rows = rows
+            this.columns = columns
+            this.digitalPin = microX.pinToDigitalPin(pinNumber)
+            this.displayBuffer = pins.createBuffer(rows * columns * 3)
+        }
+    
+        /**
+         * Set powerbrick all pixels' color
+         * @param r pixel red intensity [0,255]
+         * @param g pixel green intensity [0,255]
+         * @param b pixel blue intensity [0,255]
+        */
+        public setAllPixels(r: number, g: number, b: number): void {
+            r = microX.inRange(r, 0, 255)
+            g = microX.inRange(g, 0, 255)
+            b = microX.inRange(b, 0, 255)
+            for (let y = 0; y < this.rows; y++) {
+                for (let x = 0; x < this.columns; x++) {
+                    this._setPixel(y, x, r, g, b)
+                }
+            }
+        }
+        
+        /**
+         * Set pixel color
+         * @param y pixel y-coordinate [0,7]
+         * @param x pixel y-coordinate [0,7]
+         * @param r pixel red intensity [0,255]
+         * @param g pixel green intensity [0,255]
+         * @param b pixel blue intensity [0,255]
+        */
+       public setPixel(y: number, x: number, r: number, g: number, b: number): void {
+            y = microX.inRange(y, 0, this.rows - 1)
+            x = microX.inRange(x, 0, this.columns - 1)
+            r = microX.inRange(r, 0, 255)
+            g = microX.inRange(g, 0, 255)
+            b = microX.inRange(b, 0, 255)
+            this._setPixel(y, x, r, g, b)
+        }
+        
+        private _setPixel(y: number, x: number, r: number, g: number, b: number): void {
+            // 3 channels/sub-pixels (RGB) per pixel
+            let pixelOffset = 0
+            pixelOffset = (y * this.columns + x) * 3
+            this.displayBuffer[pixelOffset + 0] = g
+            this.displayBuffer[pixelOffset + 1] = r
+            this.displayBuffer[pixelOffset + 2] = b
+        }
+
+        /**
+         * Refresh pixels
+        */
+        public refresh() {
+            ws2812b.sendBuffer(this.displayBuffer, this.digitalPin)
+        }
+
+    }
+
+    /**
+     * Initialize Kittenbot Robotbit pixels
+     * @param pinNumber digital pin number
+     */
+    //% block="Initialize Robotbit Pixels"
+    //% blockId="microX_intializeRobotbitPixels"
+    //% group="Robotbit"
+    //% weight=49
+    export function intializeRobotbitPixels(): void {
+        if (initializedRobotbitPixels)
+            return
+        
+        robotbitPixels = new RgbMatrix(1, 4, microX.PinNumber.Pin16)
+        initializedRobotbitPixels = true
+
+        // After initializing port set to black to prevent first refresh error
+        setRobotBitAllPixels(0, 0, 0)
+        refreshRobotBitPixels()
+        setRobotBitAllPixels(0, 0, 0)
+        refreshRobotBitPixels()
+    }
+
+    /**
+     * Set robotbit all pixels color
+     * @param r pixel red intensity [0,255]
+     * @param g pixel green intensity [0,255]
+     * @param b pixel blue intensity [0,255]
+    */
+    //% block="Set Robotbit pixels to color|red %r|green %g|blue %b"
+    //% blockId="microX_setRobotBitAllPixels"
+    //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
+    //% inlineInputMode=inline
+    //% group="Robotbit"
+    //% weight=48
+    export function setRobotBitAllPixels(r: number, g: number, b: number): void {
+        if (initializedRobotbitPixels == false)
+            return
+        robotbitPixels.setAllPixels(r, g, b)
+    }
+    
+    /**
+     * Set robotbit pixel color
+     * @param x pixel x-coordinate [0,3]
+     * @param r pixel red intensity [0,255]
+     * @param g pixel green intensity [0,255]
+     * @param b pixel blue intensity [0,255]
+    */
+    //% block="Set Robotbit pixel to color|x %x|red %r|green %g|blue %b"
+    //% blockId="microX_setRobotBitPixel"
+    //% x.min=0 x.max=3 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
+    //% inlineInputMode=inline
+    //% group="Robotbit"
+    //% weight=47
+    export function setRobotBitPixel(x: number, r: number, g: number, b: number): void {
+        if (initializedRobotbitPixels == false)
+            return
+        robotbitPixels.setPixel(0, x, r, g, b)
+    }
+
+    /**
+     * Refresh robotbit pixels
+    */
+    //% block="Refresh/update Robotbit pixels"
+    //% blockId="microX_refreshRobotBitPixels"
+    //% port.min=0 port.max=6
+    //% group="Robotbit"
+    //% weight=46
+    export function refreshRobotBitPixels() {
+        if (initializedRobotbitPixels == false)
+            return
+        robotbitPixels.refresh()
+    }
+    
+    /**
+     * Initialize Kittenbot Powerbrick pixels module
+     * @param pinNumber digital pin number
+     */
+    //% block="Initialize Powerbrick Pixels module connected to|digital pin %pinNumber"
+    //% blockId="microX_intializePowerbrickPixels"
+    //% group="Powerbrick"
+    //% weight=45
+    export function intializePowerbrickPixels(pinNumber: microX.PinNumber): void {
+        if (initializedPowerbrickPixels || pinNumber == null)
+            return
+
+        powerbrickPixels = new RgbMatrix(8, 8, pinNumber)
+        
+        initializedPowerbrickPixels = true
+        
+        // After initializing port set to black to prevent first refresh error
+        setPowerbrickAllPixels(0, 0, 0)
+        refreshPowerbrickPixels()
+        setPowerbrickAllPixels(0, 0, 0)
+        refreshPowerbrickPixels()
+    }
+
+    /**
+     * Set powerbrick all pixels color
+     * @param r pixel red intensity [0,255]
+     * @param g pixel green intensity [0,255]
+     * @param b pixel blue intensity [0,255]
+    */
+    //% block="Set Powerbrick pixels to color|red %r|green %g|blue %b"
+    //% blockId="microX_setPowerbrickAllPixels"
+    //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
+    //% inlineInputMode=inline
+    //% group="Powerbrick"
+    //% weight=44
+    export function setPowerbrickAllPixels(r: number, g: number, b: number): void {
+        if (initializedPowerbrickPixels == false)
+            return
+        powerbrickPixels.setAllPixels(r, g, b)
+    }
+    
+    /**
+     * Set powerbrick pixel color
+     * @param y pixel y-coordinate [0,7]
+     * @param x pixel x-coordinate [0,7]
+     * @param r pixel red intensity [0,255]
+     * @param g pixel green intensity [0,255]
+     * @param b pixel blue intensity [0,255]
+    */
+    //% block="Set Powerbrick pixel to color|y %y|x %x|red %r|green %g|blue %b"
+    //% blockId="microX_setPowerbrickPixel"
+    //% y.min=0 y.max=7 x.min=0 x.max=7 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
+    //% inlineInputMode=inline
+    //% group="Powerbrick"
+    //% weight=43
+    export function setPowerbrickPixel(y: number, x: number, r: number, g: number, b: number): void {
+        if (initializedPowerbrickPixels == false)
+            return
+        // The pixels are wired up in a weird order, workaround:
+        if (x % 2 == 0)
+            powerbrickPixels.setPixel(x, y, r, g, b)
+        else
+            powerbrickPixels.setPixel(x, 7 - y, r, g, b)
+    }
+
+    /**
+     * Refresh powerbrick pixels
+    */
+    //% block="Refresh/update Powerbrick pixels"
+    //% blockId="microX_refreshPowerbrickPixels"
+    //% group="Powerbrick"
+    //% weight=42
+    export function refreshPowerbrickPixels() {
+        if (initializedPowerbrickPixels == false)
+            return
+        powerbrickPixels.refresh()
+    }
+}
+
+//% block=uxMp3
+//% color="#303030" weight=45 icon="\uf0e7"
+//% groups='["Powerbrick"]'
+namespace microX_Mp3 {
+    
+
     let mp3PlayerStartByte = 0x7e
     let mp3PlayerEndByte = 0xef
+
+    let initializedPowerbrickMp3Player = false
+
+    /**
+     * Powerbrick MP3 action (1, 2, 3, 5, 6, 7)
+     */
+    export enum PowerbrickMp3ControlAction {
+        //% block=Play
+        Play = 0xaa,
+        //% block=Stop
+        Stop = 0xab,
+        //% block=Next
+        Next = 0xac,
+        //% block=Prev
+        Prev = 0xad
+    }
+    
+    /**
+     * Initializes the MP3 player connected to a specific serial pin (or Powerbrick serial port)
+     * @param serialPinTx serial pin number (transmit)
+     * @param serialPinRx serial pin number (receive)
+     */
+    //% block="Initialize Powerbrick MP3 Player connected to|serial pin (TX) %pinNumber|serial pin (RX) %pinNumber"
+    //% blockId="microX_initializePowerbrickMp3Player"
+    //% group="Powerbrick"
+    //% weight=39
+    export function initializePowerbrickMp3Player(serialPinTx: microX.PinNumber, serialPinRx: microX.PinNumber): void {   
+        if (initializedPowerbrickMp3Player)
+            return
+        
+        let txPin = microX.pinToSerialPin(serialPinTx)
+        let rxPin = microX.pinToSerialPin(serialPinRx)
+        if (txPin == null || rxPin == null)
+            return
+
+        serial.redirect(txPin, rxPin, BaudRate.BaudRate9600)
+        initializedPowerbrickMp3Player = true
+    }
 
     function _mp3PlayerSendArray(command: number, data: Array<number>): void {
         if (initializedPowerbrickMp3Player == false)
@@ -1068,8 +1277,8 @@ namespace microX {
      */
     //% block="Powerbrick MP3 Player|do %controlAction"
     //% blockId="microX_mp3PlayerControl"
-    //% group="MP3"
-    //% weight=20
+    //% group="Powerbrick"
+    //% weight=38
     export function mp3PlayerControl(controlAction: PowerbrickMp3ControlAction): void {
         if (controlAction < PowerbrickMp3ControlAction.Play || controlAction > PowerbrickMp3ControlAction.Prev)
             return
@@ -1083,10 +1292,10 @@ namespace microX {
     //% block="Powerbrick MP3 Player set|volume %volume"
     //% blockId="microX_mp3PlayerSetVolume"
     //% volume.min=0 volume.max=31
-    //% group="MP3"
-    //% weight=21
+    //% group="Powerbrick"
+    //% weight=37
     export function mp3PlayerSetVolume(volume: number): void {
-        volume = inRange(volume, 0, 31)
+        volume = microX.inRange(volume, 0, 31)
         _mp3PlayerSendArray(0xae, [volume])
     }
 
@@ -1097,10 +1306,10 @@ namespace microX {
     //% block="Powerbrick MP3 Player play|file number %filenumber"
     //% blockId="microX_mp3PlayerPlayFilenumber"
     //% filenumber.min=1 filenumber.max=255
-    //% group="MP3"
-    //% weight=22
+    //% group="Powerbrick"
+    //% weight=36
     export function mp3PlayerPlayFilenumber(filenumber: number): void {
-        filenumber = inRange(filenumber, 1, 255)
+        filenumber = microX.inRange(filenumber, 1, 255)
         _mp3PlayerSendArray(0xa2, [0, filenumber])
     }
 
@@ -1110,189 +1319,11 @@ namespace microX {
      */
     //% block="Powerbrick MP3 Player play|file name %filename"
     //% blockId="microX_mp3PlayerPlayFile"
-    //% group="MP3"
-    //% weight=23
+    //% group="Powerbrick"
+    //% weight=35
     export function mp3PlayerPlayFile(filename: string): void {
         if (filename == null || filename.length == 0)
             return
         _mp3PlayerSendString(0xa3, filename)
     }
-
-    /**
-     * Powerbrick gesture and color sensor mode
-     */
-    enum PowerbrickGestureColorSensorMode {
-        //% block=Ambient
-        Ambient = 1,
-        //% block=Proximity
-        Proximity = 2,
-        //% block=Gesture
-        Gesture = 3,
-        //% block=Active
-        Active = 4
-    }
-
-    const KC_ADDR = 0x6D
-    const KC_VERSION = 0x00
-    const KC_MODE = 1
-    const KC_READCOLOR = 21
-    const KC_READCOLORRAW = 23
-    const KC_LEDPWM = 24
-    const KC_LEDONOFF = 25
-    const KC_LEDBIT = 26
-    const KC_PROXIMITY = 31
-    const KC_GESTURE = 41
-
-    function powerbrickGestureColorModuleSetMode(mode: PowerbrickGestureColorSensorMode): void {
-        i2cwrite(KC_ADDR, KC_MODE, mode);
-    }
-
-    /**
-     * Get hue using Powerbrick Gesture+Color sensor
-     */
-    //% block="Powerbrick Gesture+Color get hue"
-    //% blockId="microX_powerbrickGestureColorModuleGetHue"
-    //% group="Sensors"
-    //% weight=44
-    export function powerbrickGestureColorModuleGetHue(): number {
-        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Ambient)
-        pins.i2cWriteNumber(KC_ADDR, KC_READCOLOR, NumberFormat.UInt8BE)
-        let buff = pins.i2cReadBuffer(KC_ADDR, 2)
-        return buff[0] * 2
-    }
-
-    /**
-     * Get brightness using Powerbrick Gesture+Color sensor
-     */
-    //% block="Powerbrick Gesture+Color get brightness"
-    //% blockId="microX_powerbrickGestureColorModuleGetBrightness"
-    //% group="Sensors"
-    //% weight=45
-    export function powerbrickGestureColorModuleGetBrightness(): number {
-        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Ambient)
-        pins.i2cWriteNumber(KC_ADDR, KC_READCOLOR, NumberFormat.UInt8BE)
-        let buff = pins.i2cReadBuffer(KC_ADDR, 2)
-        return buff[1]
-    }
-
-    /**
-     * Set Phase Width Modulation of Powerbrick Gesture+Color sensor's LEDs
-     */
-    //% block="Powerbrick Gesture+Color set PWM|phase width %pwm"
-    //% blockId="microX_powerbrickGestureColorModuleSetPwm"
-    //% group="Sensors"
-    //% weight=46
-    export function powerbrickGestureColorModuleSetPwm(pwm: number): void {
-        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Active)
-        i2cwrite(KC_ADDR, KC_LEDPWM, pwm);
-    }
-
-    /**
-     * Set Phase Width Modulation of Powerbrick Gesture+Color sensor's LEDs
-     * @param ledNumber 0 for all otherwise 1...4
-     */
-    //% block="Powerbrick Gesture+Color set LED|led number %ledNumber|on %on"
-    //% ledNumber.min=0 ledNumber.max=4
-    //% blockId="microX_powerbrickGestureColorModuleSetLed"
-    //% group="Sensors"
-    //% weight=47
-    export function powerbrickGestureColorModuleSetLed(ledNumber: number, on: boolean): void {
-        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Active)
-        if (ledNumber < 0 || ledNumber > 4)
-            return
-        let buf = pins.createBuffer(3)
-        buf[0] = KC_LEDONOFF
-        buf[1] = ledNumber
-        buf[2] = bool2Num(on)
-        pins.i2cWriteBuffer(KC_ADDR, buf)
-        basic.pause(1)
-    }
-
-    function bool2Num(b: boolean): number {
-        return b == true ? 1 : 0
-    }
-
-    /**
-     * Set Phase Width Modulation of Powerbrick Gesture+Color sensor's LEDs
-     * @param led1On led1On
-     * @param led2On led2On
-     * @param led3On led3On
-     * @param led4On led4On
-     */
-    //% block="Powerbrick Gesture+Color set LEDs|led1 %led1On|led2 %led2On|led3 %led3On|led4 %led4On"
-    //% blockId="microX_powerbrickGestureColorModuleSetLeds"
-    //% group="Sensors"
-    //% weight=48
-    export function powerbrickGestureColorModuleSetLeds(led1On: boolean, led2On: boolean, led3On: boolean, led4On: boolean): void {
-        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Proximity)
-        let buf = pins.createBuffer(2)
-        buf[0] = KC_LEDBIT
-        buf[1] = bool2Num(led1On) + (bool2Num(led2On) << 1) + (bool2Num(led3On) << 2) + (bool2Num(led4On) << 3)
-        pins.i2cWriteBuffer(KC_ADDR, buf)
-        basic.pause(1)
-    }
-
-    /**
-     * Get Proximity using Powerbrick Gesture+Color sensor
-     */
-    //% block="Powerbrick Gesture+Color get promximity"
-    //% blockId="microX_powerbrickGestureColorModuleGetProximity"
-    //% group="Sensors"
-    //% weight=49
-    export function powerbrickGestureColorModuleGetProximity(): number {
-        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Proximity)
-        return i2cread(KC_ADDR, KC_PROXIMITY)
-    }
-
-    /**
-     * Get gesture using Powerbrick Gesture+Color sensor
-     */
-    //% block="Powerbrick Gesture+Color get gesture"
-    //% blockId="microX_powerbrickGestureColorModuleGetGesture"
-    //% group="Sensors"
-    //% weight=50
-    export function powerbrickGestureColorModuleGetGesture(): number {
-        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Gesture)
-        return i2cread(KC_ADDR, KC_GESTURE)
-    }
-
-    /**
-     * Get RGB using Powerbrick Gesture+Color sensor
-     */
-    //% block="Powerbrick Gesture+Color get RGB"
-    //% blockId="microX_powerbrickGestureColorModuleGetRgb"
-    //% group="Sensors"
-    //% weight=51
-    export function powerbrickGestureColorModuleGetRgb(): string {
-        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Active)
-        pins.i2cWriteNumber(KC_ADDR, KC_READCOLORRAW, NumberFormat.UInt8BE);
-        let buff = pins.i2cReadBuffer(KC_ADDR, 4)
-        return numberToHex(buff[0]) + numberToHex(buff[1]) + numberToHex(buff[2]) + numberToHex(buff[3])
-    }
-
-    function hexToNumber(h: string, offset: number): number {
-        return ((h.charCodeAt(offset) - 0x30) << 4) + h.charCodeAt(offset + 1) - 0x30
-    }
-
-    function numberToHex(n: number): string {
-        return String.fromCharCode((n & 0xf0 >> 4) + 0x30) + String.fromCharCode((n & 0xf) + 0x30)
-    }
-
-    export function rgbPixelToRed(rgb: string): number {
-        return hexToNumber(rgb, 0)
-    }
-
-    export function rgbPixelToGreen(rgb: string): number {
-        return hexToNumber(rgb, 2)
-    }
-
-    export function rgbPixelToBlue(rgb: string): number {
-        return hexToNumber(rgb, 4)
-    }
-
-    export function redGreenBlueToRgbPixel(red: number, green: number, blue: number): string {
-        let result = numberToHex(red) + numberToHex(green) + numberToHex(blue)
-        return result
-    }
-
 }
