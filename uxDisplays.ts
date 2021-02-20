@@ -3,13 +3,15 @@
  */
 //% block=uxDisplays
 //% color="#303030" weight=46 icon="\uf0eb"
-//% groups='["Robotbit", "Powerbrick"]'
+//% groups='["Robotbit", "Superbit", "Powerbrick"]'
 namespace uxDisplays {
 
     let robotbitPixels: RgbMatrix = null
+    let superbitPixels: RgbMatrix = null
     let powerbrickPixels: RgbMatrix = null
 
     let initializedRobotbitPixels = false
+    let initializedSuperbitPixels = false
     let initializedPowerbrickPixels = false
 
     /**
@@ -29,7 +31,7 @@ namespace uxDisplays {
         }
     
         /**
-         * Set powerbrick all pixels' color
+         * Set Powerbrick all pixels' color
          * @param r pixel red intensity [0,255]
          * @param g pixel green intensity [0,255]
          * @param b pixel blue intensity [0,255]
@@ -96,61 +98,134 @@ namespace uxDisplays {
         initializedRobotbitPixels = true
 
         // After initializing port set to black to prevent first refresh error
-        setRobotBitAllPixels(0, 0, 0)
-        refreshRobotBitPixels()
-        setRobotBitAllPixels(0, 0, 0)
-        refreshRobotBitPixels()
+        setRobotbitAllPixels(0, 0, 0)
+        refreshRobotbitPixels()
+        setRobotbitAllPixels(0, 0, 0)
+        refreshRobotbitPixels()
     }
 
     /**
-     * Set robotbit all pixels color
+     * Set Robotbit all pixels color
      * @param r pixel red intensity [0,255]
      * @param g pixel green intensity [0,255]
      * @param b pixel blue intensity [0,255]
     */
     //% block="Set Robotbit pixels to color|red %r|green %g|blue %b"
-    //% blockId="ux_setRobotBitAllPixels"
+    //% blockId="ux_setRobotbitAllPixels"
     //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
     //% group="Robotbit"
     //% weight=48
-    export function setRobotBitAllPixels(r: number, g: number, b: number): void {
+    export function setRobotbitAllPixels(r: number, g: number, b: number): void {
         if (initializedRobotbitPixels == false)
             return
         robotbitPixels.setAllPixels(r, g, b)
     }
     
     /**
-     * Set robotbit pixel color
+     * Set Robotbit pixel color
      * @param x pixel x-coordinate [0,3]
      * @param r pixel red intensity [0,255]
      * @param g pixel green intensity [0,255]
      * @param b pixel blue intensity [0,255]
     */
     //% block="Set Robotbit pixel to color|x %x|red %r|green %g|blue %b"
-    //% blockId="ux_setRobotBitPixel"
+    //% blockId="ux_setRobotbitPixel"
     //% x.min=0 x.max=3 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
     //% group="Robotbit"
     //% weight=47
-    export function setRobotBitPixel(x: number, r: number, g: number, b: number): void {
+    export function setRobotbitPixel(x: number, r: number, g: number, b: number): void {
         if (initializedRobotbitPixels == false)
             return
         robotbitPixels.setPixel(0, x, r, g, b)
     }
 
     /**
-     * Refresh robotbit pixels
+     * Refresh Robotbit pixels
     */
     //% block="Refresh/update Robotbit pixels"
-    //% blockId="ux_refreshRobotBitPixels"
+    //% blockId="ux_refreshRobotbitPixels"
     //% port.min=0 port.max=6
     //% group="Robotbit"
     //% weight=46
-    export function refreshRobotBitPixels() {
+    export function refreshRobotbitPixels() {
         if (initializedRobotbitPixels == false)
             return
         robotbitPixels.refresh()
+    }
+
+    /**
+     * Initialize Yahboom Superbit pixels
+     * @param pinNumber digital pin number
+     */
+    //% block="Initialize Superbit Pixels"
+    //% blockId="ux_intializeSuperbitPixels"
+    //% group="Superbit"
+    //% weight=49
+    export function intializeSuperbitPixels(): void {
+        if (initializedSuperbitPixels)
+            return
+        
+        superbitPixels = new RgbMatrix(1, 4, ux.PinNumber.Pin12)
+        initializedSuperbitPixels = true
+
+        // After initializing port set to black to prevent first refresh error
+        setSuperbitAllPixels(0, 0, 0)
+        refreshSuperbitPixels()
+        setSuperbitAllPixels(0, 0, 0)
+        refreshSuperbitPixels()
+    }
+
+    /**
+     * Set Superbit all pixels color
+     * @param r pixel red intensity [0,255]
+     * @param g pixel green intensity [0,255]
+     * @param b pixel blue intensity [0,255]
+    */
+    //% block="Set Superbit pixels to color|red %r|green %g|blue %b"
+    //% blockId="ux_setSuperbitAllPixels"
+    //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
+    //% inlineInputMode=inline
+    //% group="Superbit"
+    //% weight=48
+    export function setSuperbitAllPixels(r: number, g: number, b: number): void {
+        if (initializedSuperbitPixels == false)
+            return
+        superbitPixels.setAllPixels(r, g, b)
+    }
+
+    /**
+     * Set Superbit pixel color
+     * @param x pixel x-coordinate [0,3]
+     * @param r pixel red intensity [0,255]
+     * @param g pixel green intensity [0,255]
+     * @param b pixel blue intensity [0,255]
+    */
+    //% block="Set Superbit pixel to color|x %x|red %r|green %g|blue %b"
+    //% blockId="ux_setSuperbitPixel"
+    //% x.min=0 x.max=3 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
+    //% inlineInputMode=inline
+    //% group="Superbit"
+    //% weight=47
+    export function setSuperbitPixel(x: number, r: number, g: number, b: number): void {
+        if (initializedSuperbitPixels == false)
+            return
+        superbitPixels.setPixel(0, x, r, g, b)
+    }
+
+    /**
+     * Refresh Superbit pixels
+    */
+    //% block="Refresh/update Superbit pixels"
+    //% blockId="ux_refreshSuperbitPixels"
+    //% port.min=0 port.max=6
+    //% group="Superbit"
+    //% weight=46
+    export function refreshSuperbitPixels() {
+        if (initializedSuperbitPixels == false)
+            return
+        superbitPixels.refresh()
     }
     
     /**
@@ -177,7 +252,7 @@ namespace uxDisplays {
     }
 
     /**
-     * Set powerbrick all pixels color
+     * Set Powerbrick all pixels color
      * @param r pixel red intensity [0,255]
      * @param g pixel green intensity [0,255]
      * @param b pixel blue intensity [0,255]
@@ -195,7 +270,7 @@ namespace uxDisplays {
     }
     
     /**
-     * Set powerbrick pixel color
+     * Set Powerbrick pixel color
      * @param y pixel y-coordinate [0,7]
      * @param x pixel x-coordinate [0,7]
      * @param r pixel red intensity [0,255]
@@ -219,7 +294,7 @@ namespace uxDisplays {
     }
 
     /**
-     * Refresh powerbrick pixels
+     * Refresh Powerbrick pixels
     */
     //% block="Refresh/update Powerbrick pixels"
     //% blockId="ux_refreshPowerbrickPixels"

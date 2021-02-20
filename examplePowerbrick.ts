@@ -1,5 +1,5 @@
 /**
- * PowerBrick example
+ * Powerbrick example
  */
 
 // Initialization for motors and servos
@@ -8,10 +8,10 @@ uxMotion.initializePhaseWidthModulationDriver()
 // Powerbrick display example
 uxDisplays.intializePowerbrickPixels(ux.PinNumber.PowerbrickPort3_DigitalA)
 
-uxMotion.setOrangeGreenGeekservoSpeed(uxMotion.Servo.Servo1, 0)
-uxMotion.setGreyGeekservoAngle(uxMotion.Servo.Servo2, 0)
-uxMotion.setLargeGreyGeekservoAngle(uxMotion.Servo.Servo3, 0)
-uxMotion.setServoPulseWidth(uxMotion.Servo.Servo4, 0)
+uxMotion.setOrangeGreenGeekservoSpeed(uxMotion.Servo.PowerbrickServo1, 0)
+uxMotion.setGreyGeekservoAngle(uxMotion.Servo.PowerbrickServo2, 0)
+uxMotion.setLargeGreyGeekservoAngle(uxMotion.Servo.PowerbrickServo3, 0)
+uxMotion.setServoPulseWidth(uxMotion.Servo.PowerbrickServo4, 0)
 
 // Sensor and motion example
 basic.forever(function () {
@@ -19,10 +19,10 @@ basic.forever(function () {
     if (distance < 5) {
         uxMotion.setMotor(uxMotion.Motor.PowerbrickM1, -4095)
         uxMotion.setMotor(uxMotion.Motor.PowerbrickM2, -4095)
-        uxMotion.setOrangeGreenGeekservoSpeed(uxMotion.Servo.Servo1, -1024)
-        uxMotion.setGreyGeekservoAngle(uxMotion.Servo.Servo2, 225)
-        uxMotion.setLargeGreyGeekservoAngle(uxMotion.Servo.Servo3, 360)
-        uxMotion.setServoPulseWidth(uxMotion.Servo.Servo4, 2646)
+        uxMotion.setOrangeGreenGeekservoSpeed(uxMotion.Servo.PowerbrickServo1, -1024)
+        uxMotion.setGreyGeekservoAngle(uxMotion.Servo.PowerbrickServo2, 225)
+        uxMotion.setLargeGreyGeekservoAngle(uxMotion.Servo.PowerbrickServo3, 360)
+        uxMotion.setServoPulseWidth(uxMotion.Servo.PowerbrickServo4, 2646)
     }
     else if (distance < 10) {
         uxDisplays.setPowerbrickAllPixels(128, 0, 0)

@@ -8,10 +8,10 @@ uxMotion.initializePhaseWidthModulationDriver()
 // Initialization for LEDs
 uxDisplays.intializeRobotbitPixels()
 
-uxMotion.setOrangeGreenGeekservoSpeed(uxMotion.Servo.Servo1, 0)
-uxMotion.setGreyGeekservoAngle(uxMotion.Servo.Servo2, 0)
-uxMotion.setLargeGreyGeekservoAngle(uxMotion.Servo.Servo3, 0)
-uxMotion.setServoPulseWidth(uxMotion.Servo.Servo4, 0)
+uxMotion.setOrangeGreenGeekservoSpeed(uxMotion.Servo.RobotbitServo1, 0)
+uxMotion.setGreyGeekservoAngle(uxMotion.Servo.RobotbitServo2, 0)
+uxMotion.setLargeGreyGeekservoAngle(uxMotion.Servo.RobotbitServo3, 0)
+uxMotion.setServoPulseWidth(uxMotion.Servo.RobotbitServo4, 0)
 
 // Sensor and motion example
 basic.forever(function () {
@@ -19,18 +19,18 @@ basic.forever(function () {
     if (distance < 5) {
         uxMotion.setMotor(uxMotion.Motor.RobotbitM1A, -4095)
         uxMotion.setMotor(uxMotion.Motor.RobotbitM1B, -4095)
-        uxMotion.setOrangeGreenGeekservoSpeed(uxMotion.Servo.Servo1, -1024)
-        uxMotion.setGreyGeekservoAngle(uxMotion.Servo.Servo2, 225)
-        uxMotion.setLargeGreyGeekservoAngle(uxMotion.Servo.Servo3, 360)
-        uxMotion.setServoPulseWidth(uxMotion.Servo.Servo4, 2646)
+        uxMotion.setOrangeGreenGeekservoSpeed(uxMotion.Servo.RobotbitServo1, -1024)
+        uxMotion.setGreyGeekservoAngle(uxMotion.Servo.RobotbitServo2, 225)
+        uxMotion.setLargeGreyGeekservoAngle(uxMotion.Servo.RobotbitServo3, 360)
+        uxMotion.setServoPulseWidth(uxMotion.Servo.RobotbitServo4, 2646)
     }
     else if (distance < 10) {
-        uxDisplays.setRobotBitAllPixels(128, 0, 0)
-        uxDisplays.refreshRobotBitPixels()
+        uxDisplays.setRobotbitAllPixels(128, 0, 0)
+        uxDisplays.refreshRobotbitPixels()
     } else {
         uxMotion.setMotor(uxMotion.Motor.RobotbitM1A, 4095)
         uxMotion.setMotor(uxMotion.Motor.RobotbitM1B, 4095)
-        uxDisplays.setRobotBitAllPixels(10, 0, 0)
-        uxDisplays.refreshRobotBitPixels()
+        uxDisplays.setRobotbitAllPixels(10, 0, 0)
+        uxDisplays.refreshRobotbitPixels()
     }
 })

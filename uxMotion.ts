@@ -8,50 +8,92 @@ namespace uxMotion {
 
     const PWM_PCA9685_ADDRESS = 0x40
     
-    // const PHASE_WIDTH_PERIOD_MICROSEC = 20000
+    // Originally const PHASE_WIDTH_PERIOD_MICROSEC = 20000
+    // changes to 20480 for higher accuracy (since this is divided to below number of levels)
     const PHASE_WIDTH_PERIOD_MICROSEC = 20480
     const PHASE_WIDTH_LEVELS = 4096
 
     let initializedPhaseWidthModulationDriver = false
 
     /**
-     * Servo number (1 to 8)
+     * Servo number to channel mapping
      */
     export enum Servo {
-        //% block=Servo1
-        Servo1 = 1,
-        //% block=Servo2
-        Servo2 = 2,
-        //% block=Servo3
-        Servo3 = 3,
-        //% block=Servo4
-        Servo4 = 4,
-        //% block=Servo5
-        Servo5 = 5,
-        //% block=Servo6
-        Servo6 = 6,
-        //% block=Servo7
-        Servo7 = 7,
-        //% block=Servo8
-        Servo8 = 8
+        //% block=RobotbitServo1
+        RobotbitServo1 = 8,
+        //% block=RobotbitServo2
+        RobotbitServo2 = 9,
+        //% block=RobotbitServo3
+        RobotbitServo3 = 10,
+        //% block=RobotbitServo4
+        RobotbitServo4 = 11,
+        //% block=RobotbitServo5
+        RobotbitServo5 = 12,
+        //% block=RobotbitServo6
+        RobotbitServo6 = 13,
+        //% block=RobotbitServo7
+        RobotbitServo7 = 14,
+        //% block=RobotbitServo8
+        RobotbitServo8 = 15,
+        //% block=PowerbrickServo1
+        PowerbrickServo1 = 8,
+        //% block=PowerbrickServo2
+        PowerbrickServo2 = 9,
+        //% block=PowerbrickServo3
+        PowerbrickServo3 = 10,
+        //% block=PowerbrickServo4
+        PowerbrickServo4 = 11,
+        //% block=PowerbrickServo5
+        PowerbrickServo5 = 12,
+        //% block=PowerbrickServo6
+        PowerbrickServo6 = 13,
+        //% block=PowerbrickServo7
+        PowerbrickServo7 = 14,
+        //% block=PowerbrickServo8
+        PowerbrickServo8 = 15,
+        //% block=SuperbitServo1
+        SuperbitServo1 = 0,
+        //% block=SuperbitServo2
+        SuperbitServo2 = 1,
+        //% block=SuperbitServo3
+        SuperbitServo3 = 2,
+        //% block=SuperbitServo4
+        SuperbitServo4 = 3,
+        //% block=SuperbitServo5
+        SuperbitServo5 = 4,
+        //% block=SuperbitServo6
+        SuperbitServo6 = 5,
+        //% block=SuperbitServo7
+        SuperbitServo7 = 6,
+        //% block=SuperbitServo8
+        SuperbitServo8 = 7,
     }
 
     /**
-     * Motor number
+     * Motor number to channel mapping
+     * each motor takes up two consecutive channels, hence the gap of 2 between them
      */
     export enum Motor {
         //% block=RobotbitM1A
         RobotbitM1A = 0,
         //% block=RobotbitM1B
-        RobotbitM1B = 1,
+        RobotbitM1B = 2,
         //% block=RobotbitM2A
-        RobotbitM2A = 2,
+        RobotbitM2A = 4,
         //% block=RobotbitM2B
-        RobotbitM2B = 3,
+        RobotbitM2B = 6,
         //% block=PowerbrickM1
         PowerbrickM1 = 0,
         //% block=PowerbrickM2
-        PowerbrickM2 = 1
+        PowerbrickM2 = 2,
+        //% block=SuperbitM1
+        SuperbitM1 = 8,
+        //% block=SuperbitM2
+        SuperbitM2 = 10,
+        //% block=SuperbitM3
+        SuperbitM3 = 12,
+        //% block=SuperbitM4
+        SuperbitM4 = 14,
     }
 
     function setPeriod(periodMicrosecs: number): void {
@@ -108,7 +150,7 @@ namespace uxMotion {
     //% group="Motors"
     //% weight=88
     export function setMotor(motorNum: Motor, speed: number): void {
-        if (motorNum < 0 || 3 < motorNum)
+        if (motorNum < 0 || 14 < motorNum || motorNum % 2 != 0)
             return
         
         initializePhaseWidthModulationDriver()
@@ -122,10 +164,8 @@ namespace uxMotion {
             speed1 = 0
         }
 
-        // Motors are mapped to channels [[0, 1], [2, 3], [4, 5], [6, 7]]
-        let channel = motorNum << 1
-        setPwm(channel, 0, speed1)
-        setPwm(channel + 1, 0, speed2)
+        setPwm(motorNum, 0, speed1)
+        setPwm(motorNum + 1, 0, speed2)
     }
 
     /**
@@ -140,13 +180,14 @@ namespace uxMotion {
     //% advanced=true
     //% weight=87
     export function setServoPulseWidth(servoNum: Servo, pulseWidth: number): void {
+        if (servoNum < 0 || 15 < servoNum)
+            return
         
         initializePhaseWidthModulationDriver()
         // 50Hz --> Full cycle is 20mS (20000uS), normalize this from range 0...20000uS to 0...4096
         let value = Math.round(pulseWidth * PHASE_WIDTH_LEVELS / PHASE_WIDTH_PERIOD_MICROSEC)
         value = ux.inRange(value, 1, PHASE_WIDTH_LEVELS - 1)
-        // Servos are mapped to channels [8, 9, 10, 11, 12, 13, 14, 15]
-        setPwm(servoNum + 7, 0, value)
+        setPwm(servoNum, 0, value)
     }
 
     /**
