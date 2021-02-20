@@ -49,7 +49,7 @@ namespace uxRemotes {
         pins.setPull(DigitalPin.P14, PinPullMode.PullUp)
         pins.setPull(DigitalPin.P15, PinPullMode.PullUp)
         pins.setPull(DigitalPin.P16, PinPullMode.PullUp)
-        uxMotion.initializePhaseWidthModulationDriver()
+        uxMotion.initializePhaseWidthModulationDriverAdvanced(0x41)
         initializedYBRemote = true
     }
 
