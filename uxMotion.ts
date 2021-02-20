@@ -6,12 +6,12 @@
 //% groups='["Initialization", "Motors", "Speed Servos", "Angle Servos"]'
 namespace uxMotion {
 
-    const PWM_PCA9685_ADDRESS = 0x40
+    let pwn_pca9685_address = 0x40
+
+    let phase_width_levels = 4096
     
-    // Originally const PHASE_WIDTH_PERIOD_MICROSEC = 20000
-    // changes to 20480 for higher accuracy (since this is divided to below number of levels)
-    const PHASE_WIDTH_PERIOD_MICROSEC = 20480
-    export const PHASE_WIDTH_LEVELS = 4096
+    // Originally 20000, changed to 20480 for higher accuracy (since this is divided to above number of levels)
+    let phase_width_period_microsec = 20480
 
     let initializedPhaseWidthModulationDriver = false
 
@@ -98,14 +98,43 @@ namespace uxMotion {
 
     function setPeriod(periodMicrosecs: number): void {
         // Constrain the frequency
-        let prescale = 25 * periodMicrosecs / PHASE_WIDTH_LEVELS - 1
-        let oldmode = ux.i2cread(PWM_PCA9685_ADDRESS, 0x00)
+        let prescale = 25 * periodMicrosecs / phase_width_levels - 1
+        let oldmode = ux.i2cread(pwn_pca9685_address, 0x00)
         let newmode = (oldmode & 0x7f) | 0x10 // sleep
-        ux.i2cwrite(PWM_PCA9685_ADDRESS, 0x00, newmode) // go to sleep
-        ux.i2cwrite(PWM_PCA9685_ADDRESS, 0xfe, prescale) // set the prescaler
-        ux.i2cwrite(PWM_PCA9685_ADDRESS, 0x00, oldmode)
+        ux.i2cwrite(pwn_pca9685_address, 0x00, newmode) // go to sleep
+        ux.i2cwrite(pwn_pca9685_address, 0xfe, prescale) // set the prescaler
+        ux.i2cwrite(pwn_pca9685_address, 0x00, oldmode)
         control.waitMicros(5000)
-        ux.i2cwrite(PWM_PCA9685_ADDRESS, 0x00, oldmode | 0xa1)
+        ux.i2cwrite(pwn_pca9685_address, 0x00, oldmode | 0xa1)
+    }
+
+    /**
+     * Initialize the phase width modulation driver used for servos and motors
+     */
+    //% block="Initialize Phase Width Modulation Driver (for servos and motors)|address %address|levels %levels|widthMicrosec %widthMicrosec"
+    //% blockId="ux_initializePhaseWidthModulationDriverAtAddress"
+    //% address.min=0 address.max=127 address.defl=64
+    //% levels.min=256 levels.max=65536 levels.defl=4096
+    //% widthMicrosec.min=10240 widthMicrosec.max=40960 widthMicrosec.defl=20480
+    //% group="Initialization"
+    //% weight=88
+    //% advanced=true
+    export function initializePhaseWidthModulationDriverAdvanced(address: number = 0x40, levels: number = 4096, widthMicrosec: number = 20480): void {
+        if (initializedPhaseWidthModulationDriver)
+            return
+        pwn_pca9685_address = address
+        phase_width_levels = levels
+        phase_width_period_microsec = widthMicrosec
+        ux.i2cwrite(address, 0x00, 0x00)
+        setPeriod(phase_width_period_microsec)
+        initializedPhaseWidthModulationDriver = true
+    }
+
+    /**
+     * Get the number of levels for phase width modulation
+     */
+    export function getPhaseWidthLevels(): number {
+        return phase_width_levels
     }
     
     /**
@@ -116,12 +145,7 @@ namespace uxMotion {
     //% group="Initialization"
     //% weight=89
     export function initializePhaseWidthModulationDriver(): void {
-        if (initializedPhaseWidthModulationDriver)
-            return
-        ux.i2cwrite(PWM_PCA9685_ADDRESS, 0x00, 0x00)
-        // Operate at 50Hz
-        setPeriod(PHASE_WIDTH_PERIOD_MICROSEC)
-        initializedPhaseWidthModulationDriver = true
+        initializePhaseWidthModulationDriverAdvanced()
     }
 
     export function setPwm(channel: number, low2Bytes: number, high2Bytes: number): void {
@@ -136,7 +160,7 @@ namespace uxMotion {
         buffer[2] = (low2Bytes >>> 8) & 0xff
         buffer[3] = high2Bytes & 0xff
         buffer[4] = (high2Bytes >>> 8) & 0xff
-        pins.i2cWriteBuffer(PWM_PCA9685_ADDRESS, buffer)
+        pins.i2cWriteBuffer(pwn_pca9685_address, buffer)
     }
 
     /**
@@ -156,7 +180,7 @@ namespace uxMotion {
         initializePhaseWidthModulationDriver()
         
         let speed1 = speed
-        speed1 = ux.inRange(speed1, -PHASE_WIDTH_LEVELS+1, PHASE_WIDTH_LEVELS-1)
+        speed1 = ux.inRange(speed1, -phase_width_levels+1, phase_width_levels-1)
 
         let speed2 = 0
         if (speed1 < 0) {
@@ -185,8 +209,8 @@ namespace uxMotion {
         
         initializePhaseWidthModulationDriver()
         // 50Hz --> Full cycle is 20mS (20000uS), normalize this from range 0...20000uS to 0...4096
-        let value = Math.round(pulseWidth * PHASE_WIDTH_LEVELS / PHASE_WIDTH_PERIOD_MICROSEC)
-        value = ux.inRange(value, 1, PHASE_WIDTH_LEVELS - 1)
+        let value = Math.round(pulseWidth * phase_width_levels / phase_width_period_microsec)
+        value = ux.inRange(value, 1, phase_width_levels - 1)
         setPwm(servoNum, 0, value)
     }
 
@@ -203,9 +227,9 @@ namespace uxMotion {
     //% weight=86
     export function setOrangeGreenGeekservoSpeed(servoNum: Servo, speed: number): void {
         // For 20000uSec cycle: reverse=500uS-1500uS, 0: 1500uS, forward=1500uS-2500uS
-        let zeroPulse = PHASE_WIDTH_PERIOD_MICROSEC * 3 / 40
-        let minPulse = PHASE_WIDTH_PERIOD_MICROSEC / 40
-        let maxPulse = PHASE_WIDTH_PERIOD_MICROSEC  / 8
+        let zeroPulse = phase_width_period_microsec * 3 / 40
+        let minPulse = phase_width_period_microsec / 40
+        let maxPulse = phase_width_period_microsec  / 8
         let pulseWidth = zeroPulse + speed
         pulseWidth = ux.inRange(pulseWidth, minPulse, maxPulse)
         setServoPulseWidth(servoNum, pulseWidth)
@@ -237,9 +261,9 @@ namespace uxMotion {
             else
                 degree_norm = 0
         }
-        let minPulse = PHASE_WIDTH_PERIOD_MICROSEC * 3 / 100
-        let maxPulse = PHASE_WIDTH_PERIOD_MICROSEC * 6 / 50
-        let pulseWidth = degree_norm * PHASE_WIDTH_PERIOD_MICROSEC * phaseRangePercent / 100 / degreeRange + minPulse
+        let minPulse = phase_width_period_microsec * 3 / 100
+        let maxPulse = phase_width_period_microsec * 6 / 50
+        let pulseWidth = degree_norm * phase_width_period_microsec * phaseRangePercent / 100 / degreeRange + minPulse
         pulseWidth = ux.inRange(pulseWidth, minPulse, maxPulse)
         setServoPulseWidth(servoNum, pulseWidth)
     }
@@ -263,8 +287,8 @@ namespace uxMotion {
         if (degree_norm < 0)
             degree_norm += 360
 
-        let pulseWidth = degree_norm * PHASE_WIDTH_LEVELS * 125 / 256 / 360 + (PHASE_WIDTH_LEVELS / 8)
-        pulseWidth = ux.inRange(pulseWidth, PHASE_WIDTH_LEVELS / 8, PHASE_WIDTH_LEVELS * 5 / 8)
+        let pulseWidth = degree_norm * phase_width_levels * 125 / 256 / 360 + (phase_width_levels / 8)
+        pulseWidth = ux.inRange(pulseWidth, phase_width_levels / 8, phase_width_levels * 5 / 8)
         setServoPulseWidth(servoNum, pulseWidth)
     }
 }
