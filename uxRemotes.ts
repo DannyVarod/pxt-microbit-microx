@@ -34,9 +34,9 @@ namespace uxRemotes {
         B4Yellow = 16
     }
 
-    function initializeYahboomRemotePhaseWidthModulationDriver(): void {
-        uxMotion.initializePhaseWidthModulationDriverAdvanced(0x41)
-    }
+    // function initializeYahboomRemotePhaseWidthModulationDriver(): void {
+    //     uxMotion.initializePhaseWidthModulationDriverAdvanced(0x41)
+    // }
 
     /**
      * Initialize for Yahboom remote
@@ -53,7 +53,7 @@ namespace uxRemotes {
         pins.setPull(DigitalPin.P14, PinPullMode.PullUp)
         pins.setPull(DigitalPin.P15, PinPullMode.PullUp)
         pins.setPull(DigitalPin.P16, PinPullMode.PullUp)
-        initializeYahboomRemotePhaseWidthModulationDriver()
+        // initializeYahboomRemotePhaseWidthModulationDriver()
         initializedYBRemote = true
     }
 
@@ -132,18 +132,18 @@ namespace uxRemotes {
         pins.onPulsed(pin, pulseValue, body)
     }
 
-    /**
-     * Set Yahboom remote vibration speed
-     * @param speed [0...4095] pulse width in uSec
-    */
-    //% block="Yahboom remote vibration speed|speed %speed"
-    //% blockId="ux_setYahboomRemoteVibrationSpeed"
-    //% speed.min=0 speed.max=4095
-    //% group="Yahboom"
-    //% weight=95
-    export function setYahboomRemoteVibrationSpeed(speed: number): void {
-        initializeYahboomRemotePhaseWidthModulationDriver()
-        speed = ux.inRange(speed, 0, uxMotion.getPhaseWidthLevels()-1)
-        uxMotion.setPwm(0, 0, speed)
-    }
+    // /**
+    //  * Set Yahboom remote vibration speed
+    //  * @param speed [0...4095] pulse width in uSec
+    // */
+    // //% block="Yahboom remote vibration speed|speed %speed"
+    // //% blockId="ux_setYahboomRemoteVibrationSpeed"
+    // //% speed.min=0 speed.max=4095
+    // //% group="Yahboom"
+    // //% weight=95
+    // export function setYahboomRemoteVibrationSpeed(speed: number): void {
+    //     initializeYahboomRemotePhaseWidthModulationDriver()
+    //     speed = ux.inRange(speed, 0, uxMotion.getPhaseWidthLevels()-1)
+    //     uxMotion.setPwm(0, 0, speed)
+    // }
 }

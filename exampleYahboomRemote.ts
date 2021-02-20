@@ -2,20 +2,17 @@
  * Joystick example
  */
 
-// Initialize buttons
+// Initialize buttons and PWM
 uxRemotes.initializeYahboomRemote()
-
-// Initialize buzzer motor
-uxMotion.initializePhaseWidthModulationDriver()
 
 let joystickY = 0
 let joystickX = 0
 
 // Joystick buttons example
 uxRemotes.onYahboomRemoteButton(uxRemotes.YBRemoteButton.B3Blue, uxRemotes.ButtonState.Released, function () {
-    uxRemotes.setYahboomRemoteVibrationSpeed(4095)
+    //uxRemotes.setYahboomRemoteVibrationSpeed(4095)
     control.waitMicros(500000)
-    uxRemotes.setYahboomRemoteVibrationSpeed(0)
+    //uxRemotes.setYahboomRemoteVibrationSpeed(0)
 })
 
 // Joystick position example
