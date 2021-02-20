@@ -57,6 +57,8 @@ Current license [LGPL v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.e
 
 ### In development / parially working or not working:
 
+* Yahboom Remote - remote buttons not working with micro:bit V2
+* Yahboom Remote - vibration feedback not working
 * Powerbrick color and gesture sensor - partially working
 * Powerbrick MP3 player - not working
 
