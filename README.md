@@ -28,8 +28,9 @@ Current license [LGPL v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.e
 ### Boards:
 
 * Yahboom remote / game handle
-* KittenBot Powerbrick / Armourbit
+* KittenBot Powerbrick (aka Armourbit)
 * KittenBot Robotbit
+* Yahboom Superbit (aka Super:bit)
 
 ### Sensors:
 
@@ -53,9 +54,11 @@ Current license [LGPL v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.e
 
 * Powerbrick 8*8 RGB pixel display
 * Robotbit RGB 4 pixel display
+* Superbit RGB 4 pixel display
 
 ### In development / parially working or not working:
 
+* Superbit support in development
 * Powerbrick color and gesture sensor - partially working
 * Powerbrick MP3 player - not working
 
