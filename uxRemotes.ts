@@ -48,11 +48,11 @@ namespace uxRemotes {
     export function initializeYahboomRemote(): void {
         if (initializedYBRemote)
             return
-        pins.setPull(DigitalPin.P8, PinPullMode.PullUp)
-        pins.setPull(DigitalPin.P13, PinPullMode.PullUp)
-        pins.setPull(DigitalPin.P14, PinPullMode.PullUp)
-        pins.setPull(DigitalPin.P15, PinPullMode.PullUp)
-        pins.setPull(DigitalPin.P16, PinPullMode.PullUp)
+        pins.setPull(DigitalPin.P8, PinPullMode.PullDown)
+        pins.setPull(DigitalPin.P13, PinPullMode.PullDown)
+        pins.setPull(DigitalPin.P14, PinPullMode.PullDown)
+        pins.setPull(DigitalPin.P15, PinPullMode.PullDown)
+        pins.setPull(DigitalPin.P16, PinPullMode.PullDown)
         // initializeYahboomRemotePhaseWidthModulationDriver()
         initializedYBRemote = true
     }
