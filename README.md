@@ -20,8 +20,7 @@ Current license [LGPL v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.e
 2. Create a new project (or open an existing one)
 3. Click on "Advanced" --> "Extensions"
 4. Copy the URL of this repository [https://github.com/DannyVarod/pxt-microbit-microx/](https://github.com/DannyVarod/pxt-microbit-microx/) into the "Search or enter project URL..." box
-5. Click on extension (uxRemotes, uxMotion, uxSensors,  uxDisplays, ...)
-6. This extension has now been added to your project, you can find the commands under "MicroX" in the UI.
+5. This extension has now been added to your project, you can find the commands under  (uxRemotes, uxMotion, uxSensors,  uxDisplays, ...).
 
 ## Currently includes functionality (in development) for:
 
@@ -30,7 +29,7 @@ Current license [LGPL v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.e
 * Yahboom remote / game handle
 * KittenBot Powerbrick (aka Armourbit)
 * KittenBot Robotbit
-* Yahboom Superbit (aka Super:bit)
+* Yahboom Superbit (aka "Super:bit")
 
 ### Sensors:
 
@@ -58,7 +57,6 @@ Current license [LGPL v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.e
 
 ### In development / parially working or not working:
 
-* Superbit support in development
 * Powerbrick color and gesture sensor - partially working
 * Powerbrick MP3 player - not working
 
