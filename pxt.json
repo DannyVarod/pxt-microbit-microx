@@ -16,8 +16,9 @@
         "README.md"
     ],
     "testFiles": [
-        "exampleJoystick.ts",
+        "exampleYahboomRemote.ts",
         "exampleRobotbit.ts",
+        "exampleSuperbit.ts",
         "examplePowerbrick.ts"
     ],
     "public": true
