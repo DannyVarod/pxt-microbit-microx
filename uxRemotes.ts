@@ -138,7 +138,7 @@ namespace uxRemotes {
     //% group="Yahboom"
     //% weight=95
     export function setYahboomRemoteVibrationSpeed(speed: number): void {
-        uxMotion.initializePhaseWidthModulationDriverAtAddress(0x41)
+        uxMotion.initializePhaseWidthModulationDriverAdvanced(0x41)
         speed = ux.inRange(speed, 0, uxMotion.getPhaseWidthLevels()-1)
         uxMotion.setPwm(0, 0, speed)
     }
