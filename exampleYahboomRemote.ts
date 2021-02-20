@@ -13,9 +13,9 @@ let joystickX = 0
 
 // Joystick buttons example
 uxRemotes.onYahboomRemoteButton(uxRemotes.YBRemoteButton.B3Blue, uxRemotes.ButtonState.Released, function () {
-    uxMotion.setMotor(uxMotion.Motor.RobotbitM1A, 100)
+    uxRemotes.setYahboomRemoteVibrationSpeed(4095)
     control.waitMicros(500000)
-    uxMotion.setMotor(uxMotion.Motor.RobotbitM1A, 0)
+    uxRemotes.setYahboomRemoteVibrationSpeed(0)
 })
 
 // Joystick position example

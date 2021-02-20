@@ -11,7 +11,7 @@ namespace uxMotion {
     // Originally const PHASE_WIDTH_PERIOD_MICROSEC = 20000
     // changes to 20480 for higher accuracy (since this is divided to below number of levels)
     const PHASE_WIDTH_PERIOD_MICROSEC = 20480
-    const PHASE_WIDTH_LEVELS = 4096
+    export const PHASE_WIDTH_LEVELS = 4096
 
     let initializedPhaseWidthModulationDriver = false
 
@@ -124,7 +124,7 @@ namespace uxMotion {
         initializedPhaseWidthModulationDriver = true
     }
 
-    function setPwm(channel: number, low2Bytes: number, high2Bytes: number): void {
+    export function setPwm(channel: number, low2Bytes: number, high2Bytes: number): void {
         if (channel < 0 || 15 < channel)
             return
         
