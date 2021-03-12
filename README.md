@@ -28,7 +28,7 @@ Current license [LGPL v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.e
 
 * Yahboom remote / game handle
 * KittenBot Powerbrick (aka Armourbit)
-* KittenBot Robotbit
+* KittenBot Robotbit (aka "robot:bit")
 * Yahboom Superbit (aka "Super:bit")
 
 ### Sensors:
