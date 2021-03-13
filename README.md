@@ -12,8 +12,6 @@ I will list which hardware modules worked for me, however, your hardware may pro
 
 If you would like to see support for your hardware here, you are welcome to send hardware for development and testing of this extension. No guarantee for if and when support will be added, depends on existence, clarity and correctness of documentation of the hardware and on if and when I have time to spare.
 
-Current license [LGPL v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html) (free to use, however, you need to share any changes you make, changed code must use same license).
-
 ## Usage:
 
 1. Run [MakeCode for micro:bit from here](https://makecode.microbit.org/) or [download offline version](https://makecode.microbit.org/offline-app)
