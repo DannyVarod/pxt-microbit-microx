@@ -86,7 +86,7 @@ namespace uxDisplays {
      * Initialize Kittenbot Robotbit pixels
      * @param pinNumber digital pin number
      */
-    //% block="Initialize Robotbit Pixels"
+    //% block="initialize robotbit pixels"
     //% blockId="uxDisplays_intializeRobotbitPixels"
     //% group="Robotbit"
     //% weight=49
@@ -110,7 +110,7 @@ namespace uxDisplays {
      * @param g pixel green intensity [0,255]
      * @param b pixel blue intensity [0,255]
     */
-    //% block="Set Robotbit pixels to color|red %r|green %g|blue %b"
+    //% block="set robotbit pixels to color|red %r|green %g|blue %b"
     //% blockId="uxDisplays_setRobotbitAllPixels"
     //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
@@ -129,7 +129,7 @@ namespace uxDisplays {
      * @param g pixel green intensity [0,255]
      * @param b pixel blue intensity [0,255]
     */
-    //% block="Set Robotbit pixel to color|x %x|red %r|green %g|blue %b"
+    //% block="set robotbit pixel to color|x %x|red %r|green %g|blue %b"
     //% blockId="uxDisplays_setRobotbitPixel"
     //% x.min=0 x.max=3 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
@@ -144,7 +144,7 @@ namespace uxDisplays {
     /**
      * Refresh Robotbit pixels
     */
-    //% block="Refresh/update Robotbit pixels"
+    //% block="refresh/update robotbit pixels"
     //% blockId="uxDisplays_refreshRobotbitPixels"
     //% port.min=0 port.max=6
     //% group="Robotbit"
@@ -159,7 +159,7 @@ namespace uxDisplays {
      * Initialize Yahboom Superbit pixels
      * @param pinNumber digital pin number
      */
-    //% block="Initialize Superbit Pixels"
+    //% block="initialize superbit pixels"
     //% blockId="uxDisplays_intializeSuperbitPixels"
     //% group="Superbit"
     //% weight=49
@@ -183,7 +183,7 @@ namespace uxDisplays {
      * @param g pixel green intensity [0,255]
      * @param b pixel blue intensity [0,255]
     */
-    //% block="Set Superbit pixels to color|red %r|green %g|blue %b"
+    //% block="set superbit pixels to color|red %r|green %g|blue %b"
     //% blockId="uxDisplays_setSuperbitAllPixels"
     //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
@@ -202,7 +202,7 @@ namespace uxDisplays {
      * @param g pixel green intensity [0,255]
      * @param b pixel blue intensity [0,255]
     */
-    //% block="Set Superbit pixel to color|x %x|red %r|green %g|blue %b"
+    //% block="set superbit pixel to color|x %x|red %r|green %g|blue %b"
     //% blockId="uxDisplays_setSuperbitPixel"
     //% x.min=0 x.max=3 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
@@ -217,7 +217,7 @@ namespace uxDisplays {
     /**
      * Refresh Superbit pixels
     */
-    //% block="Refresh/update Superbit pixels"
+    //% block="refresh/update superbit pixels"
     //% blockId="uxDisplays_refreshSuperbitPixels"
     //% port.min=0 port.max=6
     //% group="Superbit"
@@ -232,7 +232,7 @@ namespace uxDisplays {
      * Initialize Kittenbot Powerbrick pixels module
      * @param pinNumber digital pin number
      */
-    //% block="Initialize Powerbrick Pixels module connected to|digital pin %pinNumber"
+    //% block="initialize powerbrick pixels module connected to|digital pin %pinNumber"
     //% blockId="uxDisplays_intializePowerbrickPixels"
     //% group="Powerbrick"
     //% weight=45
@@ -257,7 +257,7 @@ namespace uxDisplays {
      * @param g pixel green intensity [0,255]
      * @param b pixel blue intensity [0,255]
     */
-    //% block="Set Powerbrick pixels to color|red %r|green %g|blue %b"
+    //% block="set powerbrick pixels to color|red %r|green %g|blue %b"
     //% blockId="uxDisplays_setPowerbrickAllPixels"
     //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
@@ -277,7 +277,7 @@ namespace uxDisplays {
      * @param g pixel green intensity [0,255]
      * @param b pixel blue intensity [0,255]
     */
-    //% block="Set Powerbrick pixel to color|y %y|x %x|red %r|green %g|blue %b"
+    //% block="set powerbrick pixel to color|y %y|x %x|red %r|green %g|blue %b"
     //% blockId="uxDisplays_setPowerbrickPixel"
     //% y.min=0 y.max=7 x.min=0 x.max=7 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
@@ -296,7 +296,7 @@ namespace uxDisplays {
     /**
      * Refresh Powerbrick pixels
     */
-    //% block="Refresh/update Powerbrick pixels"
+    //% block="refresh/update powerbrick pixels"
     //% blockId="uxDisplays_refreshPowerbrickPixels"
     //% group="Powerbrick"
     //% weight=42

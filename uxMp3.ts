@@ -15,13 +15,13 @@ namespace uxMp3 {
      * Powerbrick MP3 action (1, 2, 3, 5, 6, 7)
      */
     export enum POWERBRICK_MP3_CONTROL_ACTION {
-        //% block=Play
+        //% block="play"
         PLAY = 0xaa,
-        //% block=Stop
+        //% block="stop"
         STOP = 0xab,
-        //% block=Next
+        //% block="next"
         NEXT = 0xac,
-        //% block=Prev
+        //% block="prev"
         PREV = 0xad
     }
     
@@ -30,7 +30,7 @@ namespace uxMp3 {
      * @param serialPinTx serial pin number (transmit)
      * @param serialPinRx serial pin number (receive)
      */
-    //% block="Initialize Powerbrick MP3 Player connected to|serial pin (TX) %pinNumber|serial pin (RX) %pinNumber"
+    //% block="initialize powerbrick MP3 player connected to|serial pin (TX) %serialPinTx|serial pin (RX) %serialPinRx"
     //% blockId="uxMp3_initializePowerbrickMp3Player"
     //% group="Powerbrick"
     //% weight=39
@@ -97,7 +97,7 @@ namespace uxMp3 {
      * Control the MP3 player
      * @param controlAction control action
      */
-    //% block="Powerbrick MP3 Player|do %controlAction"
+    //% block="powerbrick MP3 player|do %controlAction"
     //% blockId="uxMp3_mp3PlayerControl"
     //% group="Powerbrick"
     //% weight=38
@@ -111,7 +111,7 @@ namespace uxMp3 {
      * Set volume
      * @param volume volume
      */
-    //% block="Powerbrick MP3 Player set|volume %volume"
+    //% block="powerbrick MP3 player set|volume %volume"
     //% blockId="uxMp3_mp3PlayerSetVolume"
     //% volume.min=0 volume.max=31
     //% group="Powerbrick"
@@ -125,7 +125,7 @@ namespace uxMp3 {
      * Play a file by index
      * @param filenumber 1-based file number
      */
-    //% block="Powerbrick MP3 Player play|file number %filenumber"
+    //% block="powerbrick MP3 player play|file number %filenumber"
     //% blockId="uxMp3_mp3PlayerPlayFilenumber"
     //% filenumber.min=1 filenumber.max=255
     //% group="Powerbrick"
@@ -139,7 +139,7 @@ namespace uxMp3 {
      * Play a file by name
      * @param filename file name, up to 250 characters
      */
-    //% block="Powerbrick MP3 Player play|file name %filename"
+    //% block="powerbrick MP3 player play|file name %filename"
     //% blockId="uxMp3_mp3PlayerPlayFile"
     //% group="Powerbrick"
     //% weight=35
