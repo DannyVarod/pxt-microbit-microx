@@ -53,7 +53,7 @@ namespace uxSensors {
      * @param pinNumber digital pin number
      */
     //% block="Ultrasonic distance of cat-sensor connected to|digital pin %pinNumber"
-    //% blockId="ux_ultrasonicDistanceCatShapedSensor"
+    //% blockId="uxSensors_ultrasonicDistanceCatShapedSensor"
     //% group="Distance"
     //% weight=79
     export function ultrasonicDistanceCatShapedSensor(pinNumber: ux.PIN_NUMBER): number {
@@ -65,7 +65,7 @@ namespace uxSensors {
      * @param pinNumber digital pin number
      */
     //% block="Ultrasonic distance of Powerbrick module connected to|digital pin %pinNumber"
-    //% blockId="ux_ultrasonicDistancePowerbrickUltrasonicModule"
+    //% blockId="uxSensors_ultrasonicDistancePowerbrickUltrasonicModule"
     //% group="Distance"
     //% weight=81
     export function ultrasonicDistancePowerbrickUltrasonicModule(pinNumber: ux.PIN_NUMBER): number {
@@ -77,7 +77,7 @@ namespace uxSensors {
      * @param pinNumber analog pin number
      */
     //% block="Sound level of Powerbrick module connected to|analog pin %pinNumber"
-    //% blockId="ux_soundLevelPowerbrickUltrasonicModule"
+    //% blockId="uxSensors_soundLevelPowerbrickUltrasonicModule"
     //% group="Sound"
     //% weight=78
     export function soundLevelPowerbrickUltrasonicModule(pinNumber: ux.PIN_NUMBER): number {
@@ -92,7 +92,7 @@ namespace uxSensors {
      * @param pinNumber digital pin number
      */
     //% block="Ultrasonic distance of cat-sensor with LED-ears connected to|digital pin %pinNumber"
-    //% blockId="ux_ultrasonicDistanceCatShapedSensorWithLeds"
+    //% blockId="uxSensors_ultrasonicDistanceCatShapedSensorWithLeds"
     //% group="Distance"
     //% weight=76
     export function ultrasonicDistanceCatShapedSensorWithLeds(pinNumber: ux.PIN_NUMBER): number {
@@ -115,7 +115,7 @@ namespace uxSensors {
      * @param ch2 digital pin number
      */
     //% block="Initialize Line Tracker 2CH connected to|digial pin %ch1|digial pin %ch2"
-    //% blockId="ux_initializeLineTracker2Channels"
+    //% blockId="uxSensors_initializeLineTracker2Channels"
     //% group="Line Trackers"
     //% weight=75
     export function initializeLineTracker2Channels(ch1: ux.PIN_NUMBER, ch2: ux.PIN_NUMBER): void {
@@ -130,7 +130,7 @@ namespace uxSensors {
      * @param ch3 digital pin number
      */
     //% block="Initialize Line Tracker 3CH connected to|digial pin %ch1|digial pin %ch2|digial pin %ch3"
-    //% blockId="ux_initializeLineTracker3Channels"
+    //% blockId="uxSensors_initializeLineTracker3Channels"
     //% group="Line Trackers"
     //% weight=74
     export function initializeLineTracker3Channels(ch1: ux.PIN_NUMBER, ch2: ux.PIN_NUMBER, ch3: ux.PIN_NUMBER): void {
@@ -145,7 +145,7 @@ namespace uxSensors {
      * @param ch2 digital pin number
      */
     //% block="Get line position from 2 channel tracker connected to|digial pin %ch1|digial pin %ch2"
-    //% blockId="ux_getLinePosition2Channels"
+    //% blockId="uxSensors_getLinePosition2Channels"
     //% group="Line Trackers"
     //% weight=73
     export function getLinePosition2Channels(ch1: ux.PIN_NUMBER, ch2: ux.PIN_NUMBER): string {
@@ -167,7 +167,7 @@ namespace uxSensors {
      * @param ch3 digital pin number
      */
     //% block="Get line position from 3 channel tracker connected to|digial pin %ch1|digial pin %ch2|digial pin %ch3"
-    //% blockId="ux_getLinePosition3Channels"
+    //% blockId="uxSensors_getLinePosition3Channels"
     //% group="Line Trackers"
     //% weight=72
     export function getLinePosition3Channels(ch1: ux.PIN_NUMBER, ch2: ux.PIN_NUMBER, ch3: ux.PIN_NUMBER): string {
@@ -224,7 +224,7 @@ namespace uxSensors {
      * Get brightness using Powerbrick Gesture+Color sensor
      */
     //% block="Powerbrick Gesture+Color get brightness"
-    //% blockId="ux_powerbrickGestureColorModuleGetBrightness"
+    //% blockId="uxSensors_powerbrickGestureColorModuleGetBrightness"
     //% group="Light"
     //% weight=71
     export function powerbrickGestureColorModuleGetBrightness(): number {
@@ -238,7 +238,7 @@ namespace uxSensors {
      * Get hue using Powerbrick Gesture+Color sensor
      */
     //% block="Powerbrick Gesture+Color get hue"
-    //% blockId="ux_powerbrickGestureColorModuleGetHue"
+    //% blockId="uxSensors_powerbrickGestureColorModuleGetHue"
     //% group="Light"
     //% weight=70
     export function powerbrickGestureColorModuleGetHue(): number {
@@ -252,7 +252,7 @@ namespace uxSensors {
      * Get RGB using Powerbrick Gesture+Color sensor
      */
     //% block="Powerbrick Gesture+Color get RGB"
-    //% blockId="ux_powerbrickGestureColorModuleGetRgb"
+    //% blockId="uxSensors_powerbrickGestureColorModuleGetRgb"
     //% group="Light"
     //% weight=69
     export function powerbrickGestureColorModuleGetRgb(): string {
@@ -268,7 +268,7 @@ namespace uxSensors {
      */
     //% block="Powerbrick Gesture+Color set LED|led number %ledNumber|on %on"
     //% ledNumber.min=0 ledNumber.max=4
-    //% blockId="ux_powerbrickGestureColorModuleSetLed"
+    //% blockId="uxSensors_powerbrickGestureColorModuleSetLed"
     //% group="Proximity"
     //% weight=68
     export function powerbrickGestureColorModuleSetLed(ledNumber: number, on: boolean): void {
@@ -291,7 +291,7 @@ namespace uxSensors {
      * @param led4On led4On
      */
     //% block="Powerbrick Gesture+Color set LEDs|led1 %led1On|led2 %led2On|led3 %led3On|led4 %led4On"
-    //% blockId="ux_powerbrickGestureColorModuleSetLeds"
+    //% blockId="uxSensors_powerbrickGestureColorModuleSetLeds"
     //% group="Proximity"
     //% weight=67
     export function powerbrickGestureColorModuleSetLeds(led1On: boolean, led2On: boolean, led3On: boolean, led4On: boolean): void {
@@ -307,7 +307,7 @@ namespace uxSensors {
      * Set Phase Width Modulation of Powerbrick Gesture+Color sensor's LEDs
      */
     //% block="Powerbrick Gesture+Color set PWM|phase width %pwm"
-    //% blockId="ux_powerbrickGestureColorModuleSetPwm"
+    //% blockId="uxSensors_powerbrickGestureColorModuleSetPwm"
     //% group="Proximity"
     //% weight=66
     export function powerbrickGestureColorModuleSetPwm(pwm: number): void {
@@ -323,7 +323,7 @@ namespace uxSensors {
      * Get Proximity using Powerbrick Gesture+Color sensor
      */
     //% block="Powerbrick Gesture+Color get proximity"
-    //% blockId="ux_powerbrickGestureColorModuleGetProximity"
+    //% blockId="uxSensors_powerbrickGestureColorModuleGetProximity"
     //% group="Proximity"
     //% weight=65
     export function powerbrickGestureColorModuleGetProximity(): number {
@@ -335,7 +335,7 @@ namespace uxSensors {
      * Get gesture using Powerbrick Gesture+Color sensor
      */
     //% block="Powerbrick Gesture+Color get gesture"
-    //% blockId="ux_powerbrickGestureColorModuleGetGesture"
+    //% blockId="uxSensors_powerbrickGestureColorModuleGetGesture"
     //% group="Gestures"
     //% weight=64
     export function powerbrickGestureColorModuleGetGesture(): number {

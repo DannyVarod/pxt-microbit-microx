@@ -87,7 +87,7 @@ namespace uxDisplays {
      * @param pinNumber digital pin number
      */
     //% block="Initialize Robotbit Pixels"
-    //% blockId="ux_intializeRobotbitPixels"
+    //% blockId="uxDisplays_intializeRobotbitPixels"
     //% group="Robotbit"
     //% weight=49
     export function intializeRobotbitPixels(): void {
@@ -111,7 +111,7 @@ namespace uxDisplays {
      * @param b pixel blue intensity [0,255]
     */
     //% block="Set Robotbit pixels to color|red %r|green %g|blue %b"
-    //% blockId="ux_setRobotbitAllPixels"
+    //% blockId="uxDisplays_setRobotbitAllPixels"
     //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
     //% group="Robotbit"
@@ -130,7 +130,7 @@ namespace uxDisplays {
      * @param b pixel blue intensity [0,255]
     */
     //% block="Set Robotbit pixel to color|x %x|red %r|green %g|blue %b"
-    //% blockId="ux_setRobotbitPixel"
+    //% blockId="uxDisplays_setRobotbitPixel"
     //% x.min=0 x.max=3 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
     //% group="Robotbit"
@@ -145,7 +145,7 @@ namespace uxDisplays {
      * Refresh Robotbit pixels
     */
     //% block="Refresh/update Robotbit pixels"
-    //% blockId="ux_refreshRobotbitPixels"
+    //% blockId="uxDisplays_refreshRobotbitPixels"
     //% port.min=0 port.max=6
     //% group="Robotbit"
     //% weight=46
@@ -160,7 +160,7 @@ namespace uxDisplays {
      * @param pinNumber digital pin number
      */
     //% block="Initialize Superbit Pixels"
-    //% blockId="ux_intializeSuperbitPixels"
+    //% blockId="uxDisplays_intializeSuperbitPixels"
     //% group="Superbit"
     //% weight=49
     export function intializeSuperbitPixels(): void {
@@ -184,7 +184,7 @@ namespace uxDisplays {
      * @param b pixel blue intensity [0,255]
     */
     //% block="Set Superbit pixels to color|red %r|green %g|blue %b"
-    //% blockId="ux_setSuperbitAllPixels"
+    //% blockId="uxDisplays_setSuperbitAllPixels"
     //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
     //% group="Superbit"
@@ -203,7 +203,7 @@ namespace uxDisplays {
      * @param b pixel blue intensity [0,255]
     */
     //% block="Set Superbit pixel to color|x %x|red %r|green %g|blue %b"
-    //% blockId="ux_setSuperbitPixel"
+    //% blockId="uxDisplays_setSuperbitPixel"
     //% x.min=0 x.max=3 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
     //% group="Superbit"
@@ -218,7 +218,7 @@ namespace uxDisplays {
      * Refresh Superbit pixels
     */
     //% block="Refresh/update Superbit pixels"
-    //% blockId="ux_refreshSuperbitPixels"
+    //% blockId="uxDisplays_refreshSuperbitPixels"
     //% port.min=0 port.max=6
     //% group="Superbit"
     //% weight=46
@@ -233,7 +233,7 @@ namespace uxDisplays {
      * @param pinNumber digital pin number
      */
     //% block="Initialize Powerbrick Pixels module connected to|digital pin %pinNumber"
-    //% blockId="ux_intializePowerbrickPixels"
+    //% blockId="uxDisplays_intializePowerbrickPixels"
     //% group="Powerbrick"
     //% weight=45
     export function intializePowerbrickPixels(pinNumber: ux.PIN_NUMBER): void {
@@ -258,7 +258,7 @@ namespace uxDisplays {
      * @param b pixel blue intensity [0,255]
     */
     //% block="Set Powerbrick pixels to color|red %r|green %g|blue %b"
-    //% blockId="ux_setPowerbrickAllPixels"
+    //% blockId="uxDisplays_setPowerbrickAllPixels"
     //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
     //% group="Powerbrick"
@@ -278,7 +278,7 @@ namespace uxDisplays {
      * @param b pixel blue intensity [0,255]
     */
     //% block="Set Powerbrick pixel to color|y %y|x %x|red %r|green %g|blue %b"
-    //% blockId="ux_setPowerbrickPixel"
+    //% blockId="uxDisplays_setPowerbrickPixel"
     //% y.min=0 y.max=7 x.min=0 x.max=7 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
     //% group="Powerbrick"
@@ -297,7 +297,7 @@ namespace uxDisplays {
      * Refresh Powerbrick pixels
     */
     //% block="Refresh/update Powerbrick pixels"
-    //% blockId="ux_refreshPowerbrickPixels"
+    //% blockId="uxDisplays_refreshPowerbrickPixels"
     //% group="Powerbrick"
     //% weight=42
     export function refreshPowerbrickPixels() {

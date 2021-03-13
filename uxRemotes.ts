@@ -12,9 +12,9 @@ namespace uxRemotes {
      * Button state
      */
     export enum BUTTON_STATE {
-        //% block=Released
+        //% block="released"
         RELEASED = 0,
-        //% block=Pressed
+        //% block="pressed"
         PRESSED = 1
     }
         
@@ -22,15 +22,15 @@ namespace uxRemotes {
      * YB-EMH02 ver 1.2 remote buttons
      */
     export enum YB_REMOTE_BUTTON {
-        //% block=JoystickZ
+        //% block="joystick z"
         JOYSTICK_Z = 8,
-        //% block=B1Red
+        //% block="b1 red"
         B1_RED = 13,
-        //% block=B2Green
+        //% block="b2 green"
         B2_GREENGreen = 14,
-        //% block=B3Blue
+        //% block="b3 blue"
         B3_BLUE = 15,
-        //% block=B4Yellow
+        //% block="b4 yellow"
         B4_YELLOW = 16
     }
 
@@ -41,8 +41,8 @@ namespace uxRemotes {
     /**
      * Initialize for Yahboom remote
      */
-    //% block="Initialize Yahboom remote"
-    //% blockId="ux_initializeYahboomRemote"
+    //% block="initialize yahboom remote"
+    //% blockId="uxRemotes_initializeYahboomRemote"
     //% group="Yahboom"
     //% weight=99
     export function initializeYahboomRemote(): void {
@@ -60,8 +60,8 @@ namespace uxRemotes {
     /**
      * Get X-axis value of YB-EMH02 ver 1.2 joystick (port2) between -1 (left) and 1 (right)
      */
-    //% block="Yahboom remote X (-1=left to 1=right)"
-    //% blockId="ux_joystickX"
+    //% block="yahboom remote x (-1=left to 1=right)"
+    //% blockId="uxRemotes_joystickX"
     //% group="Yahboom"
     //% weight=98
     export function joystickX(): number {
@@ -80,8 +80,8 @@ namespace uxRemotes {
     /**
      * Get Y-axis value of YB-EMH02 ver 1.2 joystick (port1) between -1 (bottom) and 1 (top)
      */
-    //% block="Yahboom remote Y (-1=down to 1=up)"
-    //% blockId="ux_joystickY"
+    //% block="yahboom remote y (-1=down to 1=up)"
+    //% blockId="uxRemotes_joystickY"
     //% group="Yahboom"
     //% weight=97
     export function joystickY() {
@@ -100,8 +100,8 @@ namespace uxRemotes {
     /**
      * Act on YB-EMH02 ver 1.2 remote button click (Click on Joystick (Z), B1, B2, B3, B4)
      */
-    //% block="On Yahboom remote|button %button|state %state"
-    //% blockId="ux_onYahboomRemoteButton"
+    //% block="on yahboom remote|button %button|state %state"
+    //% blockId="uxRemotes_onYahboomRemoteButton"
     //% group="Yahboom"
     //% weight=96
     export function onYahboomRemoteButton(button: YB_REMOTE_BUTTON, state: BUTTON_STATE, body: Action): void {
@@ -136,8 +136,8 @@ namespace uxRemotes {
     //  * Set Yahboom remote vibration speed
     //  * @param speed [0...4095] pulse width in uSec
     // */
-    // //% block="Yahboom remote vibration speed|speed %speed"
-    // //% blockId="ux_setYahboomRemoteVibrationSpeed"
+    // //% block="yahboom remote vibration speed|speed %speed"
+    // //% blockId="uxRemotes_setYahboomRemoteVibrationSpeed"
     // //% speed.min=0 speed.max=4095
     // //% group="Yahboom"
     // //% weight=95

@@ -19,53 +19,53 @@ namespace uxMotion {
      * Servo number to channel mapping
      */
     export enum SERVO {
-        //% block=RobotbitServo1
+        //% block="robotbit servo1"
         ROBOTBIT_SERVO1 = 8,
-        //% block=RobotbitServo2
+        //% block="robotbit servo2"
         ROBOTBIT_SERVO2 = 9,
-        //% block=RobotbitServo3
+        //% block="robotbit servo3"
         ROBOTBIT_SERVO3 = 10,
-        //% block=RobotbitServo4
+        //% block="robotbit servo4"
         ROBOTBIT_SERVO4 = 11,
-        //% block=RobotbitServo5
+        //% block="robotbit servo5"
         ROBOTBIT_SERVO5 = 12,
-        //% block=RobotbitServo6
+        //% block="robotbit servo6"
         ROBOTBIT_SERVO6 = 13,
-        //% block=RobotbitServo7
+        //% block="robotbit servo7"
         ROBOTBIT_SERVO7 = 14,
-        //% block=RobotbitServo8
+        //% block="robotbit servo8"
         ROBOTBIT_SERVO8 = 15,
-        //% block=PowerbrickServo1
+        //% block="powerbrick servo1"
         POWERBRICK_SERVO1 = 8,
-        //% block=PowerbrickServo2
+        //% block="powerbrick servo2"
         POWERBRICK_SERVO2 = 9,
-        //% block=PowerbrickServo3
+        //% block="powerbrick servo3"
         POWERBRICK_SERVO3 = 10,
-        //% block=PowerbrickServo4
+        //% block="powerbrick servo4"
         POWERBRICK_SERVO4 = 11,
-        //% block=PowerbrickServo5
+        //% block="powerbrick servo5"
         POWERBRICK_SERVO5 = 12,
-        //% block=PowerbrickServo6
+        //% block="powerbrick servo6"
         POWERBRICK_SERVO6 = 13,
-        //% block=PowerbrickServo7
+        //% block="powerbrick servo7"
         POWERBRICK_SERVO7 = 14,
-        //% block=PowerbrickServo8
+        //% block="powerbrick servo8"
         POWERBRICK_SERVO8 = 15,
-        //% block=SuperbitServo1
+        //% block="superbit servo1"
         SUPERBIT_SERVO1 = 0,
-        //% block=SuperbitServo2
+        //% block="superbit servo2"
         SUPERBIT_SERVO2 = 1,
-        //% block=SuperbitServo3
+        //% block="superbit servo3"
         SUPERBIT_SERVO3 = 2,
-        //% block=SuperbitServo4
+        //% block="superbit servo4"
         SUPERBIT_SERVO4 = 3,
-        //% block=SuperbitServo5
+        //% block="superbit servo5"
         SUPERBIT_SERVO5 = 4,
-        //% block=SuperbitServo6
+        //% block="superbit servo6"
         SUPERBIT_SERVO6 = 5,
-        //% block=SuperbitServo7
+        //% block="superbit servo7"
         SUPERBIT_SERVO7 = 6,
-        //% block=SuperbitServo8
+        //% block="superbit servo8"
         SUPERBIT_SERVO8 = 7,
     }
 
@@ -74,25 +74,25 @@ namespace uxMotion {
      * each motor takes up two consecutive channels, hence the gap of 2 between them
      */
     export enum MOTOR {
-        //% block=RobotbitM1A
+        //% block="robotbit M1.A"
         ROBOTBIT_M1A = 0,
-        //% block=RobotbitM1B
+        //% block="robotbit M1.B"
         ROBOTBIT_M1B = 2,
-        //% block=RobotbitM2A
+        //% block="robotbit M2.A"
         ROBOTBIT_M2A = 4,
-        //% block=RobotbitM2B
+        //% block="robotbit M2.B"
         ROBOTBIT_M2B = 6,
-        //% block=PowerbrickM1
+        //% block="powerbrick M1"
         POWERBRICK_M1 = 0,
-        //% block=PowerbrickM2
+        //% block="powerbrick M2"
         POWERBRICK_M2 = 2,
-        //% block=SuperbitM1
+        //% block="superbit M1"
         SUPERBIT_M1 = 8,
-        //% block=SuperbitM2
+        //% block="superbit M2"
         SUPERBIT_M2 = 10,
-        //% block=SuperbitM3
+        //% block="superbit M3"
         SUPERBIT_M3 = 12,
-        //% block=SuperbitM4
+        //% block="superbit M4"
         SUPERBIT_M4 = 14,
     }
 
@@ -111,8 +111,8 @@ namespace uxMotion {
     /**
      * Initialize the phase width modulation driver used for servos and motors
      */
-    //% block="Initialize Phase Width Modulation Driver (for servos and motors)|address %address|levels %levels|widthMicrosec %widthMicrosec"
-    //% blockId="ux_initializePhaseWidthModulationDriverAtAddress"
+    //% block="initialize phase width modulation driver (for servos and motors)|address %address|levels %levels|widthMicrosec %widthMicrosec"
+    //% blockId="uxMotion_initializePhaseWidthModulationDriverAtAddress"
     //% address.min=0 address.max=127 address.defl=64
     //% levels.min=256 levels.max=65536 levels.defl=4096
     //% widthMicrosec.min=10240 widthMicrosec.max=40960 widthMicrosec.defl=20480
@@ -140,8 +140,8 @@ namespace uxMotion {
     /**
      * Initialize the phase width modulation driver used for servos and motors
      */
-    //% block="Initialize Phase Width Modulation Driver (for servos and motors)"
-    //% blockId="ux_initializePhaseWidthModulationDriver"
+    //% block="initialize phase width modulation driver (for servos and motors)"
+    //% blockId="uxMotion_initializePhaseWidthModulationDriver"
     //% group="Initialization"
     //% weight=89
     export function initializePhaseWidthModulationDriver(): void {
@@ -168,8 +168,8 @@ namespace uxMotion {
      * @param motorNum where motor is connected e.g.: M1A
      * @param speed [-4095...4095] speed
     */
-    //% block="Set motor speed for motor|connected to %motorNum|speed %speed"
-    //% blockId="ux_setMotor"
+    //% block="set motor speed for motor|connected to %motorNum|speed %speed"
+    //% blockId="uxMotion_setMotor"
     //% speed.min=-4095 speed.max=4095
     //% group="Motors"
     //% weight=88
@@ -197,8 +197,8 @@ namespace uxMotion {
      * @param servoNum where servo is connected e.g.: Servo1
      * @param pulseWidth [5...20470] pulse width in uSec
     */
-    //% block="Servo pulse width|connected to %servoNum|pulse width (uSec) %pulseWidth"
-    //% blockId="ux_setServoPulseWidth"
+    //% block="servo pulse width|connected to %servoNum|pulse width (uSec) %pulseWidth"
+    //% blockId="uxMotion_setServoPulseWidth"
     //% pulseWidth.min=5 pulseWidth.max=20470
     //% inlineInputMode=inline
     //% advanced=true
@@ -219,8 +219,8 @@ namespace uxMotion {
      * @param servoNum where servo is connected e.g.: Servo1
      * @param speed [-1024...1024] speed
     */
-    //% block="Orange/Green Geekservo|connected to %servoNum|speed %speed"
-    //% blockId="ux_setOrangeGreenGeekservoSpeed"
+    //% block="orange/green geekservo|connected to %servoNum|speed %speed"
+    //% blockId="uxMotion_setOrangeGreenGeekservoSpeed"
     //% speed.min=-1024 speed.max=1024
     //% inlineInputMode=inline
     //% group="Speed Servos"
@@ -236,12 +236,12 @@ namespace uxMotion {
     }
 
     /**
-     * Set Grey Geekservo angle
+     * Set grey geekservo angle
      * @param servoNum where servo is connected e.g.: Servo1
      * @param degree [-45...225] angle in degrees e.g.: -45, 90, 225
     */
-    //% block="Grey Geekservo|connected to %servoNum|degree %degree"
-    //% blockId="ux_setGreyGeekservoAngle"
+    //% block="grey geekservo|connected to %servoNum|degree %degree"
+    //% blockId="uxMotion_setGreyGeekservoAngle"
     //% degree.min=-45 degree.max=225
     //% inlineInputMode=inline
     //% group="Angle Servos"
@@ -269,12 +269,12 @@ namespace uxMotion {
     }
 
     /**
-     * Set LARGE Grey Geekservo angle
+     * Set large grey geekservo angle
      * @param servoNum where servo is connected e.g.: Servo1
      * @param degree [0...360] angle in degrees e.g.: 0, 15, 30, 90, 180, 270, 360
     */
-    //% block="LARGE grey Geekservo|connected to %servoNum|degree %degree"
-    //% blockId="ux_setLargeGreyGeekservoAngle"
+    //% block="large grey Geekservo|connected to %servoNum|degree %degree"
+    //% blockId="uxMotion_setLargeGreyGeekservoAngle"
     //% degree.min=0 degree.max=360
     //% inlineInputMode=inline
     //% group="Angle Servos"

@@ -31,7 +31,7 @@ namespace uxMp3 {
      * @param serialPinRx serial pin number (receive)
      */
     //% block="Initialize Powerbrick MP3 Player connected to|serial pin (TX) %pinNumber|serial pin (RX) %pinNumber"
-    //% blockId="ux_initializePowerbrickMp3Player"
+    //% blockId="uxMp3_initializePowerbrickMp3Player"
     //% group="Powerbrick"
     //% weight=39
     export function initializePowerbrickMp3Player(serialPinTx: ux.PIN_NUMBER, serialPinRx: ux.PIN_NUMBER): void {   
@@ -98,7 +98,7 @@ namespace uxMp3 {
      * @param controlAction control action
      */
     //% block="Powerbrick MP3 Player|do %controlAction"
-    //% blockId="ux_mp3PlayerControl"
+    //% blockId="uxMp3_mp3PlayerControl"
     //% group="Powerbrick"
     //% weight=38
     export function mp3PlayerControl(controlAction: POWERBRICK_MP3_CONTROL_ACTION): void {
@@ -112,7 +112,7 @@ namespace uxMp3 {
      * @param volume volume
      */
     //% block="Powerbrick MP3 Player set|volume %volume"
-    //% blockId="ux_mp3PlayerSetVolume"
+    //% blockId="uxMp3_mp3PlayerSetVolume"
     //% volume.min=0 volume.max=31
     //% group="Powerbrick"
     //% weight=37
@@ -126,7 +126,7 @@ namespace uxMp3 {
      * @param filenumber 1-based file number
      */
     //% block="Powerbrick MP3 Player play|file number %filenumber"
-    //% blockId="ux_mp3PlayerPlayFilenumber"
+    //% blockId="uxMp3_mp3PlayerPlayFilenumber"
     //% filenumber.min=1 filenumber.max=255
     //% group="Powerbrick"
     //% weight=36
@@ -140,7 +140,7 @@ namespace uxMp3 {
      * @param filename file name, up to 250 characters
      */
     //% block="Powerbrick MP3 Player play|file name %filename"
-    //% blockId="ux_mp3PlayerPlayFile"
+    //% blockId="uxMp3_mp3PlayerPlayFile"
     //% group="Powerbrick"
     //% weight=35
     export function mp3PlayerPlayFile(filename: string): void {
