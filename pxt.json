@@ -1,7 +1,7 @@
 {
     "name": "MicroX",
     "description": "An all-in-one (beta) extension for micro:bit supporting multiple hardware modules, e.g. boards, sensors, motors, servos.",
-    "icon": "./docs/static/libs/icon.png",
+    "icon": "./static/libs/icon.png",
     "dependencies": {
         "core": "*",
         "ws2812b": "github:Microsoft/pxt-ws2812b#v0.1.1",
