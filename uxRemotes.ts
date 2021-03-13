@@ -11,27 +11,27 @@ namespace uxRemotes {
     /**
      * Button state
      */
-    export enum ButtonState {
+    export enum BUTTON_STATE {
         //% block=Released
-        Released = 0,
+        RELEASED = 0,
         //% block=Pressed
-        Pressed = 1
+        PRESSED = 1
     }
         
     /**
      * YB-EMH02 ver 1.2 remote buttons
      */
-    export enum YBRemoteButton {
+    export enum YB_REMOTE_BUTTON {
         //% block=JoystickZ
-        JoystickZ = 8,
+        JOYSTICK_Z = 8,
         //% block=B1Red
-        B1Red = 13,
+        B1_RED = 13,
         //% block=B2Green
-        B2Green = 14,
+        B2_GREENGreen = 14,
         //% block=B3Blue
-        B3Blue = 15,
+        B3_BLUE = 15,
         //% block=B4Yellow
-        B4Yellow = 16
+        B4_YELLOW = 16
     }
 
     // function initializeYahboomRemotePhaseWidthModulationDriver(): void {
@@ -104,24 +104,24 @@ namespace uxRemotes {
     //% blockId="ux_onYahboomRemoteButton"
     //% group="Yahboom"
     //% weight=96
-    export function onYahboomRemoteButton(button: YBRemoteButton, state: ButtonState, body: Action): void {
+    export function onYahboomRemoteButton(button: YB_REMOTE_BUTTON, state: BUTTON_STATE, body: Action): void {
         
         let pulseValue: PulseValue = PulseValue.Low
-        if (state == ButtonState.Released)
+        if (state == BUTTON_STATE.RELEASED)
             pulseValue = PulseValue.High
         
         let pin: DigitalPin = DigitalPin.P8
         switch (button) {
-            case YBRemoteButton.B1Red:
+            case YB_REMOTE_BUTTON.B1_RED:
                 pin = DigitalPin.P13
                 break
-            case YBRemoteButton.B2Green:
+            case YB_REMOTE_BUTTON.B2_GREENGreen:
                 pin = DigitalPin.P14
                 break
-            case YBRemoteButton.B3Blue:
+            case YB_REMOTE_BUTTON.B3_BLUE:
                 pin = DigitalPin.P15
                 break
-            case YBRemoteButton.B4Yellow:
+            case YB_REMOTE_BUTTON.B4_YELLOW:
                 pin = DigitalPin.P16
                 break
             default:

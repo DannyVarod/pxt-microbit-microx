@@ -14,15 +14,15 @@ namespace uxMp3 {
     /**
      * Powerbrick MP3 action (1, 2, 3, 5, 6, 7)
      */
-    export enum PowerbrickMp3ControlAction {
+    export enum POWERBRICK_MP3_CONTROL_ACTION {
         //% block=Play
-        Play = 0xaa,
+        PLAY = 0xaa,
         //% block=Stop
-        Stop = 0xab,
+        STOP = 0xab,
         //% block=Next
-        Next = 0xac,
+        NEXT = 0xac,
         //% block=Prev
-        Prev = 0xad
+        PREV = 0xad
     }
     
     /**
@@ -34,7 +34,7 @@ namespace uxMp3 {
     //% blockId="ux_initializePowerbrickMp3Player"
     //% group="Powerbrick"
     //% weight=39
-    export function initializePowerbrickMp3Player(serialPinTx: ux.PinNumber, serialPinRx: ux.PinNumber): void {   
+    export function initializePowerbrickMp3Player(serialPinTx: ux.PIN_NUMBER, serialPinRx: ux.PIN_NUMBER): void {   
         if (initializedPowerbrickMp3Player)
             return
         
@@ -101,8 +101,8 @@ namespace uxMp3 {
     //% blockId="ux_mp3PlayerControl"
     //% group="Powerbrick"
     //% weight=38
-    export function mp3PlayerControl(controlAction: PowerbrickMp3ControlAction): void {
-        if (controlAction < PowerbrickMp3ControlAction.Play || controlAction > PowerbrickMp3ControlAction.Prev)
+    export function mp3PlayerControl(controlAction: POWERBRICK_MP3_CONTROL_ACTION): void {
+        if (controlAction < POWERBRICK_MP3_CONTROL_ACTION.PLAY || controlAction > POWERBRICK_MP3_CONTROL_ACTION.PREV)
             return
         _mp3PlayerSendArray(controlAction, [])
     }

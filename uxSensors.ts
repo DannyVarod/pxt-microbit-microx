@@ -9,7 +9,7 @@ namespace uxSensors {
     let usedPrevDistance = false
     let prevDistance: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-    function _ultrasonicDistance(pinNumber: ux.PinNumber, pullMode: PinPullMode, mult: number, div: number, attempt: number): number {
+    function _ultrasonicDistance(pinNumber: ux.PIN_NUMBER, pullMode: PinPullMode, mult: number, div: number, attempt: number): number {
         let pin = ux.pinToDigitalPin(pinNumber)
         if (pin == null)
             return 0
@@ -56,7 +56,7 @@ namespace uxSensors {
     //% blockId="ux_ultrasonicDistanceCatShapedSensor"
     //% group="Distance"
     //% weight=79
-    export function ultrasonicDistanceCatShapedSensor(pinNumber: ux.PinNumber): number {
+    export function ultrasonicDistanceCatShapedSensor(pinNumber: ux.PIN_NUMBER): number {
         return _ultrasonicDistance(pinNumber, PinPullMode.PullDown, 21, 800, 0)
     }
 
@@ -68,7 +68,7 @@ namespace uxSensors {
     //% blockId="ux_ultrasonicDistancePowerbrickUltrasonicModule"
     //% group="Distance"
     //% weight=81
-    export function ultrasonicDistancePowerbrickUltrasonicModule(pinNumber: ux.PinNumber): number {
+    export function ultrasonicDistancePowerbrickUltrasonicModule(pinNumber: ux.PIN_NUMBER): number {
         return _ultrasonicDistance(pinNumber, PinPullMode.PullNone, 10, 348, 0)
     }
 
@@ -80,7 +80,7 @@ namespace uxSensors {
     //% blockId="ux_soundLevelPowerbrickUltrasonicModule"
     //% group="Sound"
     //% weight=78
-    export function soundLevelPowerbrickUltrasonicModule(pinNumber: ux.PinNumber): number {
+    export function soundLevelPowerbrickUltrasonicModule(pinNumber: ux.PIN_NUMBER): number {
         let pin = ux.pinToAnalogPin(pinNumber)
         if (pin == null)
             return 0
@@ -95,18 +95,18 @@ namespace uxSensors {
     //% blockId="ux_ultrasonicDistanceCatShapedSensorWithLeds"
     //% group="Distance"
     //% weight=76
-    export function ultrasonicDistanceCatShapedSensorWithLeds(pinNumber: ux.PinNumber): number {
+    export function ultrasonicDistanceCatShapedSensorWithLeds(pinNumber: ux.PIN_NUMBER): number {
         return _ultrasonicDistance(pinNumber, PinPullMode.PullNone, 9, 348, 0)
     }
 
     /**
      * Line state
      */
-    export enum LineState {
+    export enum LINE_STATE {
         //% block=White
-        White = 0,
+        WHITE = 0,
         //% block=Black
-        Black = 1
+        BLACK = 1
     }
 
     /**
@@ -118,7 +118,7 @@ namespace uxSensors {
     //% blockId="ux_initializeLineTracker2Channels"
     //% group="Line Trackers"
     //% weight=75
-    export function initializeLineTracker2Channels(ch1: ux.PinNumber, ch2: ux.PinNumber): void {
+    export function initializeLineTracker2Channels(ch1: ux.PIN_NUMBER, ch2: ux.PIN_NUMBER): void {
         pins.setPull(ux.pinToDigitalPin(ch1), PinPullMode.PullUp)
         pins.setPull(ux.pinToDigitalPin(ch2), PinPullMode.PullUp)
     }
@@ -133,7 +133,7 @@ namespace uxSensors {
     //% blockId="ux_initializeLineTracker3Channels"
     //% group="Line Trackers"
     //% weight=74
-    export function initializeLineTracker3Channels(ch1: ux.PinNumber, ch2: ux.PinNumber, ch3: ux.PinNumber): void {
+    export function initializeLineTracker3Channels(ch1: ux.PIN_NUMBER, ch2: ux.PIN_NUMBER, ch3: ux.PIN_NUMBER): void {
         pins.setPull(ux.pinToDigitalPin(ch1), PinPullMode.PullUp)
         pins.setPull(ux.pinToDigitalPin(ch2), PinPullMode.PullUp)
         pins.setPull(ux.pinToDigitalPin(ch3), PinPullMode.PullUp)
@@ -148,7 +148,7 @@ namespace uxSensors {
     //% blockId="ux_getLinePosition2Channels"
     //% group="Line Trackers"
     //% weight=73
-    export function getLinePosition2Channels(ch1: ux.PinNumber, ch2: ux.PinNumber): string {
+    export function getLinePosition2Channels(ch1: ux.PIN_NUMBER, ch2: ux.PIN_NUMBER): string {
         ch1 = 1 - pins.digitalReadPin(ux.pinToDigitalPin(ch1))
         ch2 = 1 - pins.digitalReadPin(ux.pinToDigitalPin(ch2))
         if (ch1 == 0 && ch2 == 0)
@@ -170,7 +170,7 @@ namespace uxSensors {
     //% blockId="ux_getLinePosition3Channels"
     //% group="Line Trackers"
     //% weight=72
-    export function getLinePosition3Channels(ch1: ux.PinNumber, ch2: ux.PinNumber, ch3: ux.PinNumber): string {
+    export function getLinePosition3Channels(ch1: ux.PIN_NUMBER, ch2: ux.PIN_NUMBER, ch3: ux.PIN_NUMBER): string {
         ch1 = 1 - pins.digitalReadPin(ux.pinToDigitalPin(ch1))
         ch2 = 1 - pins.digitalReadPin(ux.pinToDigitalPin(ch2))
         ch3 = 1 - pins.digitalReadPin(ux.pinToDigitalPin(ch3))
@@ -194,15 +194,15 @@ namespace uxSensors {
     /**
      * Powerbrick gesture and color sensor mode
      */
-    enum PowerbrickGestureColorSensorMode {
+    enum POWERBRICK_GESTURE_COLOR_SENSOR_MODE {
         //% block=Ambient
-        Ambient = 1,
+        AMBIENT = 1,
         //% block=Proximity
-        Proximity = 2,
+        PROXIMITY = 2,
         //% block=Gesture
-        Gesture = 3,
+        GESTURE = 3,
         //% block=Active
-        Active = 4
+        ACTIVE = 4
     }
 
     const KC_ADDR = 0x6D
@@ -216,7 +216,7 @@ namespace uxSensors {
     const KC_PROXIMITY = 31
     const KC_GESTURE = 41
 
-    function powerbrickGestureColorModuleSetMode(mode: PowerbrickGestureColorSensorMode): void {
+    function powerbrickGestureColorModuleSetMode(mode: POWERBRICK_GESTURE_COLOR_SENSOR_MODE): void {
         ux.i2cwrite(KC_ADDR, KC_MODE, mode);
     }
 
@@ -228,7 +228,7 @@ namespace uxSensors {
     //% group="Light"
     //% weight=71
     export function powerbrickGestureColorModuleGetBrightness(): number {
-        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Ambient)
+        powerbrickGestureColorModuleSetMode(POWERBRICK_GESTURE_COLOR_SENSOR_MODE.AMBIENT)
         pins.i2cWriteNumber(KC_ADDR, KC_READCOLOR, NumberFormat.UInt8BE)
         let buff = pins.i2cReadBuffer(KC_ADDR, 2)
         return buff[1]
@@ -242,7 +242,7 @@ namespace uxSensors {
     //% group="Light"
     //% weight=70
     export function powerbrickGestureColorModuleGetHue(): number {
-        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Ambient)
+        powerbrickGestureColorModuleSetMode(POWERBRICK_GESTURE_COLOR_SENSOR_MODE.AMBIENT)
         pins.i2cWriteNumber(KC_ADDR, KC_READCOLOR, NumberFormat.UInt8BE)
         let buff = pins.i2cReadBuffer(KC_ADDR, 2)
         return buff[0] * 2
@@ -256,7 +256,7 @@ namespace uxSensors {
     //% group="Light"
     //% weight=69
     export function powerbrickGestureColorModuleGetRgb(): string {
-        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Active)
+        powerbrickGestureColorModuleSetMode(POWERBRICK_GESTURE_COLOR_SENSOR_MODE.ACTIVE)
         pins.i2cWriteNumber(KC_ADDR, KC_READCOLORRAW, NumberFormat.UInt8BE);
         let buff = pins.i2cReadBuffer(KC_ADDR, 4)
         return numberToHex(buff[0]) + numberToHex(buff[1]) + numberToHex(buff[2]) + numberToHex(buff[3])
@@ -272,7 +272,7 @@ namespace uxSensors {
     //% group="Proximity"
     //% weight=68
     export function powerbrickGestureColorModuleSetLed(ledNumber: number, on: boolean): void {
-        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Active)
+        powerbrickGestureColorModuleSetMode(POWERBRICK_GESTURE_COLOR_SENSOR_MODE.ACTIVE)
         if (ledNumber < 0 || ledNumber > 4)
             return
         let buf = pins.createBuffer(3)
@@ -295,7 +295,7 @@ namespace uxSensors {
     //% group="Proximity"
     //% weight=67
     export function powerbrickGestureColorModuleSetLeds(led1On: boolean, led2On: boolean, led3On: boolean, led4On: boolean): void {
-        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Proximity)
+        powerbrickGestureColorModuleSetMode(POWERBRICK_GESTURE_COLOR_SENSOR_MODE.PROXIMITY)
         let buf = pins.createBuffer(2)
         buf[0] = KC_LEDBIT
         buf[1] = bool2Num(led1On) + (bool2Num(led2On) << 1) + (bool2Num(led3On) << 2) + (bool2Num(led4On) << 3)
@@ -311,7 +311,7 @@ namespace uxSensors {
     //% group="Proximity"
     //% weight=66
     export function powerbrickGestureColorModuleSetPwm(pwm: number): void {
-        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Active)
+        powerbrickGestureColorModuleSetMode(POWERBRICK_GESTURE_COLOR_SENSOR_MODE.ACTIVE)
         ux.i2cwrite(KC_ADDR, KC_LEDPWM, pwm);
     }
 
@@ -327,7 +327,7 @@ namespace uxSensors {
     //% group="Proximity"
     //% weight=65
     export function powerbrickGestureColorModuleGetProximity(): number {
-        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Proximity)
+        powerbrickGestureColorModuleSetMode(POWERBRICK_GESTURE_COLOR_SENSOR_MODE.PROXIMITY)
         return ux.i2cread(KC_ADDR, KC_PROXIMITY)
     }
 
@@ -339,7 +339,7 @@ namespace uxSensors {
     //% group="Gestures"
     //% weight=64
     export function powerbrickGestureColorModuleGetGesture(): number {
-        powerbrickGestureColorModuleSetMode(PowerbrickGestureColorSensorMode.Gesture)
+        powerbrickGestureColorModuleSetMode(POWERBRICK_GESTURE_COLOR_SENSOR_MODE.GESTURE)
         return ux.i2cread(KC_ADDR, KC_GESTURE)
     }
 

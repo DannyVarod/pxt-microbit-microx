@@ -9,190 +9,190 @@
 namespace ux {
     
     /**
-     * Pins
+     * Pin Number
      */
-    export enum PinNumber {
+    export enum PIN_NUMBER {
         //% block=Pin0
-        Pin0 = 0,
+        PIN0 = 0,
         //% block=Pin1
-        Pin1 = 1,
+        PIN1 = 1,
         //% block=Pin2
-        Pin2 = 2,
+        PIN2 = 2,
         //% block=Pin3
-        Pin3 = 3,
+        PIN3 = 3,
         //% block=Pin4
-        Pin4 = 4,
+        PIN4 = 4,
         //% block=Pin6
-        Pin6 = 6,
+        PIN6 = 6,
         //% block=Pin7
-        Pin7 = 7,
+        PIN7 = 7,
         //% block=Pin8
-        Pin8 = 8,
+        PIN8 = 8,
         //% block=Pin9
-        Pin9 = 9,
+        PIN9 = 9,
         //% block=Pin10
-        Pin10 = 10,
+        PIN10 = 10,
         //% block=Pin12
-        Pin12 = 12,
+        PIN12 = 12,
         //% block=Pin13
-        Pin13 = 13,
+        PIN13 = 13,
         //% block=Pin14
-        Pin14 = 14,
+        PIN14 = 14,
         //% block=Pin15
-        Pin15 = 15,
+        PIN15 = 15,
         //% block=Pin16
-        Pin16 = 16,
+        PIN16 = 16,
 
         //% block=AnalogPin0
-        AnalogPin0 = Pin0,
+        AnalogPin0 = PIN0,
         //% block=AnalogPin1
-        AnalogPin1 = Pin1,
+        AnalogPin1 = PIN1,
         //% block=AnalogPin2
-        AnalogPin2 = Pin2,
+        AnalogPin2 = PIN2,
         //% block=AnalogPin3
-        AnalogPin3 = Pin3,
+        AnalogPin3 = PIN3,
         //% block=AnalogPin4
-        AnalogPin4 = Pin4,
+        AnalogPin4 = PIN4,
         //% block=AnalogPin10
-        AnalogPin10 = Pin10,
+        AnalogPin10 = PIN10,
 
         //% block=PowerbrickPort1A
-        PowerbrickPort1A = Pin0,
+        PowerbrickPort1A = PIN0,
         //% block=PowerbrickPort1B
-        PowerbrickPort1B = Pin8,
+        PowerbrickPort1B = PIN8,
         //% block=PowerbrickPort2A
-        PowerbrickPort2A = Pin1,
+        PowerbrickPort2A = PIN1,
         //% block=PowerbrickPort2B
-        PowerbrickPort2B = Pin12,
+        PowerbrickPort2B = PIN12,
         //% block=PowerbrickPort3A
-        PowerbrickPort3A = Pin2,
+        PowerbrickPort3A = PIN2,
         //% block=PowerbrickPort3B
-        PowerbrickPort3B = Pin13,
+        PowerbrickPort3B = PIN13,
         //% block=PowerbrickPort4A
-        PowerbrickPort4A = Pin14,
+        PowerbrickPort4A = PIN14,
         //% block=PowerbrickPort4B
-        PowerbrickPort4B = Pin15,
+        PowerbrickPort4B = PIN15,
         //% block=PowerbrickPort5A
-        PowerbrickPort5A = Pin3,
+        PowerbrickPort5A = PIN3,
         //% block=PowerbrickPort5B
-        PowerbrickPort5B = Pin6,
+        PowerbrickPort5B = PIN6,
         //% block=PowerbrickPort6A
-        PowerbrickPort6A = Pin4,
+        PowerbrickPort6A = PIN4,
         //% block=PowerbrickPort6B
-        PowerbrickPort6B = Pin7,
+        PowerbrickPort6B = PIN7,
         //% block=PowerbrickPort7A
-        PowerbrickPort7A = Pin10,
+        PowerbrickPort7A = PIN10,
         //% block=PowerbrickPort7B
-        PowerbrickPort7B = Pin9,
+        PowerbrickPort7B = PIN9,
 
         //% block=PowerbrickPort1_DigitalA
-        PowerbrickPort1_DigitalA = Pin0,
+        PowerbrickPort1_DigitalA = PIN0,
         //% block=PowerbrickPort1_DigitalB
-        PowerbrickPort1_DigitalB = Pin8,
+        PowerbrickPort1_DigitalB = PIN8,
         //% block=PowerbrickPort2_DigitalA
-        PowerbrickPort2_DigitalA = Pin1,
+        PowerbrickPort2_DigitalA = PIN1,
         //% block=PowerbrickPort2_DigitalB
-        PowerbrickPort2_DigitalB = Pin12,
+        PowerbrickPort2_DigitalB = PIN12,
         //% block=PowerbrickPort3_DigitalA
-        PowerbrickPort3_DigitalA = Pin2,
+        PowerbrickPort3_DigitalA = PIN2,
         //% block=PowerbrickPort3_DigitalB
-        PowerbrickPort3_DigitalB = Pin13,
+        PowerbrickPort3_DigitalB = PIN13,
         //% block=PowerbrickPort4_DigitalA
-        PowerbrickPort4_DigitalA = Pin14,
+        PowerbrickPort4_DigitalA = PIN14,
         //% block=PowerbrickPort4_DigitalB
-        PowerbrickPort4_DigitalB = Pin15,
+        PowerbrickPort4_DigitalB = PIN15,
         //% block=PowerbrickPort5_DigitalA
-        PowerbrickPort5_DigitalA = Pin3,
+        PowerbrickPort5_DigitalA = PIN3,
         //% block=PowerbrickPort5_DigitalB
-        PowerbrickPort5_DigitalB = Pin6,
+        PowerbrickPort5_DigitalB = PIN6,
         //% block=PowerbrickPort6_DigitalA
-        PowerbrickPort6_DigitalA = Pin4,
+        PowerbrickPort6_DigitalA = PIN4,
         //% block=PowerbrickPort6_DigitalB
-        PowerbrickPort6_DigitalB = Pin7,
+        PowerbrickPort6_DigitalB = PIN7,
         //% block=PowerbrickPort7_DigitalA
-        PowerbrickPort7_DigitalA = Pin10,
+        PowerbrickPort7_DigitalA = PIN10,
         //% block=PowerbrickPort7_DigitalB
-        PowerbrickPort7_DigitalB = Pin9,
+        PowerbrickPort7_DigitalB = PIN9,
 
         //% block=PowerbrickPort1_Analog
-        PowerbrickPort1_Analog = Pin0,
+        PowerbrickPort1_Analog = PIN0,
         //% block=PowerbrickPort2_Analog
-        PowerbrickPort2_Analog = Pin1,
+        PowerbrickPort2_Analog = PIN1,
         //% block=PowerbrickPort3_Analog
-        PowerbrickPort3_Analog = Pin2,
+        PowerbrickPort3_Analog = PIN2,
         //% block=PowerbrickPort5_Analog
-        PowerbrickPort5_Analog = Pin3,
+        PowerbrickPort5_Analog = PIN3,
         //% block=PowerbrickPort6_Analog
-        PowerbrickPort6_Analog = Pin4,
+        PowerbrickPort6_Analog = PIN4,
         //% block=PowerbrickPort7_Analog
-        PowerbrickPort7_Analog = Pin10,
+        PowerbrickPort7_Analog = PIN10,
 
         //% block=PowerbrickPort1_SerialA
-        PowerbrickPort1_SerialA = Pin0,
+        PowerbrickPort1_SerialA = PIN0,
         //% block=PowerbrickPort1_SerialB
-        PowerbrickPort1_SerialB = Pin8,
+        PowerbrickPort1_SerialB = PIN8,
         //% block=PowerbrickPort2_SerialA
-        PowerbrickPort2_SerialA = Pin1,
+        PowerbrickPort2_SerialA = PIN1,
         //% block=PowerbrickPort2_SerialB
-        PowerbrickPort2_SerialB = Pin12,
+        PowerbrickPort2_SerialB = PIN12,
         //% block=PowerbrickPort3_SerialA
-        PowerbrickPort3_SerialA = Pin2,
+        PowerbrickPort3_SerialA = PIN2,
         //% block=PowerbrickPort3_SerialB
-        PowerbrickPort3_SerialB = Pin13,
+        PowerbrickPort3_SerialB = PIN13,
         //% block=PowerbrickPort4_SerialA
-        PowerbrickPort4_SerialA = Pin14,
+        PowerbrickPort4_SerialA = PIN14,
         //% block=PowerbrickPort4_SerialB
-        PowerbrickPort4_SerialB = Pin15,
+        PowerbrickPort4_SerialB = PIN15,
         //% block=PowerbrickPort7_SerialA
-        PowerbrickPort7_SerialA = Pin10,
+        PowerbrickPort7_SerialA = PIN10,
         //% block=PowerbrickPort7_SerialB
-        PowerbrickPort7_SerialB = Pin9
+        PowerbrickPort7_SerialB = PIN9
     }
 
-    export function pinToDigitalPin(pinNumber: PinNumber): DigitalPin {
+    export function pinToDigitalPin(pinNumber: PIN_NUMBER): DigitalPin {
         switch (pinNumber) {
-            case PinNumber.Pin0: return DigitalPin.P0
-            case PinNumber.Pin1: return DigitalPin.P1
-            case PinNumber.Pin2: return DigitalPin.P2
-            case PinNumber.Pin3: return DigitalPin.P3
-            case PinNumber.Pin4: return DigitalPin.P4
-            case PinNumber.Pin6: return DigitalPin.P6
-            case PinNumber.Pin7: return DigitalPin.P7
-            case PinNumber.Pin8: return DigitalPin.P8
-            case PinNumber.Pin9: return DigitalPin.P9
-            case PinNumber.Pin10: return DigitalPin.P10
-            case PinNumber.Pin12: return DigitalPin.P12
-            case PinNumber.Pin13: return DigitalPin.P13
-            case PinNumber.Pin14: return DigitalPin.P14
-            case PinNumber.Pin15: return DigitalPin.P15
-            case PinNumber.Pin16: return DigitalPin.P16
+            case PIN_NUMBER.PIN0: return DigitalPin.P0
+            case PIN_NUMBER.PIN1: return DigitalPin.P1
+            case PIN_NUMBER.PIN2: return DigitalPin.P2
+            case PIN_NUMBER.PIN3: return DigitalPin.P3
+            case PIN_NUMBER.PIN4: return DigitalPin.P4
+            case PIN_NUMBER.PIN6: return DigitalPin.P6
+            case PIN_NUMBER.PIN7: return DigitalPin.P7
+            case PIN_NUMBER.PIN8: return DigitalPin.P8
+            case PIN_NUMBER.PIN9: return DigitalPin.P9
+            case PIN_NUMBER.PIN10: return DigitalPin.P10
+            case PIN_NUMBER.PIN12: return DigitalPin.P12
+            case PIN_NUMBER.PIN13: return DigitalPin.P13
+            case PIN_NUMBER.PIN14: return DigitalPin.P14
+            case PIN_NUMBER.PIN15: return DigitalPin.P15
+            case PIN_NUMBER.PIN16: return DigitalPin.P16
             default: return null
         }
     }
 
-    export function pinToSerialPin(pinNumber: PinNumber): SerialPin {
+    export function pinToSerialPin(pinNumber: PIN_NUMBER): SerialPin {
         switch (pinNumber) {
-            case PinNumber.Pin0: return SerialPin.P0
-            case PinNumber.Pin1: return SerialPin.P1
-            case PinNumber.Pin2: return SerialPin.P2
-            case PinNumber.Pin8: return SerialPin.P8
-            case PinNumber.Pin12: return SerialPin.P12
-            case PinNumber.Pin13: return SerialPin.P13
-            case PinNumber.Pin14: return SerialPin.P14
-            case PinNumber.Pin15: return SerialPin.P15
-            case PinNumber.Pin16: return SerialPin.P16
+            case PIN_NUMBER.PIN0: return SerialPin.P0
+            case PIN_NUMBER.PIN1: return SerialPin.P1
+            case PIN_NUMBER.PIN2: return SerialPin.P2
+            case PIN_NUMBER.PIN8: return SerialPin.P8
+            case PIN_NUMBER.PIN12: return SerialPin.P12
+            case PIN_NUMBER.PIN13: return SerialPin.P13
+            case PIN_NUMBER.PIN14: return SerialPin.P14
+            case PIN_NUMBER.PIN15: return SerialPin.P15
+            case PIN_NUMBER.PIN16: return SerialPin.P16
             default: return null
         }
     }
 
-    export function pinToAnalogPin(pinNumber: PinNumber): AnalogPin {
+    export function pinToAnalogPin(pinNumber: PIN_NUMBER): AnalogPin {
         switch (pinNumber) {
-            case PinNumber.Pin0: return AnalogPin.P0
-            case PinNumber.Pin1: return AnalogPin.P1
-            case PinNumber.Pin2: return AnalogPin.P2
-            case PinNumber.Pin3: return AnalogPin.P3
-            case PinNumber.Pin4: return AnalogPin.P4
-            case PinNumber.Pin10: return AnalogPin.P10
+            case PIN_NUMBER.PIN0: return AnalogPin.P0
+            case PIN_NUMBER.PIN1: return AnalogPin.P1
+            case PIN_NUMBER.PIN2: return AnalogPin.P2
+            case PIN_NUMBER.PIN3: return AnalogPin.P3
+            case PIN_NUMBER.PIN4: return AnalogPin.P4
+            case PIN_NUMBER.PIN10: return AnalogPin.P10
             default: return null
         }
     }

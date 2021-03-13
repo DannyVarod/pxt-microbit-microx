@@ -18,82 +18,82 @@ namespace uxMotion {
     /**
      * Servo number to channel mapping
      */
-    export enum Servo {
+    export enum SERVO {
         //% block=RobotbitServo1
-        RobotbitServo1 = 8,
+        ROBOTBIT_SERVO1 = 8,
         //% block=RobotbitServo2
-        RobotbitServo2 = 9,
+        ROBOTBIT_SERVO2 = 9,
         //% block=RobotbitServo3
-        RobotbitServo3 = 10,
+        ROBOTBIT_SERVO3 = 10,
         //% block=RobotbitServo4
-        RobotbitServo4 = 11,
+        ROBOTBIT_SERVO4 = 11,
         //% block=RobotbitServo5
-        RobotbitServo5 = 12,
+        ROBOTBIT_SERVO5 = 12,
         //% block=RobotbitServo6
-        RobotbitServo6 = 13,
+        ROBOTBIT_SERVO6 = 13,
         //% block=RobotbitServo7
-        RobotbitServo7 = 14,
+        ROBOTBIT_SERVO7 = 14,
         //% block=RobotbitServo8
-        RobotbitServo8 = 15,
+        ROBOTBIT_SERVO8 = 15,
         //% block=PowerbrickServo1
-        PowerbrickServo1 = 8,
+        POWERBRICK_SERVO1 = 8,
         //% block=PowerbrickServo2
-        PowerbrickServo2 = 9,
+        POWERBRICK_SERVO2 = 9,
         //% block=PowerbrickServo3
-        PowerbrickServo3 = 10,
+        POWERBRICK_SERVO3 = 10,
         //% block=PowerbrickServo4
-        PowerbrickServo4 = 11,
+        POWERBRICK_SERVO4 = 11,
         //% block=PowerbrickServo5
-        PowerbrickServo5 = 12,
+        POWERBRICK_SERVO5 = 12,
         //% block=PowerbrickServo6
-        PowerbrickServo6 = 13,
+        POWERBRICK_SERVO6 = 13,
         //% block=PowerbrickServo7
-        PowerbrickServo7 = 14,
+        POWERBRICK_SERVO7 = 14,
         //% block=PowerbrickServo8
-        PowerbrickServo8 = 15,
+        POWERBRICK_SERVO8 = 15,
         //% block=SuperbitServo1
-        SuperbitServo1 = 0,
+        SUPERBIT_SERVO1 = 0,
         //% block=SuperbitServo2
-        SuperbitServo2 = 1,
+        SUPERBIT_SERVO2 = 1,
         //% block=SuperbitServo3
-        SuperbitServo3 = 2,
+        SUPERBIT_SERVO3 = 2,
         //% block=SuperbitServo4
-        SuperbitServo4 = 3,
+        SUPERBIT_SERVO4 = 3,
         //% block=SuperbitServo5
-        SuperbitServo5 = 4,
+        SUPERBIT_SERVO5 = 4,
         //% block=SuperbitServo6
-        SuperbitServo6 = 5,
+        SUPERBIT_SERVO6 = 5,
         //% block=SuperbitServo7
-        SuperbitServo7 = 6,
+        SUPERBIT_SERVO7 = 6,
         //% block=SuperbitServo8
-        SuperbitServo8 = 7,
+        SUPERBIT_SERVO8 = 7,
     }
 
     /**
      * Motor number to channel mapping
      * each motor takes up two consecutive channels, hence the gap of 2 between them
      */
-    export enum Motor {
+    export enum MOTOR {
         //% block=RobotbitM1A
-        RobotbitM1A = 0,
+        ROBOTBIT_M1A = 0,
         //% block=RobotbitM1B
-        RobotbitM1B = 2,
+        ROBOTBIT_M1B = 2,
         //% block=RobotbitM2A
-        RobotbitM2A = 4,
+        ROBOTBIT_M2A = 4,
         //% block=RobotbitM2B
-        RobotbitM2B = 6,
+        ROBOTBIT_M2B = 6,
         //% block=PowerbrickM1
-        PowerbrickM1 = 0,
+        POWERBRICK_M1 = 0,
         //% block=PowerbrickM2
-        PowerbrickM2 = 2,
+        POWERBRICK_M2 = 2,
         //% block=SuperbitM1
-        SuperbitM1 = 8,
+        SUPERBIT_M1 = 8,
         //% block=SuperbitM2
-        SuperbitM2 = 10,
+        SUPERBIT_M2 = 10,
         //% block=SuperbitM3
-        SuperbitM3 = 12,
+        SUPERBIT_M3 = 12,
         //% block=SuperbitM4
-        SuperbitM4 = 14,
+        SUPERBIT_M4 = 14,
     }
 
     function setPeriod(periodMicrosecs: number): void {
@@ -173,7 +173,7 @@ namespace uxMotion {
     //% speed.min=-4095 speed.max=4095
     //% group="Motors"
     //% weight=88
-    export function setMotor(motorNum: Motor, speed: number): void {
+    export function setMotor(motorNum: MOTOR, speed: number): void {
         if (motorNum < 0 || 14 < motorNum || motorNum % 2 != 0)
             return
         
@@ -203,7 +203,7 @@ namespace uxMotion {
     //% inlineInputMode=inline
     //% advanced=true
     //% weight=87
-    export function setServoPulseWidth(servoNum: Servo, pulseWidth: number): void {
+    export function setServoPulseWidth(servoNum: SERVO, pulseWidth: number): void {
         if (servoNum < 0 || 15 < servoNum)
             return
         
@@ -225,7 +225,7 @@ namespace uxMotion {
     //% inlineInputMode=inline
     //% group="Speed Servos"
     //% weight=86
-    export function setOrangeGreenGeekservoSpeed(servoNum: Servo, speed: number): void {
+    export function setOrangeGreenGeekservoSpeed(servoNum: SERVO, speed: number): void {
         // For 20000uSec cycle: reverse=500uS-1500uS, 0: 1500uS, forward=1500uS-2500uS
         let zeroPulse = phase_width_period_microsec * 3 / 40
         let minPulse = phase_width_period_microsec / 40
@@ -246,7 +246,7 @@ namespace uxMotion {
     //% inlineInputMode=inline
     //% group="Angle Servos"
     //% weight=85
-    export function setGreyGeekservoAngle(servoNum: Servo, degree: number): void {
+    export function setGreyGeekservoAngle(servoNum: SERVO, degree: number): void {
         // For 20000uSec cycle: -45deg: 600uS, 225deg: 2400uS (6.6667 uS/deg = 20.0/3.0)
         let degreeRange = 270
         let phaseRangePercent = 9 // (2400-600)/20000 * 100
@@ -279,7 +279,7 @@ namespace uxMotion {
     //% inlineInputMode=inline
     //% group="Angle Servos"
     //% weight=84
-    export function setLargeGreyGeekservoAngle(servoNum: Servo, degree: number): void {
+    export function setLargeGreyGeekservoAngle(servoNum: SERVO, degree: number): void {
         // 0deg: 512uS, 360deg: 2512uS, max: 2560us
         
         // Shift degrees to range [0,360]

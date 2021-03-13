@@ -9,7 +9,7 @@ let joystickY = 0
 let joystickX = 0
 
 // Joystick buttons example
-uxRemotes.onYahboomRemoteButton(uxRemotes.YBRemoteButton.B3Blue, uxRemotes.ButtonState.Released, function () {
+uxRemotes.onYahboomRemoteButton(uxRemotes.YB_REMOTE_BUTTON.B3_BLUE, uxRemotes.BUTTON_STATE.RELEASED, function () {
     //uxRemotes.setYahboomRemoteVibrationSpeed(4095)
     control.waitMicros(500000)
     //uxRemotes.setYahboomRemoteVibrationSpeed(0)

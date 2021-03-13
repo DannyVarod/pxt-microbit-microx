@@ -6,9 +6,9 @@
 //% groups='["Robotbit", "Superbit", "Powerbrick"]'
 namespace uxDisplays {
 
-    let robotbitPixels: RgbMatrix = null
-    let superbitPixels: RgbMatrix = null
-    let powerbrickPixels: RgbMatrix = null
+    let robotbitPixels: RGB_MATRIX = null
+    let superbitPixels: RGB_MATRIX = null
+    let powerbrickPixels: RGB_MATRIX = null
 
     let initializedRobotbitPixels = false
     let initializedSuperbitPixels = false
@@ -17,13 +17,13 @@ namespace uxDisplays {
     /**
      * Abstraction for led matrices
      */
-    export class RgbMatrix {
+    export class RGB_MATRIX {
         rows: number
         columns: number
         digitalPin: DigitalPin
         displayBuffer: Buffer
 
-        constructor(rows: number, columns: number, pinNumber: ux.PinNumber) {
+        constructor(rows: number, columns: number, pinNumber: ux.PIN_NUMBER) {
             this.rows = rows
             this.columns = columns
             this.digitalPin = ux.pinToDigitalPin(pinNumber)
@@ -94,7 +94,7 @@ namespace uxDisplays {
         if (initializedRobotbitPixels)
             return
         
-        robotbitPixels = new RgbMatrix(1, 4, ux.PinNumber.Pin16)
+        robotbitPixels = new RGB_MATRIX(1, 4, ux.PIN_NUMBER.PIN16)
         initializedRobotbitPixels = true
 
         // After initializing port set to black to prevent first refresh error
@@ -167,7 +167,7 @@ namespace uxDisplays {
         if (initializedSuperbitPixels)
             return
         
-        superbitPixels = new RgbMatrix(1, 4, ux.PinNumber.Pin12)
+        superbitPixels = new RGB_MATRIX(1, 4, ux.PIN_NUMBER.PIN12)
         initializedSuperbitPixels = true
 
         // After initializing port set to black to prevent first refresh error
@@ -236,11 +236,11 @@ namespace uxDisplays {
     //% blockId="ux_intializePowerbrickPixels"
     //% group="Powerbrick"
     //% weight=45
-    export function intializePowerbrickPixels(pinNumber: ux.PinNumber): void {
+    export function intializePowerbrickPixels(pinNumber: ux.PIN_NUMBER): void {
         if (initializedPowerbrickPixels || pinNumber == null)
             return
 
-        powerbrickPixels = new RgbMatrix(8, 8, pinNumber)
+        powerbrickPixels = new RGB_MATRIX(8, 8, pinNumber)
         
         initializedPowerbrickPixels = true
         
