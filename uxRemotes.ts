@@ -60,11 +60,12 @@ namespace uxRemotes {
     /**
      * Get X-axis value of YB-EMH02 ver 1.2 joystick (port2) between -1 (left) and 1 (right)
      */
-    //% block="yahboom remote x (-1=left to 1=right)"
+    //% block="yahboom remote x (-scale=left to scale=right)|scale %scale"
     //% blockId="uxRemotes_joystickX"
+    //% scale.min=1 scale.max=4095
     //% group="Yahboom"
     //% weight=98
-    export function joystickX(): number {
+    export function joystickX(scale: number = 1.0): number {
         
         // Normalize from [0,1023] to [-512,511]
         let readValue = 512 - pins.analogReadPin(AnalogPin.P2)
@@ -73,18 +74,19 @@ namespace uxRemotes {
         if (-25 < readValue && readValue < 25)
             readValue = 0
         
-        // Normalize from -512..511 to -1.0 ... 1.0
-        return readValue / 512.0
+        // Normalize from -512..511 to -scale...scale
+        return readValue * scale / 512.0
     }
 
     /**
      * Get Y-axis value of YB-EMH02 ver 1.2 joystick (port1) between -1 (bottom) and 1 (top)
      */
-    //% block="yahboom remote y (-1=down to 1=up)"
+    //% block="yahboom remote y (-scale=down to scale=up)|scale %scale"
     //% blockId="uxRemotes_joystickY"
+    //% scale.min=1 scale.max=4095
     //% group="Yahboom"
     //% weight=97
-    export function joystickY() {
+    export function joystickY(scale: number = 1.0): number {
         
         // Normalize from [0,1023] to [-512,511]
         let readValue = 512 - pins.analogReadPin(AnalogPin.P1)
@@ -93,8 +95,8 @@ namespace uxRemotes {
         if (-25 < readValue && readValue < 25)
             readValue = 0
         
-        // Normalize from -512..511 to -1.0 ... 1.0
-        return readValue / 512.0
+        // Normalize from -512..511 to -scale...scale
+        return readValue * scale / 512.0
     }
 
     /**
