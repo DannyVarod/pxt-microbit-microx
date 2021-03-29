@@ -23,5 +23,5 @@
     ],
     "public": true,
     "preferredEditor": "tsprj",
-    "icon": "./static/libs/icon.png"
+    "icon": "icon.png"
 }
