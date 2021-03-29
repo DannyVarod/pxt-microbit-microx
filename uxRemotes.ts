@@ -62,7 +62,7 @@ namespace uxRemotes {
      */
     //% block="yahboom remote x (-scale=left to scale=right)|scale %scale"
     //% blockId="uxRemotes_joystickX"
-    //% scale.min=1 scale.max=4095
+    //% scale.min=1 scale.max=4095 scale.defl=100
     //% group="Yahboom"
     //% weight=98
     export function joystickX(scale: number = 1.0): number {
@@ -83,7 +83,7 @@ namespace uxRemotes {
      */
     //% block="yahboom remote y (-scale=down to scale=up)|scale %scale"
     //% blockId="uxRemotes_joystickY"
-    //% scale.min=1 scale.max=4095
+    //% scale.min=1 scale.max=4095 scale.defl=100
     //% group="Yahboom"
     //% weight=97
     export function joystickY(scale: number = 1.0): number {
