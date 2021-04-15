@@ -3,15 +3,13 @@
  */
 //% block=uxDisplays
 //% color="#303030" weight=46 icon="\uf0eb"
-//% groups='["Robotbit", "Superbit", "Powerbrick"]'
+//% groups='["Initialize", "On-board", "Powerbrick"]'
 namespace uxDisplays {
 
-    let robotbitPixels: RGB_MATRIX = null
-    let superbitPixels: RGB_MATRIX = null
+    let onboardPixels: RGB_MATRIX = null
     let powerbrickPixels: RGB_MATRIX = null
 
-    let initializedRobotbitPixels = false
-    let initializedSuperbitPixels = false
+    let initializedOnboardPixels = false
     let initializedPowerbrickPixels = false
 
     /**
@@ -83,151 +81,137 @@ namespace uxDisplays {
     }
 
     /**
-     * Initialize Kittenbot Robotbit pixels
+     * Initialize onboard pixels
      * @param pinNumber digital pin number
+     * @param rows number of rows
+     * @param columns number of columns
      */
-    //% block="initialize robotbit pixels"
-    //% blockId="uxDisplays_intializeRobotbitPixels"
-    //% group="Robotbit"
-    //% weight=49
-    export function intializeRobotbitPixels(): void {
-        if (initializedRobotbitPixels)
+    //% block="initialize onboard pixels"
+    //% blockId="uxDisplays_intializeOnboardPixels|pin number %pinNumber|number of rows %rows|number of columns %columns"
+    //% advanced=true
+    //% weight=99
+    export function intializeOnboardPixels(pinNumber: ux.PIN_NUMBER, rows: number, columns: number): void {
+        if (initializedOnboardPixels)
             return
         
-        robotbitPixels = new RGB_MATRIX(1, 4, ux.PIN_NUMBER.PIN16)
-        initializedRobotbitPixels = true
+        onboardPixels = new RGB_MATRIX(rows, columns, pinNumber)
+        initializedOnboardPixels = true
 
         // After initializing port set to black to prevent first refresh error
-        setRobotbitAllPixels(0, 0, 0)
-        refreshRobotbitPixels()
-        setRobotbitAllPixels(0, 0, 0)
-        refreshRobotbitPixels()
+        setAllOnboardPixels(0, 0, 0)
+        refreshOnboardPixels()
+        setAllOnboardPixels(0, 0, 0)
+        refreshOnboardPixels()
     }
 
     /**
-     * Set Robotbit all pixels color
+     * Initialize onboard pixels for Robotbit
+     * @param pinNumber digital pin number
+     */
+    //% block="initialize onboard pixels Robotbit"
+    //% blockId="uxDisplays_intializeOnboardPixelsRobotbit"
+    //% group="Initialize"
+    //% weight=49
+    export function intializeOnboardPixelsRobotbit(): void {
+        intializeOnboardPixels(ux.PIN_NUMBER.PIN16, 1, 4)
+    }
+
+    /**
+     * Initialize onboard pixels for Superbit
+     * @param pinNumber digital pin number
+     */
+    //% block="initialize onboard pixels Superbit"
+    //% blockId="uxDisplays_intializeOnboardPixelsSuperbit"
+    //% group="Initialize"
+    //% weight=48
+    export function intializeOnboardPixelsSuperbit(): void {
+        intializeOnboardPixels(ux.PIN_NUMBER.PIN12, 1, 4)
+    }
+
+    /**
+     * Initialize onboard pixels for Superbit
+     * @param pinNumber digital pin number
+     */
+    //% block="initialize onboard pixels Yurobot remote"
+    //% blockId="uxDisplays_intializeOnboardPixelsYurobotRemote"
+    //% group="Initialize"
+    //% weight=47
+    export function intializeOnboardPixelsYurobotRemote(): void {
+        intializeOnboardPixels(ux.PIN_NUMBER.PIN15, 1, 6)
+    }
+
+    /**
+     * Set all on-board pixels' color
      * @param r pixel red intensity [0,255]
      * @param g pixel green intensity [0,255]
      * @param b pixel blue intensity [0,255]
     */
-    //% block="set robotbit pixels to color|red %r|green %g|blue %b"
-    //% blockId="uxDisplays_setRobotbitAllPixels"
+    //% block="set all on-board pixels to color|red %r|green %g|blue %b"
+    //% blockId="uxDisplays_setAllOnboardPixels"
     //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
-    //% group="Robotbit"
+    //% group="Onboard"
     //% weight=48
-    export function setRobotbitAllPixels(r: number, g: number, b: number): void {
-        if (initializedRobotbitPixels == false)
+    export function setAllOnboardPixels(r: number, g: number, b: number): void {
+        if (initializedOnboardPixels == false)
             return
-        robotbitPixels.setAllPixels(r, g, b)
+        onboardPixels.setAllPixels(r, g, b)
     }
     
     /**
-     * Set Robotbit pixel color
-     * @param x pixel x-coordinate [0,3]
+     * Set on-board pixel color 1D
+     * @param y pixel y-coordinate
+     * @param x pixel x-coordinate
      * @param r pixel red intensity [0,255]
      * @param g pixel green intensity [0,255]
      * @param b pixel blue intensity [0,255]
     */
-    //% block="set robotbit pixel to color|x %x|red %r|green %g|blue %b"
-    //% blockId="uxDisplays_setRobotbitPixel"
-    //% x.min=0 x.max=3 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
+    //% block="set powerbrick pixel to color (1D)|y %y|x %x|red %r|green %g|blue %b"
+    //% blockId="uxDisplays_setOnboardPixel1D"
+    //% x.min=0 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
-    //% group="Robotbit"
+    //% group="Onboard"
     //% weight=47
-    export function setRobotbitPixel(x: number, r: number, g: number, b: number): void {
-        if (initializedRobotbitPixels == false)
+    export function setOnboardPixel1D(x: number, r: number, g: number, b: number): void {
+        if (initializedOnboardPixels == false)
             return
-        robotbitPixels.setPixel(0, x, r, g, b)
-    }
-
-    /**
-     * Refresh Robotbit pixels
-    */
-    //% block="refresh/update robotbit pixels"
-    //% blockId="uxDisplays_refreshRobotbitPixels"
-    //% port.min=0 port.max=6
-    //% group="Robotbit"
-    //% weight=46
-    export function refreshRobotbitPixels() {
-        if (initializedRobotbitPixels == false)
-            return
-        robotbitPixels.refresh()
-    }
-
-    /**
-     * Initialize Yahboom Superbit pixels
-     * @param pinNumber digital pin number
-     */
-    //% block="initialize superbit pixels"
-    //% blockId="uxDisplays_intializeSuperbitPixels"
-    //% group="Superbit"
-    //% weight=49
-    export function intializeSuperbitPixels(): void {
-        if (initializedSuperbitPixels)
-            return
-        
-        superbitPixels = new RGB_MATRIX(1, 4, ux.PIN_NUMBER.PIN12)
-        initializedSuperbitPixels = true
-
-        // After initializing port set to black to prevent first refresh error
-        setSuperbitAllPixels(0, 0, 0)
-        refreshSuperbitPixels()
-        setSuperbitAllPixels(0, 0, 0)
-        refreshSuperbitPixels()
-    }
-
-    /**
-     * Set Superbit all pixels color
-     * @param r pixel red intensity [0,255]
-     * @param g pixel green intensity [0,255]
-     * @param b pixel blue intensity [0,255]
-    */
-    //% block="set superbit pixels to color|red %r|green %g|blue %b"
-    //% blockId="uxDisplays_setSuperbitAllPixels"
-    //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
-    //% inlineInputMode=inline
-    //% group="Superbit"
-    //% weight=48
-    export function setSuperbitAllPixels(r: number, g: number, b: number): void {
-        if (initializedSuperbitPixels == false)
-            return
-        superbitPixels.setAllPixels(r, g, b)
-    }
-
-    /**
-     * Set Superbit pixel color
-     * @param x pixel x-coordinate [0,3]
-     * @param r pixel red intensity [0,255]
-     * @param g pixel green intensity [0,255]
-     * @param b pixel blue intensity [0,255]
-    */
-    //% block="set superbit pixel to color|x %x|red %r|green %g|blue %b"
-    //% blockId="uxDisplays_setSuperbitPixel"
-    //% x.min=0 x.max=3 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
-    //% inlineInputMode=inline
-    //% group="Superbit"
-    //% weight=47
-    export function setSuperbitPixel(x: number, r: number, g: number, b: number): void {
-        if (initializedSuperbitPixels == false)
-            return
-        superbitPixels.setPixel(0, x, r, g, b)
-    }
-
-    /**
-     * Refresh Superbit pixels
-    */
-    //% block="refresh/update superbit pixels"
-    //% blockId="uxDisplays_refreshSuperbitPixels"
-    //% port.min=0 port.max=6
-    //% group="Superbit"
-    //% weight=46
-    export function refreshSuperbitPixels() {
-        if (initializedSuperbitPixels == false)
-            return
-        superbitPixels.refresh()
+        onboardPixels.setPixel(1, x, r, g, b)
     }
     
+    /**
+     * Set on-board pixel color 2D
+     * @param y pixel y-coordinate
+     * @param x pixel x-coordinate
+     * @param r pixel red intensity [0,255]
+     * @param g pixel green intensity [0,255]
+     * @param b pixel blue intensity [0,255]
+    */
+    //% block="set powerbrick pixel to color (2D)|y %y|x %x|red %r|green %g|blue %b"
+    //% blockId="uxDisplays_setOnboardPixel2D"
+    //% y.min=0 x.min=0 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
+    //% inlineInputMode=inline
+    //% group="Onboard"
+    //% weight=47
+    export function setOnboardPixel2D(y: number, x: number, r: number, g: number, b: number): void {
+        if (initializedOnboardPixels == false)
+            return
+        onboardPixels.setPixel(y, x, r, g, b)
+    }
+
+    /**
+     * Refresh on-board pixels
+    */
+    //% block="refresh/update on-board pixels"
+    //% blockId="uxDisplays_refreshOnboardPixels"
+    //% port.min=0 port.max=6
+    //% group="Onboard"
+    //% weight=45
+    export function refreshOnboardPixels() {
+        if (initializedOnboardPixels == false)
+            return
+            onboardPixels.refresh()
+    }
+
     /**
      * Initialize Kittenbot Powerbrick pixels module
      * @param pinNumber digital pin number
@@ -235,7 +219,7 @@ namespace uxDisplays {
     //% block="initialize powerbrick pixels module connected to|digital pin %pinNumber"
     //% blockId="uxDisplays_intializePowerbrickPixels"
     //% group="Powerbrick"
-    //% weight=45
+    //% weight=35
     export function intializePowerbrickPixels(pinNumber: ux.PIN_NUMBER): void {
         if (initializedPowerbrickPixels || pinNumber == null)
             return
@@ -262,7 +246,7 @@ namespace uxDisplays {
     //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
     //% group="Powerbrick"
-    //% weight=44
+    //% weight=34
     export function setPowerbrickAllPixels(r: number, g: number, b: number): void {
         if (initializedPowerbrickPixels == false)
             return
@@ -282,7 +266,7 @@ namespace uxDisplays {
     //% y.min=0 y.max=7 x.min=0 x.max=7 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
     //% group="Powerbrick"
-    //% weight=43
+    //% weight=33
     export function setPowerbrickPixel(y: number, x: number, r: number, g: number, b: number): void {
         if (initializedPowerbrickPixels == false)
             return
@@ -299,7 +283,7 @@ namespace uxDisplays {
     //% block="refresh/update powerbrick pixels"
     //% blockId="uxDisplays_refreshPowerbrickPixels"
     //% group="Powerbrick"
-    //% weight=42
+    //% weight=32
     export function refreshPowerbrickPixels() {
         if (initializedPowerbrickPixels == false)
             return

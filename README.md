@@ -2,7 +2,7 @@
 
 An experimental (beta) unofficial extension for MakeCode (pxt) environment for micro:bit hardware supporting multiple hardware modules, e.g. boards, sensors, motors, servos, enabling combining the different modules together in one project which is simpler to use than original extensions and clearly states what **should** work (test it yourself and decide) and what still does not (i.e. still hasn't passed my own tests).
 
-This repository is **NOT affiliated with** BBC, Microsoft, KittenBot, Yahboom, Geekservo, keyestudio or any other company. It is completely **unofficial**!
+This repository is **NOT affiliated with** BBC, Microsoft, KittenBot, Yahboom, Geekservo, keyestudio, Yurobot or any other company. It is completely **unofficial**!
 
 All company and product names are owned by their owners and are mentioned here only for sake of clarification of what this code may work with (test it yourself!).
 
@@ -24,10 +24,11 @@ If you would like to see support for your hardware here, you are welcome to send
 
 ### Boards:
 
-* Yahboom remote / game handle
+* Yahboom remote (Game handle)
 * KittenBot Powerbrick (aka Armourbit)
 * KittenBot Robotbit (aka "robot:bit")
 * Yahboom Superbit (aka "Super:bit")
+* Yurobot remote (m:bit JoyStick Extension Board) - in development
 
 ### Sensors:
 
