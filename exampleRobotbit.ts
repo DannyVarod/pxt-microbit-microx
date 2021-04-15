@@ -6,7 +6,7 @@
 uxMotion.initializePhaseWidthModulationDriver()
 
 // Initialization for LEDs
-uxDisplays.intializeRobotbitPixels()
+uxDisplays.intializeOnboardPixelsRobotbit()
 
 uxMotion.setOrangeGreenGeekservoSpeed(uxMotion.SERVO.ROBOTBIT_SERVO1, 0)
 uxMotion.setGreyGeekservoAngle(uxMotion.SERVO.ROBOTBIT_SERVO2, 0)
@@ -25,12 +25,12 @@ basic.forever(function () {
         uxMotion.setServoPulseWidth(uxMotion.SERVO.ROBOTBIT_SERVO4, 2646)
     }
     else if (distance < 10) {
-        uxDisplays.setRobotbitAllPixels(128, 0, 0)
-        uxDisplays.refreshRobotbitPixels()
+        uxDisplays.setAllOnboardPixels(128, 0, 0)
+        uxDisplays.refreshOnboardPixels()
     } else {
         uxMotion.setMotor(uxMotion.MOTOR.ROBOTBIT_M1A, 4095)
         uxMotion.setMotor(uxMotion.MOTOR.ROBOTBIT_M1B, 4095)
-        uxDisplays.setRobotbitAllPixels(10, 0, 0)
-        uxDisplays.refreshRobotbitPixels()
+        uxDisplays.setAllOnboardPixels(10, 0, 0)
+        uxDisplays.refreshOnboardPixels()
     }
 })

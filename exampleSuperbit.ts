@@ -9,7 +9,7 @@ let a = false
 uxMotion.initializePhaseWidthModulationDriver()
 
 // Initialization for LEDs
-uxDisplays.intializeSuperbitPixels()
+uxDisplays.intializeOnboardPixelsSuperbit()
 
 uxMotion.setOrangeGreenGeekservoSpeed(uxMotion.SERVO.SUPERBIT_SERVO1, 0)
 uxMotion.setGreyGeekservoAngle(uxMotion.SERVO.SUPERBIT_SERVO2, 0)
@@ -26,18 +26,18 @@ basic.forever(function () {
     } else if (b && !(a)) {
         uxMotion.setMotor(uxMotion.MOTOR.SUPERBIT_M1, 4095)
         uxMotion.setMotor(uxMotion.MOTOR.SUPERBIT_M2, 4095)
-        uxDisplays.setSuperbitAllPixels(128, 0, 0)
-        uxDisplays.refreshSuperbitPixels()
+        uxDisplays.setAllOnboardPixels(128, 0, 0)
+        uxDisplays.refreshOnboardPixels()
     } else if (a && b) {
-        uxDisplays.setSuperbitAllPixels(10, 0, 10)
-        uxDisplays.refreshSuperbitPixels()
+        uxDisplays.setAllOnboardPixels(10, 0, 10)
+        uxDisplays.refreshOnboardPixels()
         uxMotion.setOrangeGreenGeekservoSpeed(uxMotion.SERVO.SUPERBIT_SERVO1, -1024)
         uxMotion.setGreyGeekservoAngle(uxMotion.SERVO.SUPERBIT_SERVO2, 225)
         uxMotion.setLargeGreyGeekservoAngle(uxMotion.SERVO.SUPERBIT_SERVO3, 359)
         uxMotion.setServoPulseWidth(uxMotion.SERVO.SUPERBIT_SERVO4, 2646)
     } else {
-        uxDisplays.setSuperbitAllPixels(0, 10, 10)
-        uxDisplays.refreshSuperbitPixels()
+        uxDisplays.setAllOnboardPixels(0, 10, 10)
+        uxDisplays.refreshOnboardPixels()
         uxMotion.setOrangeGreenGeekservoSpeed(uxMotion.SERVO.SUPERBIT_SERVO1, 1024)
         uxMotion.setGreyGeekservoAngle(uxMotion.SERVO.SUPERBIT_SERVO2, -45)
         uxMotion.setLargeGreyGeekservoAngle(uxMotion.SERVO.SUPERBIT_SERVO3, 0)
