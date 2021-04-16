@@ -10,6 +10,9 @@ namespace uxRemotes {
     let joystickYPin: ux.PIN_NUMBER = ux.PIN_NUMBER.AnalogPin1
     let joystickXPin: ux.PIN_NUMBER = ux.PIN_NUMBER.AnalogPin2
     let feedbackMotor: uxMotion.MOTOR = -1
+    let joystickDirectionY: number = 1
+    let joystickDirectionX: number = 1
+    let joystickZeroDelta: number = 25
 
     /**
      * Initialize joystick
@@ -115,6 +118,10 @@ namespace uxRemotes {
         if (initializedRemote)
             return
         initializeJoystick(ux.PIN_NUMBER.PIN2, ux.PIN_NUMBER.PIN1)
+        joystickDirectionY = 1
+        joystickDirectionX = 1
+        // Ignore values between -25 and 25 since joystick may not be calibrated (mine had an X-offset of 1)
+        joystickZeroDelta = 25
         initializeButton(ux.PIN_NUMBER.PIN8)
         initializeButton(ux.PIN_NUMBER.PIN13)
         initializeButton(ux.PIN_NUMBER.PIN14)
@@ -133,7 +140,12 @@ namespace uxRemotes {
     export function initializeYurobotRemote(): void {
         if (initializedRemote)
             return
-        initializeJoystick(ux.PIN_NUMBER.PIN1, ux.PIN_NUMBER.PIN2)
+        // X and Y are opposite of what's written on board
+        initializeJoystick(ux.PIN_NUMBER.PIN2, ux.PIN_NUMBER.PIN1)
+        // Y is inverse on board (-1 is up)
+        joystickDirectionY = -1
+        joystickDirectionX = 1
+        joystickZeroDelta = 1
         initializeButton(ux.PIN_NUMBER.PIN8)
         initializeButton(ux.PIN_NUMBER.PIN13)
         initializeButton(ux.PIN_NUMBER.PIN14)
@@ -157,12 +169,12 @@ namespace uxRemotes {
         // Normalize from [0,1023] to [-512,511]
         let readValue = 512 - pins.analogReadPin(ux.pinToAnalogPin(joystickXPin))
         
-        // Ignore values between -25 and 25 since joystick may not be calibrated (mine had an X-offset of 1)
-        if (-25 < readValue && readValue < 25)
+        // Ignore values between -delta and delta since joystick may not be calibrated
+        if (-joystickZeroDelta < readValue && readValue < joystickZeroDelta)
             readValue = 0
         
         // Normalize from -512..511 to -scale...scale
-        return readValue * scale / 512.0
+        return readValue * joystickDirectionX * scale / 512.0
     }
 
     /**
@@ -178,12 +190,12 @@ namespace uxRemotes {
         // Normalize from [0,1023] to [-512,511]
         let readValue = 512 - pins.analogReadPin(ux.pinToAnalogPin(joystickYPin))
         
-        // Ignore values between -25 and 25 since joystick may not be calibrated (mine had a Y-offset of 12)
-        if (-25 < readValue && readValue < 25)
+        // Ignore values between -delta and delta since joystick may not be calibrated
+        if (-joystickZeroDelta < readValue && readValue < joystickZeroDelta)
             readValue = 0
         
         // Normalize from -512..511 to -scale...scale
-        return readValue * scale / 512.0
+        return readValue * joystickDirectionY * scale / 512.0
     }
 
     /**
