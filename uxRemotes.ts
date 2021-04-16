@@ -140,8 +140,7 @@ namespace uxRemotes {
     export function initializeYurobotRemote(): void {
         if (initializedRemote)
             return
-        // X and Y are opposite of what's written on board
-        initializeJoystick(ux.PIN_NUMBER.PIN2, ux.PIN_NUMBER.PIN1)
+        initializeJoystick(ux.PIN_NUMBER.PIN1, ux.PIN_NUMBER.PIN2)
         // Y is inverse on board (-1 is up)
         joystickDirectionY = -1
         joystickDirectionX = 1
