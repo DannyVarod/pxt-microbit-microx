@@ -56,10 +56,20 @@ If you would like to see support for your hardware here, you are welcome to send
 
 ### In development / parially working or not working:
 
-* Yahboom Remote - remote buttons not working with micro:bit V2
-* Yahboom Remote - vibration feedback not working
-* Powerbrick color and gesture sensor - partially working
-* Powerbrick MP3 player - not working
+* Yahboom Remote
+    - remote buttons not working with micro:bit V2
+    - vibration feedback not working
+    - buzzer not working
+
+* Yurobot Remote
+    - Buttons A & B function like microbit buttons A & B, not like specified on board
+    - vibration feedback not working
+    - buzzer not working
+    - potentiometer not working
+
+* Powerbrick
+    - color and gesture sensor partially working
+    - MP3 player not working
 
 ## Join project:
 
