@@ -120,8 +120,7 @@ namespace uxRemotes {
         initializeJoystick(ux.PIN_NUMBER.PIN2, ux.PIN_NUMBER.PIN1)
         joystickDirectionY = 1
         joystickDirectionX = 1
-        // Ignore values between -25 and 25 since joystick may not be calibrated (mine had an X-offset of 1)
-        joystickZeroDelta = 25
+        joystickZeroDelta = 10
         initializeButton(ux.PIN_NUMBER.PIN8)
         initializeButton(ux.PIN_NUMBER.PIN13)
         initializeButton(ux.PIN_NUMBER.PIN14)
@@ -204,7 +203,7 @@ namespace uxRemotes {
     //% blockId="uxRemotes_onRemoteButton"
     //% group="Buttons"
     //% weight=96
-    export function onYahboomRemoteButton(button: REMOTE_BUTTON, state: BUTTON_STATE, body: Action): void {
+    export function onRemoteButton(button: REMOTE_BUTTON, state: BUTTON_STATE, body: Action): void {
         
         let pulseValue: PulseValue = PulseValue.Low
         if (state == BUTTON_STATE.RELEASED)
