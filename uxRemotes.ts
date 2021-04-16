@@ -144,7 +144,7 @@ namespace uxRemotes {
         // Y is inverse on board (-1 is up)
         joystickDirectionY = -1
         joystickDirectionX = 1
-        joystickZeroDelta = 1
+        joystickZeroDelta = 10
         initializeButton(ux.PIN_NUMBER.PIN8)
         initializeButton(ux.PIN_NUMBER.PIN13)
         initializeButton(ux.PIN_NUMBER.PIN14)
