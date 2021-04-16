@@ -150,7 +150,7 @@ namespace uxDisplays {
     //% blockId="uxDisplays_setAllOnboardPixels"
     //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
-    //% group="Onboard"
+    //% group="On-board"
     //% weight=48
     export function setAllOnboardPixels(r: number, g: number, b: number): void {
         if (initializedOnboardPixels == false)
@@ -170,7 +170,7 @@ namespace uxDisplays {
     //% blockId="uxDisplays_setOnboardPixel1D"
     //% x.min=0 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
-    //% group="Onboard"
+    //% group="On-board"
     //% weight=47
     export function setOnboardPixel1D(x: number, r: number, g: number, b: number): void {
         if (initializedOnboardPixels == false)
@@ -190,7 +190,7 @@ namespace uxDisplays {
     //% blockId="uxDisplays_setOnboardPixel2D"
     //% y.min=0 x.min=0 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
-    //% group="Onboard"
+    //% group="On-board"
     //% weight=47
     export function setOnboardPixel2D(y: number, x: number, r: number, g: number, b: number): void {
         if (initializedOnboardPixels == false)
@@ -204,7 +204,7 @@ namespace uxDisplays {
     //% block="refresh/update on-board pixels"
     //% blockId="uxDisplays_refreshOnboardPixels"
     //% port.min=0 port.max=6
-    //% group="Onboard"
+    //% group="On-board"
     //% weight=45
     export function refreshOnboardPixels() {
         if (initializedOnboardPixels == false)

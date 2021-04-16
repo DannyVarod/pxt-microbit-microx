@@ -150,6 +150,7 @@ namespace uxRemotes {
         initializeButton(ux.PIN_NUMBER.PIN15)
         initializeButton(ux.PIN_NUMBER.PIN16)
         uxMotion.initializePhaseWidthModulationDriver()
+        uxDisplays.intializeOnboardPixelsYurobotRemote()
         feedbackMotor = 8
         initializedRemote = true
     }
