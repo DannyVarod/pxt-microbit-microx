@@ -2,23 +2,34 @@
  * Joystick example
  */
 
-// Initialize buttons and PWM
+// Initialize remote
 uxRemotes.initializeYahboomRemote()
 
-let joystickY = 0
-let joystickX = 0
-
-// Joystick buttons example
-uxRemotes.onRemoteButton(uxRemotes.REMOTE_BUTTON.YAHBOOM_B3_BLUE, uxRemotes.BUTTON_STATE.RELEASED, function () {
-    //uxRemotes.setYahboomRemoteVibrationSpeed(4095)
-    control.waitMicros(500000)
-    //uxRemotes.setYahboomRemoteVibrationSpeed(0)
-})
+// Show user that the remote is on and ready
+basic.showIcon(IconNames.Pitchfork)
 
 // Joystick position example
 basic.forever(function () {
-    led.unplot(joystickX, joystickY)
-    joystickY = Math.round(uxRemotes.joystickY() * -2 + 2)
-    joystickX = Math.round(uxRemotes.joystickX() * 2 + 2)
-    led.plot(joystickX, joystickY)
+    let yx: string = Math.round(uxRemotes.joystickY(512)) + ',' + Math.round(uxRemotes.joystickX(512))
+    basic.showString(yx)
+})
+
+uxRemotes.onRemoteButton(uxRemotes.REMOTE_BUTTON.YAHBOOM_B1_RED, uxRemotes.BUTTON_STATE.PRESSED, function () {
+    basic.showString("1")
+})
+
+uxRemotes.onRemoteButton(uxRemotes.REMOTE_BUTTON.YAHBOOM_B2_GREEN, uxRemotes.BUTTON_STATE.PRESSED, function () {
+    basic.showString("2")
+})
+
+uxRemotes.onRemoteButton(uxRemotes.REMOTE_BUTTON.YAHBOOM_B3_BLUE, uxRemotes.BUTTON_STATE.PRESSED, function () {
+    basic.showString("3")
+})
+
+uxRemotes.onRemoteButton(uxRemotes.REMOTE_BUTTON.YAHBOOM_B4_YELLOW, uxRemotes.BUTTON_STATE.PRESSED, function () {
+    basic.showString("4")
+})
+
+uxRemotes.onRemoteButton(uxRemotes.REMOTE_BUTTON.YAHBOOM_JOYSTICK_Z, uxRemotes.BUTTON_STATE.PRESSED, function () {
+    basic.showString("Z")
 })

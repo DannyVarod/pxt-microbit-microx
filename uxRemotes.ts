@@ -12,7 +12,7 @@ namespace uxRemotes {
     let feedbackMotor: uxMotion.MOTOR = -1
     let joystickDirectionY: number = 1
     let joystickDirectionX: number = 1
-    let joystickZeroDelta: number = 25
+    let joystickZeroDelta: number = 20
 
     /**
      * Initialize joystick
@@ -120,7 +120,7 @@ namespace uxRemotes {
         initializeJoystick(ux.PIN_NUMBER.PIN2, ux.PIN_NUMBER.PIN1)
         joystickDirectionY = 1
         joystickDirectionX = 1
-        joystickZeroDelta = 10
+        joystickZeroDelta = 20
         initializeButton(ux.PIN_NUMBER.PIN8)
         initializeButton(ux.PIN_NUMBER.PIN13)
         initializeButton(ux.PIN_NUMBER.PIN14)
