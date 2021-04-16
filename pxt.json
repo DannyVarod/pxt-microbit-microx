@@ -17,6 +17,7 @@
     ],
     "testFiles": [
         "exampleYahboomRemote.ts",
+        "exampleYurobotRemote.ts",
         "exampleRobotbit.ts",
         "exampleSuperbit.ts",
         "examplePowerbrick.ts"
