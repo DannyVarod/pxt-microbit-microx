@@ -34,7 +34,7 @@ If you would like to see support for your hardware here, you are welcome to send
 
 * Line tracker with 2 channels or 3 channels (2 channel line tracker / 3 channel line tracker)
     * Tested with "Tracker Sensor V2.1" (a red board), 3 channels, worked
-    * Tested with keyestudio, 3 channels, only 2 channels worked, 3rd didn't work due to hardware problem (potentiometer issue - either always on or always off, no in between)
+    * Tested with keyestudio, 3 channels - 1st board had a faulty channel, replacement board works well - comes with potentiometers for adjusting sensitivity
     * Tested with Powerbrick sensor - 2 channels, sensor was over sensitive, couldn't use with paper
 * Ultrasonic distance
     * Tested with Powerbrick sensor
