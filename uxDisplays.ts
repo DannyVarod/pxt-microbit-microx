@@ -166,7 +166,7 @@ namespace uxDisplays {
      * @param g pixel green intensity [0,255]
      * @param b pixel blue intensity [0,255]
     */
-    //% block="set powerbrick pixel to color (1D)|y %y|x %x|red %r|green %g|blue %b"
+    //% block="set on-board pixel to color (1D)|y %y|x %x|red %r|green %g|blue %b"
     //% blockId="uxDisplays_setOnboardPixel1D"
     //% x.min=0 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
@@ -186,7 +186,7 @@ namespace uxDisplays {
      * @param g pixel green intensity [0,255]
      * @param b pixel blue intensity [0,255]
     */
-    //% block="set powerbrick pixel to color (2D)|y %y|x %x|red %r|green %g|blue %b"
+    //% block="set on-board pixel to color (2D)|y %y|x %x|red %r|green %g|blue %b"
     //% blockId="uxDisplays_setOnboardPixel2D"
     //% y.min=0 x.min=0 r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255
     //% inlineInputMode=inline
@@ -216,7 +216,7 @@ namespace uxDisplays {
      * Initialize Kittenbot Powerbrick pixels module
      * @param pinNumber digital pin number
      */
-    //% block="initialize powerbrick pixels module connected to|digital pin %pinNumber"
+    //% block="initialize on-board pixels module connected to|digital pin %pinNumber"
     //% blockId="uxDisplays_intializePowerbrickPixels"
     //% group="Powerbrick"
     //% weight=35
