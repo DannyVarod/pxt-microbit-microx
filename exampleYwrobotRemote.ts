@@ -13,11 +13,17 @@ basic.forever(function () {
     basic.showString(yx)
 })
 
+// Use speaker (or earphone socket) on joystick (Pin0 instead of from micro:bit v2)
+// Potentiometer is for earphone socket volume, however, is reverse (clockwise to decrease volume)
+// Switch switches between earphone socket (left) to speaker (right)
+music.setBuiltInSpeakerEnabled(false)
+
 input.onButtonPressed(Button.A, function () {
     basic.showString("A")
     uxDisplays.setAllOnboardPixels(0, 0, 0)
     uxDisplays.setOnboardPixel1D(0, 0, 0, 100)
     uxDisplays.refreshOnboardPixels()
+    music.playTone(Note.C, music.beat())
 })
 
 input.onButtonPressed(Button.B, function () {
@@ -25,6 +31,7 @@ input.onButtonPressed(Button.B, function () {
     uxDisplays.setAllOnboardPixels(0, 0, 0)
     uxDisplays.setOnboardPixel1D(1, 100, 0, 0)
     uxDisplays.refreshOnboardPixels()
+    music.stopAllSounds()
 })
 
 uxRemotes.onRemoteButton(uxRemotes.REMOTE_BUTTON.YWROBOT_C_GREEN, uxRemotes.BUTTON_STATE.PRESSED, function () {
@@ -48,16 +55,17 @@ uxRemotes.onRemoteButton(uxRemotes.REMOTE_BUTTON.YWROBOT_JOYSTICK_Z, uxRemotes.B
     uxDisplays.refreshOnboardPixels()
 })
 
-let feedback = false
+let feedback = 0
 
 input.onButtonPressed(Button.AB, function () {
-    if (!feedback) {
-        feedback = true
-        uxRemotes.setRemoteVibrationFeedback(1023)
+    if (feedback <= 0) {
+        feedback = 255
+    } else if (feedback < 1023) {
+        feedback += 256
     } else {
-        feedback = false
-        uxRemotes.setRemoteVibrationFeedback(1023)
+        feedback = 0
     }
+    uxRemotes.setRemoteVibrationFeedback(feedback)
     basic.showString("AB")
     uxDisplays.setAllOnboardPixels(0, 0, 0)
     uxDisplays.setOnboardPixel1D(5, 100, 0, 100)
