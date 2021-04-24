@@ -57,12 +57,12 @@ If you would like to see support for your hardware here, you are welcome to send
 ### In development / parially working or not working:
 
 * Yahboom Remote
-    - remote buttons not working with micro:bit V2
-    - vibration feedback not working
-    - buzzer not working
+    - Buttons (B1, B2, B3, B4) and joystick press (Z) not working with micro:bit V2
+    - Vibration feedback not working
+    - Buzzer not working
 
 * Ywrobot Remote
-    - Joystick press (Z) not working
+    - Joystick press (Z) not working with micro:bit V2
 
 * Powerbrick
     - color and gesture sensor partially working
