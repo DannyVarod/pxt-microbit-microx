@@ -132,11 +132,11 @@ namespace uxDisplays {
      * Initialize onboard pixels for Superbit
      * @param pinNumber digital pin number
      */
-    //% block="initialize onboard pixels Yurobot remote"
-    //% blockId="uxDisplays_intializeOnboardPixelsYurobotRemote"
+    //% block="initialize onboard pixels Ywrobot remote"
+    //% blockId="uxDisplays_intializeOnboardPixelsYwrobotRemote"
     //% group="Initialize"
     //% weight=47
-    export function intializeOnboardPixelsYurobotRemote(): void {
+    export function intializeOnboardPixelsYwrobotRemote(): void {
         intializeOnboardPixels(ux.PIN_NUMBER.PIN15, 1, 6)
     }
 

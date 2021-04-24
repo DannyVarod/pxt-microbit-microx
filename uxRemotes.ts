@@ -91,16 +91,16 @@ namespace uxRemotes {
         YAHBOOM_B3_BLUE = 15,
         //% block="yahboom b4 yellow"
         YAHBOOM_B4_YELLOW = 16,
-        //% block="yurobot joystick z"
-        YUROBOT_JOYSTICK_Z = 16,
-        //% block="yurobot A blue"
-        YUROBOT_A_BLUE = 5,
-        //% block="yurobot B red"
-        YUROBOT_B_RED = 11,
-        //% block="yurobot C green"
-        YUROBOT_C_GREEN = 13,
-        //% block="yurobot D yellow"
-        YUROBOT_D_YELLOW = 14,
+        //% block="ywrobot joystick z"
+        YWROBOT_JOYSTICK_Z = 16,
+        //% block="ywrobot A blue"
+        YWROBOT_A_BLUE = 5,
+        //% block="ywrobot B red"
+        YWROBOT_B_RED = 11,
+        //% block="ywrobot C green"
+        YWROBOT_C_GREEN = 13,
+        //% block="ywrobot D yellow"
+        YWROBOT_D_YELLOW = 14,
     }
 
     // function initializeYahboomRemotePhaseWidthModulationDriver(): void {
@@ -130,13 +130,13 @@ namespace uxRemotes {
     }
 
     /**
-     * Initialize Yurobot remote
+     * Initialize Ywrobot remote
      */
-    //% block="initialize Yurobot remote"
-    //% blockId="uxRemotes_initializeYurobotRemote"
-    //% group="Yurobot"
+    //% block="initialize Ywrobot remote"
+    //% blockId="uxRemotes_initializeYwrobotRemote"
+    //% group="Ywrobot"
     //% weight=98
-    export function initializeYurobotRemote(): void {
+    export function initializeYwrobotRemote(): void {
         if (initializedRemote)
             return
         initializeJoystick(ux.PIN_NUMBER.PIN1, ux.PIN_NUMBER.PIN2)
@@ -150,7 +150,7 @@ namespace uxRemotes {
         initializeButton(ux.PIN_NUMBER.PIN15)
         initializeButton(ux.PIN_NUMBER.PIN16)
         uxMotion.initializePhaseWidthModulationDriver()
-        uxDisplays.intializeOnboardPixelsYurobotRemote()
+        uxDisplays.intializeOnboardPixelsYwrobotRemote()
         feedbackMotor = 8
         initializedRemote = true
     }
