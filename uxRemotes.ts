@@ -9,7 +9,7 @@ namespace uxRemotes {
     let initializedRemote = false
     let joystickYPin: ux.PIN_NUMBER = ux.PIN_NUMBER.AnalogPin1
     let joystickXPin: ux.PIN_NUMBER = ux.PIN_NUMBER.AnalogPin2
-    let feedbackMotor: uxMotion.MOTOR = -1
+    let feedbackPin: ux.PIN_NUMBER = -1
     let joystickDirectionY: number = 1
     let joystickDirectionX: number = 1
     let joystickZeroDelta: number = 20
@@ -27,14 +27,36 @@ namespace uxRemotes {
     }
 
     /**
-     * Initialize button
+     * Initialize button pull up
      */
     //% block="initialize button"
-    //% blockId="uxRemotes_initializeButton"
+    //% blockId="uxRemotes_initializeButtonPullUp"
     //% advanced=true
     //% weight=98
-    export function initializeButton(buttonPin: ux.PIN_NUMBER): void {
+    export function initializeButtonPullUp(buttonPin: ux.PIN_NUMBER): void {
         pins.setPull(ux.pinToDigitalPin(buttonPin), PinPullMode.PullUp)
+    }
+
+    /**
+     * Initialize button pull down
+     */
+    //% block="initialize button"
+    //% blockId="uxRemotes_initializeButtonPullDown"
+    //% advanced=true
+    //% weight=98
+    export function initializeButtonPullDown(buttonPin: ux.PIN_NUMBER): void {
+        pins.setPull(ux.pinToDigitalPin(buttonPin), PinPullMode.PullDown)
+    }
+
+    /**
+     * Initialize button pull none
+     */
+    //% block="initialize button"
+    //% blockId="uxRemotes_initializeButtonPullNone"
+    //% advanced=true
+    //% weight=98
+    export function initializeButtonPullNone(buttonPin: ux.PIN_NUMBER): void {
+        pins.setPull(ux.pinToDigitalPin(buttonPin), PinPullMode.PullNone)
     }
     
     /**
@@ -121,11 +143,11 @@ namespace uxRemotes {
         joystickDirectionY = 1
         joystickDirectionX = 1
         joystickZeroDelta = 20
-        initializeButton(ux.PIN_NUMBER.PIN8)
-        initializeButton(ux.PIN_NUMBER.PIN13)
-        initializeButton(ux.PIN_NUMBER.PIN14)
-        initializeButton(ux.PIN_NUMBER.PIN15)
-        initializeButton(ux.PIN_NUMBER.PIN16)
+        initializeButtonPullUp(ux.PIN_NUMBER.PIN8)
+        initializeButtonPullUp(ux.PIN_NUMBER.PIN13)
+        initializeButtonPullUp(ux.PIN_NUMBER.PIN14)
+        initializeButtonPullUp(ux.PIN_NUMBER.PIN15)
+        initializeButtonPullUp(ux.PIN_NUMBER.PIN16)
         initializedRemote = true
     }
 
@@ -144,14 +166,14 @@ namespace uxRemotes {
         joystickDirectionY = -1
         joystickDirectionX = 1
         joystickZeroDelta = 10
-        initializeButton(ux.PIN_NUMBER.PIN8)
-        initializeButton(ux.PIN_NUMBER.PIN13)
-        initializeButton(ux.PIN_NUMBER.PIN14)
-        initializeButton(ux.PIN_NUMBER.PIN15)
-        initializeButton(ux.PIN_NUMBER.PIN16)
+        initializeButtonPullNone(ux.PIN_NUMBER.PIN13)
+        initializeButtonPullNone(ux.PIN_NUMBER.PIN14)
+        initializeButtonPullNone(ux.PIN_NUMBER.PIN16)
+        initializeButtonPullNone(ux.PIN_NUMBER.PIN8)
+        initializeButtonPullNone(ux.PIN_NUMBER.PIN0)
         uxMotion.initializePhaseWidthModulationDriver()
         uxDisplays.intializeOnboardPixelsYwrobotRemote()
-        feedbackMotor = 8
+        feedbackPin = ux.PIN_NUMBER.PIN8
         initializedRemote = true
     }
 
@@ -211,38 +233,24 @@ namespace uxRemotes {
             pulseValue = PulseValue.High
         
         let pin: DigitalPin = ux.pinToDigitalPin((button as number) as ux.PIN_NUMBER)
-        switch (button) {
-            case REMOTE_BUTTON.YAHBOOM_B1_RED:
-                pin = DigitalPin.P13
-                break
-            case REMOTE_BUTTON.YAHBOOM_B2_GREEN:
-                pin = DigitalPin.P14
-                break
-            case REMOTE_BUTTON.YAHBOOM_B3_BLUE:
-                pin = DigitalPin.P15
-                break
-            case REMOTE_BUTTON.YAHBOOM_B4_YELLOW:
-                pin = DigitalPin.P16
-                break
-            default:
-                // Assume JoystickZ ==> DigitalPin.P8
-                break
-        }
-
         pins.onPulsed(pin, pulseValue, body)
     }
 
     /**
      * Set remote vibration feedback level
-     * @param level [0...4095]
+     * @param level [0...1023]
     */
     //% block="set remote vibration feedback|level %level"
     //% blockId="uxRemotes_setRemoteVibrationFeedback"
-    //% level.min=0 level.max=4095
+    //% level.min=0 level.max=1023
     //% group="Feedback"
     //% weight=95
     export function setRemoteVibrationFeedback(level: number): void {
-        if (feedbackMotor >= 0)
-            uxMotion.setMotor(feedbackMotor, level)
+        if (feedbackPin < 0)
+            return
+        
+        level = ux.inRange(level, 0, 1034)
+        pins.analogWritePin(AnalogPin.P8, level);
+        return;
     }
 }
