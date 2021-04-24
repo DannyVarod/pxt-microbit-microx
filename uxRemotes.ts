@@ -135,12 +135,12 @@ namespace uxRemotes {
         joystickDirectionY = 1
         joystickDirectionX = 1
         joystickZeroDelta = 20
-        initializeButtonPullNone(ux.PIN_NUMBER.PIN8)
-        initializeButtonPullNone(ux.PIN_NUMBER.PIN13)
-        initializeButtonPullNone(ux.PIN_NUMBER.PIN14)
-        initializeButtonPullNone(ux.PIN_NUMBER.PIN15)
+        initializeButtonPullUp(ux.PIN_NUMBER.PIN8)
+        initializeButtonPullUp(ux.PIN_NUMBER.PIN13)
+        initializeButtonPullUp(ux.PIN_NUMBER.PIN14)
+        initializeButtonPullUp(ux.PIN_NUMBER.PIN15)
         initializeButtonPullUp(ux.PIN_NUMBER.PIN16)
-        initializeButtonPullNone(ux.PIN_NUMBER.PIN0)
+        initializeButtonPullUp(ux.PIN_NUMBER.PIN0)
         feedbackPin = ux.PIN_NUMBER.PIN0
         initializedRemote = true
     }
@@ -162,7 +162,7 @@ namespace uxRemotes {
         joystickZeroDelta = 10
         initializeButtonPullNone(ux.PIN_NUMBER.PIN13)
         initializeButtonPullNone(ux.PIN_NUMBER.PIN14)
-        initializeButtonPullUp(ux.PIN_NUMBER.PIN16)
+        initializeButtonPullNone(ux.PIN_NUMBER.PIN16)
         initializeButtonPullNone(ux.PIN_NUMBER.PIN8)
         initializeButtonPullNone(ux.PIN_NUMBER.PIN0)
         uxDisplays.intializeOnboardPixelsYwrobotRemote()
@@ -222,7 +222,7 @@ namespace uxRemotes {
     export function onRemoteButton(button: REMOTE_BUTTON, state: BUTTON_STATE, body: Action): void {
         
         let pulseValue: PulseValue = PulseValue.Low
-        if (state == BUTTON_STATE.RELEASED)
+        if (state == BUTTON_STATE.PRESSED)
             pulseValue = PulseValue.High
         
         let pin: DigitalPin = ux.pinToDigitalPin((button as number) as ux.PIN_NUMBER)

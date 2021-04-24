@@ -28,7 +28,7 @@ If you would like to see support for your hardware here, you are welcome to send
 * KittenBot Powerbrick (aka Armourbit)
 * KittenBot Robotbit (aka "robot:bit")
 * Yahboom Superbit (aka "Super:bit")
-* Ywrobot remote (Ywrobot (looks more like Yurobot) m:bit JoyStick Extension Board) - in development
+* Ywrobot remote (Ywrobot (looks more like Yurobot) m:bit JoyStick Extension Board) - see comments on usage in exampleYwrobotRemote.ts
 
 ### Sensors:
 
@@ -62,10 +62,7 @@ If you would like to see support for your hardware here, you are welcome to send
     - buzzer not working
 
 * Ywrobot Remote
-    - Buttons A & B function like microbit buttons A & B, not like specified on board
-    - vibration feedback not working
-    - buzzer not working
-    - potentiometer not working
+    - Joystick press (Z) not working
 
 * Powerbrick
     - color and gesture sensor partially working
