@@ -48,7 +48,16 @@ uxRemotes.onRemoteButton(uxRemotes.REMOTE_BUTTON.YWROBOT_JOYSTICK_Z, uxRemotes.B
     uxDisplays.refreshOnboardPixels()
 })
 
+let feedback = false
+
 input.onButtonPressed(Button.AB, function () {
+    if (!feedback) {
+        feedback = true
+        uxRemotes.setRemoteVibrationFeedback(1023)
+    } else {
+        feedback = false
+        uxRemotes.setRemoteVibrationFeedback(1023)
+    }
     basic.showString("AB")
     uxDisplays.setAllOnboardPixels(0, 0, 0)
     uxDisplays.setOnboardPixel1D(5, 100, 0, 100)

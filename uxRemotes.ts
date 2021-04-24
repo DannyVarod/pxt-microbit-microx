@@ -115,10 +115,6 @@ namespace uxRemotes {
         YAHBOOM_B4_YELLOW = 16,
         //% block="ywrobot joystick z"
         YWROBOT_JOYSTICK_Z = 16,
-        //% block="ywrobot A blue"
-        YWROBOT_A_BLUE = 5,
-        //% block="ywrobot B red"
-        YWROBOT_B_RED = 11,
         //% block="ywrobot C green"
         YWROBOT_C_GREEN = 13,
         //% block="ywrobot D yellow"
@@ -143,11 +139,13 @@ namespace uxRemotes {
         joystickDirectionY = 1
         joystickDirectionX = 1
         joystickZeroDelta = 20
-        initializeButtonPullUp(ux.PIN_NUMBER.PIN8)
-        initializeButtonPullUp(ux.PIN_NUMBER.PIN13)
-        initializeButtonPullUp(ux.PIN_NUMBER.PIN14)
-        initializeButtonPullUp(ux.PIN_NUMBER.PIN15)
+        initializeButtonPullNone(ux.PIN_NUMBER.PIN8)
+        initializeButtonPullNone(ux.PIN_NUMBER.PIN13)
+        initializeButtonPullNone(ux.PIN_NUMBER.PIN14)
+        initializeButtonPullNone(ux.PIN_NUMBER.PIN15)
         initializeButtonPullUp(ux.PIN_NUMBER.PIN16)
+        initializeButtonPullNone(ux.PIN_NUMBER.PIN0)
+        feedbackPin = ux.PIN_NUMBER.PIN0
         initializedRemote = true
     }
 
@@ -168,7 +166,7 @@ namespace uxRemotes {
         joystickZeroDelta = 10
         initializeButtonPullNone(ux.PIN_NUMBER.PIN13)
         initializeButtonPullNone(ux.PIN_NUMBER.PIN14)
-        initializeButtonPullNone(ux.PIN_NUMBER.PIN16)
+        initializeButtonPullUp(ux.PIN_NUMBER.PIN16)
         initializeButtonPullNone(ux.PIN_NUMBER.PIN8)
         initializeButtonPullNone(ux.PIN_NUMBER.PIN0)
         uxMotion.initializePhaseWidthModulationDriver()
