@@ -121,10 +121,6 @@ namespace uxRemotes {
         YWROBOT_D_YELLOW = 14,
     }
 
-    // function initializeYahboomRemotePhaseWidthModulationDriver(): void {
-    //     uxMotion.initializePhaseWidthModulationDriverAdvanced(0x41)
-    // }
-
     /**
      * Initialize Yahboom remote
      */
@@ -169,7 +165,6 @@ namespace uxRemotes {
         initializeButtonPullUp(ux.PIN_NUMBER.PIN16)
         initializeButtonPullNone(ux.PIN_NUMBER.PIN8)
         initializeButtonPullNone(ux.PIN_NUMBER.PIN0)
-        uxMotion.initializePhaseWidthModulationDriver()
         uxDisplays.intializeOnboardPixelsYwrobotRemote()
         feedbackPin = ux.PIN_NUMBER.PIN8
         initializedRemote = true
