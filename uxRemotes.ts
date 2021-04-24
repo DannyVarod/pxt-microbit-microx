@@ -141,7 +141,7 @@ namespace uxRemotes {
         initializeButtonPullUp(ux.PIN_NUMBER.PIN15)
         initializeButtonPullUp(ux.PIN_NUMBER.PIN16)
         initializeButtonPullNone(ux.PIN_NUMBER.PIN0)
-        feedbackPin = ux.PIN_NUMBER.PIN0
+        feedbackPin = -1
         initializedRemote = true
     }
 
