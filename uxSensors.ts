@@ -100,16 +100,6 @@ namespace uxSensors {
     }
 
     /**
-     * Line state
-     */
-    export enum LINE_STATE {
-        //% block="white"
-        WHITE = 0,
-        //% block="black"
-        BLACK = 1
-    }
-
-    /**
      * Initializes a line tracker sensor with 2 channels connected to 2 specific digial pins
      * @param ch1 digital pin number
      * @param ch2 digital pin number
@@ -144,20 +134,23 @@ namespace uxSensors {
      * @param ch1 digital pin number
      * @param ch2 digital pin number
      */
-    //% block="get line position from 2 channel tracker connected to|digial pin %ch1|digial pin %ch2"
+    //% block="get line position from 2 channel tracker connected to|digial pin %ch1|digial pin %ch2|negative %negative"
     //% blockId="uxSensors_getLinePosition2Channels"
     //% group="Line Trackers"
     //% weight=73
-    export function getLinePosition2Channels(ch1: ux.PIN_NUMBER, ch2: ux.PIN_NUMBER): string {
-        ch1 = 1 - pins.digitalReadPin(ux.pinToDigitalPin(ch1))
-        ch2 = 1 - pins.digitalReadPin(ux.pinToDigitalPin(ch2))
+    export function getLinePosition2Channels(ch1: ux.PIN_NUMBER, ch2: ux.PIN_NUMBER, negative: boolean = true): string {
+        ch1 = pins.digitalReadPin(ux.pinToDigitalPin(ch1))
+        ch2 = pins.digitalReadPin(ux.pinToDigitalPin(ch2))
+        if (negative)
+            ch1 = 1 - ch1
+            ch2 = 1 - ch2
         if (ch1 == 0 && ch2 == 0)
-            return "?" //  0 0
+            return "00" //  0 0
         else if (ch1 > ch2)
-            return "<" // 1 0
-        else if (ch1 > ch2)
-            return ">" // 0 1
-        else return "-" // 1 1
+            return "10" // 1 0
+        else if (ch1 < ch2)
+            return "01" // 0 1
+        else return "11" // 1 1
     }
 
     /**
@@ -166,29 +159,33 @@ namespace uxSensors {
      * @param ch2 digital pin number
      * @param ch3 digital pin number
      */
-    //% block="get line position from 3 channel tracker connected to|digial pin %ch1|digial pin %ch2|digial pin %ch3"
+    //% block="get line position from 3 channel tracker connected to|digial pin %ch1|digial pin %ch2|digial pin %ch3|negative %negative"
     //% blockId="uxSensors_getLinePosition3Channels"
     //% group="Line Trackers"
     //% weight=72
-    export function getLinePosition3Channels(ch1: ux.PIN_NUMBER, ch2: ux.PIN_NUMBER, ch3: ux.PIN_NUMBER): string {
-        ch1 = 1 - pins.digitalReadPin(ux.pinToDigitalPin(ch1))
-        ch2 = 1 - pins.digitalReadPin(ux.pinToDigitalPin(ch2))
-        ch3 = 1 - pins.digitalReadPin(ux.pinToDigitalPin(ch3))
+    export function getLinePosition3Channels(ch1: ux.PIN_NUMBER, ch2: ux.PIN_NUMBER, ch3: ux.PIN_NUMBER, negative: boolean = true): string {
+        ch1 = pins.digitalReadPin(ux.pinToDigitalPin(ch1))
+        ch2 = pins.digitalReadPin(ux.pinToDigitalPin(ch2))
+        ch3 = pins.digitalReadPin(ux.pinToDigitalPin(ch3))
+        if (negative)
+            ch1 = 1 - ch1
+            ch2 = 1 - ch2
+            ch3 = 1 - ch3
         if (ch1 == 0 && ch2 == 0 && ch3 == 0)
-            return "?" // 0 0 0
+            return "000" // 0 0 0
         else if (ch1 > ch2 && ch2 == ch3)
-            return "<" // 1 0 0
+            return "100" // 1 0 0
         else if (ch1 == ch2 && ch2 < ch3)
-            return ">" // 0 0 1
+            return "001" // 0 0 1
         else if (ch1 == ch2 && ch2 > ch3)
-            return "\\" // 1 1 0
+            return "110" // 1 1 0
         else if (ch1 < ch2 && ch2 == ch3)
-            return "/" // 0 1 1
+            return "011" // 0 1 1
         else if (ch1 < ch2 && ch2 > ch3)
-            return "|" // 0 1 0
+            return "010" // 0 1 0
         else if (ch1 > ch2 && ch2 < ch3)
-            return "H" // 1 0 1
-        else return "-" // 1 1 1
+            return "101" // 1 0 1
+        else return "111" // 1 1 1
     }
 
     /**
