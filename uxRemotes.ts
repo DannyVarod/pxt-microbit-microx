@@ -119,6 +119,16 @@ namespace uxRemotes {
         YWROBOT_C_GREEN = 13,
         //% block="ywrobot D yellow"
         YWROBOT_D_YELLOW = 14,
+        //% block="waveshare C white"
+        WAVESHARE_C_WHITE = 15,
+        //% block="waveshare D blue"
+        WAVESHARE_D_BLUE = 14,
+        //% block="waveshare E green"
+        WAVESHARE_E_GREEN = 13,
+        //% block="waveshare F red"
+        WAVESHARE_F_RED = 12,
+        //% block="waveshare joystick Z"
+        WAVESHARE_JOYSTICK_Z = 8,
     }
 
     /**
@@ -167,6 +177,30 @@ namespace uxRemotes {
         initializeButtonPullNone(ux.PIN_NUMBER.PIN0)
         uxDisplays.intializeOnboardPixelsYwrobotRemote()
         feedbackPin = ux.PIN_NUMBER.PIN8
+        initializedRemote = true
+    }
+
+    
+    /**
+     * Initialize Waveshare remote
+     */
+    //% block="initialize Waveshare remote"
+    //% blockId="uxRemotes_initializeWaveshareRemote"
+    //% group="Waveshare"
+    //% weight=98
+    export function initializeWaveshareRemote(): void {
+        if (initializedRemote)
+            return
+        initializeJoystick(ux.PIN_NUMBER.PIN1, ux.PIN_NUMBER.PIN2)
+        joystickDirectionY = 1
+        joystickDirectionX = 1
+        joystickZeroDelta = 20
+        initializeButtonPullDown(ux.PIN_NUMBER.PIN8)
+        initializeButtonPullDown(ux.PIN_NUMBER.PIN12)
+        initializeButtonPullDown(ux.PIN_NUMBER.PIN13)
+        initializeButtonPullDown(ux.PIN_NUMBER.PIN14)
+        initializeButtonPullDown(ux.PIN_NUMBER.PIN15)
+        feedbackPin = 0
         initializedRemote = true
     }
 
