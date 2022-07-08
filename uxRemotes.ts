@@ -192,8 +192,8 @@ namespace uxRemotes {
         if (initializedRemote)
             return
         initializeJoystick(ux.PIN_NUMBER.PIN1, ux.PIN_NUMBER.PIN2)
-        joystickDirectionY = 1
-        joystickDirectionX = 1
+        joystickDirectionY = -1
+        joystickDirectionX = -1
         joystickZeroDelta = 20
         initializeButtonPullDown(ux.PIN_NUMBER.PIN8)
         initializeButtonPullDown(ux.PIN_NUMBER.PIN12)
